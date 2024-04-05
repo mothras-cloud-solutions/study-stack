@@ -1,0 +1,28 @@
+{
+  "compilerOptions": {
+    "module": "CommonJS",
+    "target": "es5",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "noEmit": false, // Changed from true to false
+    "jsx": "react-jsx",
+    "baseUrl": "./"
+  },
+  "include": [
+    "client/src/**/*",
+    "database/**/*",
+    "server/**/*",
+    "path/to/file_or_directory"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
+}
