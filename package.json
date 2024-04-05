@@ -4,7 +4,9 @@
   "description": "Modern Study Application",
   "main": "index.jsx",
   "scripts": {
-    "test": "test"
+    "test": "test",
+    "start": "nodemon server/index.tsx",
+    "build": "npx webpack --watch"
   },
   "repository": {
     "type": "git",
