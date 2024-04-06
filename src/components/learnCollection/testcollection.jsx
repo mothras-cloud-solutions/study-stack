@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 
-interface collection {
+// use this test to call index.tsx
+
+export interface collection {
   term: string;
   definition: string;
   confidenceLevel: number;
