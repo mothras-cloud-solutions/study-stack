@@ -1,36 +1,41 @@
 import React, { useState } from 'react';
+import Card from '../Card.tsx';
 
-export default function Card ( {card} ) {
+export default function StudyCards () {
+
+  interface collection {
+    term: string;
+    definition: string;
+    confidenceLevel: number;
+    keywords: string;
+    collectionid: number;
+  }
+
+  let testCollection: collection[] = [
+    {
+      "term": "firewall",
+      "definition": "Use the cross-platform JBOD panel, then you can transmit the solid state circuit!",
+      "confidenceLevel": 9,
+      "keywords": "normal, Administrator",
+      collectionid: 3
+    },
+    {
+      "term": "program",
+      "definition": "Use the back-end UTF8 capacitor, then you can generate the auxiliary pixel!",
+      "confidenceLevel": 7,
+      "keywords": "Market, Peso, apud",
+      collectionid: 3
+    },
+    {
+      "term": "transmitter",
+      "definition": "Try to copy the IB firewall, maybe it will hack the redundant firewall!",
+      "confidenceLevel": 3,
+      "keywords": "purple",
+      collectionid: 3
+    }
+  ];
 
   return <div className='card-box'>
-   <h2>Card Title</h2>
-  <nav className="nav">
-    <div className='left'>
-        <span className="tag">Flashcards</span>
-        <span className="tag">Learn</span>
-        <span className="tag">Test</span>
-        <span className="tag">Shuffle</span>
-        </div>
-    <div className="right">
-      <div className="tags are-large">
-        <span className="tag">Edit</span>
-        <span className="tag">Settings</span>
-      </div>
-    </div>
-  </nav>
- <div className="flip-container">
-      <div className="flip-card">
-        <div className="flip-card-inner">
-          <div className="flip-card-front">
-            <h3 className="title is-3">Front Side</h3>
-            <p>This is the front side of the card.</p>
-          </div>
-          <div className="flip-card-back">
-            <h3 className="title is-3">Back Side</h3>
-            <p>This is the back side of the card.</p>
-          </div>
-        </div>
-      </div>
-    </div>
+
 </div>
 }
