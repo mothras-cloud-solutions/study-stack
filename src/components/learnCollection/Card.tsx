@@ -6,7 +6,10 @@ import React, { useState } from 'react';
 // confidenceLevel: number}>
 export default function Card ({card, setIndex}) {
 
+  console.log(card, " this is the card in card")
+
   let {term, definition, keywords, confidenceLevel} = card;
+  console.log(term, " this is term now!" )
 
   // Build confidence increasing functionality later
 
