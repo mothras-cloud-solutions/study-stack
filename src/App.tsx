@@ -1,12 +1,14 @@
 import React from 'react';
-import Card from './components/Card.tsx';
 import { Interface } from 'readline';
+import TestThis from './components/learnCollection/testcollection';
+
 function App() {
 
 
   return (
     <div>
       <p>Hello Inside of App!</p>
+      <TestThis />
     </div>
   )
 }

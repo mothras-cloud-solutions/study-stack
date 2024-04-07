@@ -8,6 +8,10 @@ export default function Card ({card, setIndex}) {
 
   let {term, definition, keywords, confidenceLevel} = card;
 
+  // Build confidence increasing functionality later
+
+  // need these buttons - Skip Forward, Skip Back, Got it :saluting_face:, Repeat, and Done.
+
  return <div className='card-box'>
   <h2>Card Title</h2>
  <nav className="nav">
