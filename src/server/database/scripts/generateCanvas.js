@@ -1,5 +1,5 @@
-const fs = require('fs');
-const { faker } = require('@faker-js/faker');
+import fs from 'fs';
+import { faker } from '@faker-js/faker';
 
 function generateCanvasData(count) {
     let canvases = [];
@@ -23,6 +23,6 @@ fs.writeFile(canvasFilePath, JSON.stringify(canvasData, null, 2), (err) => {
     if (err) {
         console.error('Error writing file:', err);
     } else {
-        console.log('Successfully wrote canvas data to canvasData.json');
+        // console.log('Successfully wrote canvas data to canvasData.json');
     }
 });

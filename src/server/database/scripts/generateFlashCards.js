@@ -6,16 +6,23 @@ function generateFlashcards(count) {
     for (let i = 0; i < count; i++) {
         const term = faker.hacker.noun();
         const definition = faker.hacker.phrase();
-        const confidenceLevel = faker.datatype.number({ min: 1, max: 10 });
+        const confidenceLevel = 0;
         const keywords = faker.random.words().split(' ').slice(0, faker.datatype.number({ min: 1, max: 5 })).join(', ');
+        const thumbnail = {}; // Placeholder for thumbnail data
 
-        flashcards.push({ term, definition, confidenceLevel, keywords });
+        flashcards.push({
+            term,
+            definition,
+            confidenceLevel,
+            keywords,
+            thumbnail,
+        });
     }
     return flashcards;
 }
 
 const flashcardData = generateFlashcards(100);
-const flashcardsFilePath = '/home/andrewpark0408/BlueOcean/study-stack/src/scripts/flashcardData.json';
+const flashcardsFilePath = '/home/andrewpark0408/StudyStack/study-stack/src/server/database/scripts/flashcardsData.json';  // Update this path as necessary
 
 fs.writeFile(flashcardsFilePath, JSON.stringify(flashcardData, null, 2), (err) => {
     if (err) {
