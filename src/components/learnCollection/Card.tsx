@@ -24,6 +24,9 @@ export default function Card ({card, setIndex, index}) {
       console.log("This is where we skip back")
     } else if (buttonClicked === "Skip Forward"){
       console.log("This is where we skip forward")
+      let newIndex = index + 1;
+      setIndex(newIndex)
+      console.log(index, " is the index now in the card")
     } else if (buttonClicked === "Study again") {
       console.log("This is where we study again")
     } else if (buttonClicked === "Got it!") {

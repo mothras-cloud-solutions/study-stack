@@ -25,11 +25,11 @@ export default function StudyCards (prop: collection) {
 // have logic here where if "state" exceeds the length of collection, then stop studying and display something else like
 // "You're done!"
 
-console.log(prop.prop[0], " this is prop in StudyCard")
+console.log(prop.prop[index], " this is prop in StudyCard")
 
 
   return <div>
-    <Card card={prop.prop[0]} setIndex={setIndex} index={index} />
+    <Card card={prop.prop[index]} setIndex={setIndex} index={index} />
   </div>
 }
 
