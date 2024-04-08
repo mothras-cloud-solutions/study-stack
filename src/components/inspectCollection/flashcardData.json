@@ -1,0 +1,65 @@
+[
+  {
+    "id": 1,
+    "term": "firewall",
+    "definition": "Use the cross-platform JBOD panel, then you can transmit the solid state circuit!",
+    "confidenceLevel": 9,
+    "keywords": "normal, Administrator",
+    "collectionId": 1
+  },
+  {
+    "id": 2,
+    "term": "program",
+    "definition": "Use the back-end UTF8 capacitor, then you can generate the auxiliary pixel!",
+    "confidenceLevel": 7,
+    "keywords": "Market, Peso, apud",
+    "collectionId": 1
+
+  },
+  {
+    "id": 3,
+    "term": "transmitter",
+    "definition": "Try to copy the IB firewall, maybe it will hack the redundant firewall!",
+    "confidenceLevel": 3,
+    "keywords": "purple",
+    "collectionId": 1
+  },
+  {
+    "term": "transmitter",
+    "definition": "You can't bypass the protocol without programming the cross-platform GB port!",
+    "confidenceLevel": 7,
+    "keywords": "stall"
+  },
+  {
+    "id": 4,
+    "term": "alarm",
+    "definition": "Use the solid state IB sensor, then you can override the auxiliary microchip!",
+    "confidenceLevel": 2,
+    "keywords": "revolutionary",
+    "collectionId" : 2
+  },
+  {
+    "id": 5,
+    "term": "firewall",
+    "definition": "We need to parse the primary UTF8 circuit!",
+    "confidenceLevel": 8,
+    "keywords": "synthesize, hm, programming",
+    "collectionId" : 2
+  },
+  {
+    "id"  : 6,
+    "term": "capacitor",
+    "definition": "If we back up the hard drive, we can get to the ADP interface through the mobile DNS matrix!",
+    "confidenceLevel": 2,
+    "keywords": "ick, Oganesson, Plastic",
+    "collectionId" : 2
+  },
+  {
+    "id": 7,
+    "term": "bus",
+    "definition": "I'll transmit the haptic JSON program, that should matrix the FTP microchip!",
+    "confidenceLevel": 9,
+    "keywords": "kilogram, SCSI",
+    "collectionId" : 2
+  }
+]
