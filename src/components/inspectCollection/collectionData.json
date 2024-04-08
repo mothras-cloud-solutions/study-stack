@@ -1,0 +1,20 @@
+[
+  {
+    "collectionId": 1,
+    "title": "Refined Bronze Shirt",
+    "description": "Coadunatio denuo crastinus aureus laudantium veritas. Video decipio conscendo. Adicio asperiores angelus careo degenero balbus creo. Ceno accusamus tristis utique terminatio repellendus subnecto valetudo decerno.",
+    "subjects": [
+      "CSS"
+    ]
+  },
+  {
+    "collectionId": 2,
+    "title": "Incredible Soft Salad",
+    "description": "Strues quisquam voluptate. Tyrannus verumtamen laudantium copiose solio ambulo subito adimpleo. Corrupti avaritia vae audax vereor. Tracto solum angelus iure advoco utrimque ultra derideo.",
+    "subjects": [
+      "English",
+      "CSS",
+      "JavaScript"
+    ]
+  }
+]
