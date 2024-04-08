@@ -29,7 +29,7 @@ console.log(prop.prop[0], " this is prop in StudyCard")
 
 
   return <div>
-    <Card card={prop.prop[0]} setIndex={setIndex} />
+    <Card card={prop.prop[0]} setIndex={setIndex} index={index} />
   </div>
 }
 

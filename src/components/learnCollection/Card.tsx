@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 //   definition: string,
 //  keywords:string,
 // confidenceLevel: number}>
-export default function Card ({card, setIndex}) {
+export default function Card ({card, setIndex, index}) {
 
   console.log(card, " this is the card in card")
 
@@ -14,6 +14,25 @@ export default function Card ({card, setIndex}) {
   // Build confidence increasing functionality later
 
   // need these buttons - Skip Forward, Skip Back, Got it :saluting_face:, Repeat, and Done.
+
+  function handleClick(e) {
+    e.preventDefault();
+    let buttonClicked = e.target.innerText
+    console.log(buttonClicked, " this is buttonClicked!!")
+
+    if (buttonClicked === "Skip Back"){
+      console.log("This is where we skip back")
+    } else if (buttonClicked === "Skip Forward"){
+      console.log("This is where we skip forward")
+    } else if (buttonClicked === "Study again") {
+      console.log("This is where we study again")
+    } else if (buttonClicked === "Got it!") {
+      console.log("This is where we got it")
+    } else if (buttonClicked === "Done") {
+      console.log("This is where we done")
+    }
+    return
+  }
 
  return <div className='card-box'>
   <h2>Card Title</h2>
@@ -40,6 +59,13 @@ export default function Card ({card, setIndex}) {
          </div>
        </div>
      </div>
+   </div>
+   <div className='buttons'>
+      <button name="skip-back" type="button" onClick={handleClick}>Skip Back</button>
+      <button name="skip-forward" type="button" onClick={handleClick}>Skip Forward</button>
+      <button name="study-again" type="button" onClick={handleClick}>Study again</button>
+      <button name="got-it" type="button" onClick={handleClick}>Got it!</button>
+      <button name="done" type="button" onClick={handleClick}>Done</button>
    </div>
 </div>
 }
