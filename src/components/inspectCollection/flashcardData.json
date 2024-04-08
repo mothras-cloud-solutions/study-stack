@@ -23,5 +23,43 @@
     "confidenceLevel": 3,
     "keywords": "purple",
     "collectionId": 1
+  },
+  {
+    "term": "transmitter",
+    "definition": "You can't bypass the protocol without programming the cross-platform GB port!",
+    "confidenceLevel": 7,
+    "keywords": "stall"
+  },
+  {
+    "id": 4,
+    "term": "alarm",
+    "definition": "Use the solid state IB sensor, then you can override the auxiliary microchip!",
+    "confidenceLevel": 2,
+    "keywords": "revolutionary",
+    "collectionId" : 2
+  },
+  {
+    "id": 5,
+    "term": "firewall",
+    "definition": "We need to parse the primary UTF8 circuit!",
+    "confidenceLevel": 8,
+    "keywords": "synthesize, hm, programming",
+    "collectionId" : 2
+  },
+  {
+    "id"  : 6,
+    "term": "capacitor",
+    "definition": "If we back up the hard drive, we can get to the ADP interface through the mobile DNS matrix!",
+    "confidenceLevel": 2,
+    "keywords": "ick, Oganesson, Plastic",
+    "collectionId" : 2
+  },
+  {
+    "id": 7,
+    "term": "bus",
+    "definition": "I'll transmit the haptic JSON program, that should matrix the FTP microchip!",
+    "confidenceLevel": 9,
+    "keywords": "kilogram, SCSI",
+    "collectionId" : 2
   }
 ]

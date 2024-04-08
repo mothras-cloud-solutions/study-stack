@@ -14,21 +14,22 @@ type DeckType = {
 const DeckCollection: React.FC = () => {
   const [selectedDeck, setSelectedDeck] = useState<DeckType | null>(null);
 
-  // Update the function to accept a DeckType object
-  const handleSelectDeck = (deck: DeckType) => {
+  // Create a handler for when a deck is selected
+  const handleDeckSelect = (deck: DeckType) => {
     setSelectedDeck(deck);
   };
 
+  // Filter the flashcards for the selected deck
+  const selectedFlashcards = selectedDeck
+    ? flashcardData.filter(fc => fc.collectionId === selectedDeck.collectionId)
+    : [];
+
   return (
     <div>
-      <DeckSelector decks={collectionData} onDeckSelect={handleSelectDeck} />
+      <DeckSelector decks={collectionData} onDeckSelect={handleDeckSelect} />
       {selectedDeck && (
-        <CardThumbnailContainer
-          flashcards={flashcardData.filter(fc => fc.collectionId === selectedDeck.collectionId)}
-        />
+        <CardThumbnailContainer flashcards={selectedFlashcards} />
       )}
-      <button onClick={() => console.log('Study')}>Study</button>
-      <button onClick={() => console.log('Edit')}>Edit</button>
     </div>
   );
 };
