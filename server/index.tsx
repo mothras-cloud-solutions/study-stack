@@ -1,7 +1,6 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 require('dotenv').config();
 const express = require('express');
-
-
 
 const app = express();
 
