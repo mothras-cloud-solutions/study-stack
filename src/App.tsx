@@ -1,5 +1,6 @@
 import React from 'react';
-
+import Card from './components/Card.tsx';
+import { Interface } from 'readline';
 function App() {
 
 
