@@ -1,6 +1,3 @@
-/* @tailwind base;
-@tailwind components;
-@tailwind utilities; */
 
 /* @tailwind base;
 @tailwind components;
@@ -124,6 +121,3 @@ body {
   transform: translateY(-5px);
 }
 /* END OF Effects on hover */
-
-
-
