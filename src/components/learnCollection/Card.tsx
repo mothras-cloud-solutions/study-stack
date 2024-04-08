@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 //   definition: string,
 //  keywords:string,
 // confidenceLevel: number}>
-export default function Card ({card, setIndex, index, length}) {
+export default function Card ({card, setIndex, index, length, studyDeck, setStudyDeck}) {
 
   let {term, definition, keywords, confidenceLevel} = card;
 
@@ -32,7 +32,16 @@ export default function Card ({card, setIndex, index, length}) {
         console.log("No more cards")
       }
     } else if (buttonClicked === "Study again") {
-      // figure out study again logic
+      // add a property to this card object ("StudyAgain : true")
+      // then change its position in the array to the length to put it at the end of the arr
+      // then delete its current index from the array
+
+      studyDeck[index].studyAgain = true;
+      studyDeck[length] = studyDeck[index];
+      let newDeck = studyDeck.toSpliced(index, 1)
+      setStudyDeck(newDeck);
+
+
     } else if (buttonClicked === "Got it!") {
       // increment confidence in the backend route,
       // for now just skip to the next card
@@ -51,7 +60,12 @@ export default function Card ({card, setIndex, index, length}) {
   }
 
  return <div className='card-box'>
-  <h2>Card Title</h2>
+  <h2>Deck Title</h2>
+  {function(){
+    if (studyDeck[index].studyAgain) {
+      return <>Studying Again</>
+    }
+  }()}
  <nav className="nav">
    <div className='left'>
        </div>
