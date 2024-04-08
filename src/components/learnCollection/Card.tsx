@@ -24,7 +24,7 @@ export default function Card ({card, setIndex, index, length, studyDeck, setStud
       } else {
           setIndex(newIndex)
       }
-    } else if (buttonClicked === "Skip Forward"){
+    } else if (buttonClicked === "Skip Forward" || buttonClicked === "Next"){
       let newIndex = index + 1;
       if (newIndex < length){
         setIndex(newIndex)
@@ -45,6 +45,8 @@ export default function Card ({card, setIndex, index, length, studyDeck, setStud
     } else if (buttonClicked === "Got it!") {
       // increment confidence in the backend route,
       // for now just skip to the next card
+      // should we only move to the next card when they click next?
+      // then got it can just update the confidence instead
       let newIndex = index + 1;
       if (newIndex < length){
         setIndex(newIndex)
@@ -93,6 +95,7 @@ export default function Card ({card, setIndex, index, length, studyDeck, setStud
    <div className='buttons'>
       <button name="skip-back" type="button" onClick={handleClick}>Skip Back</button>
       <button name="skip-forward" type="button" onClick={handleClick}>Skip Forward</button>
+      <button name="next" type="button" onClick={handleClick}>Next</button>
       <button name="study-again" type="button" onClick={handleClick}>Study again</button>
       <button name="got-it" type="button" onClick={handleClick}>Got it!</button>
       <button name="done" type="button" onClick={handleClick}>Done</button>
