@@ -4,35 +4,48 @@ import React, { useState } from 'react';
 //   definition: string,
 //  keywords:string,
 // confidenceLevel: number}>
-export default function Card ({card, setIndex, index}) {
-
-  console.log(card, " this is the card in card")
+export default function Card ({card, setIndex, index, length}) {
 
   let {term, definition, keywords, confidenceLevel} = card;
-  console.log(term, " this is term now!" )
 
   // Build confidence increasing functionality later
 
   // need these buttons - Skip Forward, Skip Back, Got it :saluting_face:, Repeat, and Done.
+  // display keywords somewhere
 
   function handleClick(e) {
     e.preventDefault();
     let buttonClicked = e.target.innerText
-    console.log(buttonClicked, " this is buttonClicked!!")
 
     if (buttonClicked === "Skip Back"){
-      console.log("This is where we skip back")
+      let newIndex = index - 1;
+      if (newIndex < 0){
+        console.log("That's far enough")
+      } else {
+          setIndex(newIndex)
+      }
     } else if (buttonClicked === "Skip Forward"){
-      console.log("This is where we skip forward")
       let newIndex = index + 1;
-      setIndex(newIndex)
-      console.log(index, " is the index now in the card")
+      if (newIndex < length){
+        setIndex(newIndex)
+      } else {
+        console.log("No more cards")
+      }
     } else if (buttonClicked === "Study again") {
-      console.log("This is where we study again")
+      // figure out study again logic
     } else if (buttonClicked === "Got it!") {
-      console.log("This is where we got it")
+      // increment confidence in the backend route,
+      // for now just skip to the next card
+      let newIndex = index + 1;
+      if (newIndex < length){
+        setIndex(newIndex)
+      } else {
+        console.log("No more cards")
+      }
     } else if (buttonClicked === "Done") {
-      console.log("This is where we done")
+      console.log("Here's where I'll route to another page")
+      // needs another page to go to with the react router etc.
+      setIndex(0);
     }
     return
   }
