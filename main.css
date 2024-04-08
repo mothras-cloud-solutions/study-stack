@@ -1,3 +1,5 @@
 /* @tailwind base;
 @tailwind components;
 @tailwind utilities; */
+
+@import "~bulma/csss/bulma.css";
