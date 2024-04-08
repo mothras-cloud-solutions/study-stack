@@ -17,7 +17,7 @@ function generateCanvasData(count) {
 }
 
 const canvasData = generateCanvasData(100);
-const canvasFilePath = '/home/andrewpark0408/StudyStack/study-stack/src/server/database/scripts/canvasData.json';
+const canvasFilePath = '/home/andrewpark0408/StudyStack/study-stack/server/database/scripts/canvasData.json';
 
 fs.writeFile(canvasFilePath, JSON.stringify(canvasData, null, 2), (err) => {
     if (err) {

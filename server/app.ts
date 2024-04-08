@@ -17,5 +17,5 @@ app.use('/api/flashcards', flashcardsRoutes);
 app.use('/api/canvases', canvasesRoutes);
 
 app.listen(port, () => {
-  // console.log(`Server running at http://localhost:${port}`);
+  console.log(`Server running at http://localhost:${port}`);
 });

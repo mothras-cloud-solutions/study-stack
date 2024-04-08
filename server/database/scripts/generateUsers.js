@@ -17,12 +17,12 @@ function generateUsers(count) {
 }
 
 const userData = generateUsers(100);
-const usersFilePath = '/home/andrewpark0408/BlueOcean/study-stack/src/scripts/userData.json';
+const usersFilePath = '/home/andrewpark0408/StudyStack/study-stack/server/database/scripts/userData.json';
 
 fs.writeFile(usersFilePath, JSON.stringify(userData, null, 2), (err) => {
     if (err) {
         console.error('Error writing file:', err);
     } else {
-        console.log('Successfully wrote user data to userData.json');
+        // console.log('Successfully wrote user data to userData.json');
     }
 });

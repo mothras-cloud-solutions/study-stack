@@ -61,14 +61,31 @@ export const updateFlashcard = async (req: Request, res: Response) => {
 
 export const updateFlashcardConfidenceLevel = async (req: Request, res: Response) => {
     const { id } = req.params;
-    const { confidenceLevel } = req.body;
+
     try {
-        const result = await pool.query(
-            'UPDATE flashcards SET confidenceLevel = $1 WHERE id = $2 RETURNING *',
-            [confidenceLevel, id]
-        );
-        if (result.rows.length > 0) {
-            res.json(result.rows[0]);
+        // First, get the current confidenceLevel from the database
+        const currentResult = await pool.query('SELECT confidenceLevel FROM flashcards WHERE id = $1', [id]);
+
+        if (currentResult.rows.length > 0) {
+            let confidenceLevel = currentResult.rows[0].confidencelevel;
+            // console.log('cr[0]:', currentResult.rows[0].confidencelevel);
+            confidenceLevel += 1;  // Increment by 1
+            // console.log('updated confdence level:', confidenceLevel);
+            // console.log('Updating flashcard:', id, 'with new confidence level:', confidenceLevel);
+
+            // Then, update the confidenceLevel in the database
+            const updateResult = await pool.query(
+                'UPDATE flashcards SET confidenceLevel = $1 WHERE id = $2 RETURNING *',
+                [confidenceLevel, id]
+            );
+
+            // console.log('Update result:', updateResult);
+
+            if (updateResult.rows.length > 0) {
+                res.json(updateResult.rows[0]);
+            } else {
+                res.status(404).json({ error: 'Flashcard not found' });
+            }
         } else {
             res.status(404).json({ error: 'Flashcard not found' });
         }

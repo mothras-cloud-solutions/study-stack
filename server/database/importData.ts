@@ -2,7 +2,7 @@
 import fs from 'fs';
 import path from 'path';
 
-import { insertData } from './db'; // Adjust this path to the correct location of your db module
+import { pool, insertData } from './db'; // Adjust this path to the correct location of your db module
 
 // Function to load JSON data from a file
 const loadJsonFile = (filePath: string) => {
@@ -26,8 +26,22 @@ const main = async () => {
 
     // Ensure the column names match exactly with your database schema
     await insertData(usersData, 'users', ['username', 'email', 'password', 'role']);
-    await insertData(collectionsData, 'collections', ['title', 'description', 'subjects', 'user_id']);
-    await insertData(flashcardsData, 'flashcards', ['term', 'definition', 'confidenceLevel', 'keywords', 'collection_id']);
+
+    const userRows = await pool.query('SELECT id FROM users');
+    const userIds = userRows.rows.map(row => row.id);
+    for (const collection of collectionsData) {
+        const user_id = userIds[Math.floor(Math.random() * userIds.length)];
+        await pool.query(`INSERT INTO collections (title, description, subjects, user_id) VALUES ($1, $2, $3, $4)`, [collection.title, collection.description, collection.subjects, user_id]);
+    }
+
+    // Insert flashcards data and assign collection_id dynamically
+    const collectionRows = await pool.query('SELECT id FROM collections');
+    const collectionIds = collectionRows.rows.map(row => row.id);
+    for (const flashcard of flashcardsData) {
+        const collection_id = collectionIds[Math.floor(Math.random() * collectionIds.length)];
+        await pool.query(`INSERT INTO flashcards (term, definition, confidenceLevel, keywords, collection_id) VALUES ($1, $2, $3, $4, $5)`, [flashcard.term, flashcard.definition, flashcard.confidenceLevel, flashcard.keywords, collection_id]);
+    }
+
     await insertData(canvasesData, 'canvases', ['id', 'name', 'width', 'height', 'imageUrl', 'archived', 'user_id']);
 };
 
