@@ -4,7 +4,14 @@ import Rectangle from './shapes/Reactangle';
 
 export default function Canvas () {
   const [selectId, selectElement] = useState('');
-  const [rectangle, setRectangle] = useState({});
+  const [rectangle, setRectangle] = useState({
+    x: 10,
+    y: 10,
+    width: 100,
+    height: 100,
+    fill: 'grey',
+    id: 'rect1',
+  });
 
   const checkDeselect = (e) => {
     // deselect when clicked on empty area
@@ -27,14 +34,15 @@ export default function Canvas () {
     <Stage width={500} height={500} onClick={checkDeselect} onTouchStart={checkDeselect}>
       <Layer>
         <Rectangle
-          shapeSpecs={rectangleProps}
+          shapeSpecs={rectangle}
           isSelected={rectangleProps.id === selectId}
           onSelect={() => {
             selectElement(rectangleProps.id);
-          }}/>
-          onChange={(newAttrs) => {
-            
           }}
+          onChange={(newAttrs) => {
+            setRectangle(newAttrs);
+          }}
+        />
       </Layer>
 
     </Stage>
