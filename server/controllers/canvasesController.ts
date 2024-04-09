@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { pool } from '../database/db';
 
-export const getAllCanvases = async (req: Request, res: Response) => {
+export const getAllCanvases = async (_req: any, res: Response) => {
     try {
         const result = await pool.query('SELECT * FROM canvases');
         res.json(result.rows);
