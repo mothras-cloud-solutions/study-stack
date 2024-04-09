@@ -4,7 +4,7 @@ import { collection, testCollection } from './Interfaces.tsx';
 
 // use this test to call index.tsx
 
-export default function TestThis () {
+export default function StudyPageTest () {
 
 
 
