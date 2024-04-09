@@ -10,19 +10,19 @@ function generateUsers(count) {
             username: faker.internet.userName(),
             email: faker.internet.email(),
             password: faker.internet.password(),
-            role: roles[faker.datatype.number({ min: 0, max: roles.length - 1 })]
+            role: roles[faker.number.int({ min: 0, max: roles.length - 1 })]
         });
     }
     return users;
 }
 
 const userData = generateUsers(100);
-const usersFilePath = '/home/andrewpark0408/BlueOcean/study-stack/src/scripts/userData.json';
+const usersFilePath = '/home/andrewpark0408/StudyStack/study-stack/server/database/scripts/userData.json';
 
 fs.writeFile(usersFilePath, JSON.stringify(userData, null, 2), (err) => {
     if (err) {
         console.error('Error writing file:', err);
     } else {
-        console.log('Successfully wrote user data to userData.json');
+        // console.log('Successfully wrote user data to userData.json');
     }
 });
