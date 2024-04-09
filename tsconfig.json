@@ -1,9 +1,46 @@
+// {
+//   "compilerOptions": {
+//     "module": "commonjs",
+//     "noImplicitAny": true,
+//     "removeComments": true,
+//     "preserveConstEnums": true,
+//     "sourceMap": true,
+//     "target": "es2020",
+//     "lib": ["dom", "dom.iterable", "esnext"],
+//     "allowJs": false, // Change to false to disallow JavaScript files
+//     "skipLibCheck": true,
+//     "esModuleInterop": true,
+//     "allowSyntheticDefaultImports": true,
+//     "strict": true,
+//     "forceConsistentCasingInFileNames": true,
+//     "moduleResolution": "node",
+//     "resolveJsonModule": true,
+//     "noEmit": false,
+//     "jsx": "react-jsx",
+//     "baseUrl": "./"
+//   },
+//   "include": [
+//     "client/src/**/*",
+//     "database/**/*",
+//     "server/**/*",
+//     "path/to/file_or_directory"
+//   ],
+//   "exclude": [
+//     "node_modules",
+//     "dist"
+//   ]
+// }
+
 {
   "compilerOptions": {
-    "module": "CommonJS",
-    "target": "es5",
+    "module": "commonjs",
+    "noImplicitAny": true,
+    "removeComments": true,
+    "preserveConstEnums": true,
+    "sourceMap": true,
+    "target": "es2020",
     "lib": ["dom", "dom.iterable", "esnext"],
-    "allowJs": true,
+    "allowJs": false, // Disallow JavaScript files
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
@@ -11,18 +48,18 @@
     "forceConsistentCasingInFileNames": true,
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "noEmit": false, // Changed from true to false
+    "noEmit": false,
     "jsx": "react-jsx",
-    "baseUrl": "./"
+    "baseUrl": "./",
+    "noImplicitThis": true, // Raise error on 'this' expressions with an implied 'any' type
+    "noUnusedLocals": true, // Raise error when a local variable is unused
+    "noUnusedParameters": true, // Raise error when a function parameter is unused
+    "noFallthroughCasesInSwitch": true, // Raise error for fallthrough cases in switch statements
+    "strictNullChecks": true, // Strict null checks
+    "strictFunctionTypes": true, // Strict checking of function types
+    "strictBindCallApply": true, // Strict checking of bind/call/apply
+    "strictPropertyInitialization": true // Strict checking of property initialization
   },
-  "include": [
-    "client/src/**/*",
-    "database/**/*",
-    "server/**/*",
-    "path/to/file_or_directory"
-  ],
-  "exclude": [
-    "node_modules",
-    "dist"
-  ]
+  "include": ["client/src/**/*", "database/**/*", "server/**/*", "path/to/file_or_directory"],
+  "exclude": ["node_modules", "dist"]
 }
