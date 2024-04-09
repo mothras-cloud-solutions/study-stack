@@ -1,8 +1,8 @@
 -- Drop existing tables if they exist to avoid conflicts
-DROP TABLE IF EXISTS canvases;
-DROP TABLE IF EXISTS flashcards;
-DROP TABLE IF EXISTS collections;
-DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS canvases CASCADE;
+DROP TABLE IF EXISTS flashcards CASCADE;
+DROP TABLE IF EXISTS collections CASCADE;
+DROP TABLE IF EXISTS users CASCADE;
 
 -- Create Users table
 CREATE TABLE users (
@@ -27,10 +27,12 @@ CREATE TABLE collections (
 -- Create Flashcards table
 CREATE TABLE flashcards (
     id SERIAL PRIMARY KEY,
-    term VARCHAR(255) NOT NULL,
+    term TEXT NOT NULL,
     definition TEXT NOT NULL,
     confidenceLevel INTEGER NOT NULL,
     keywords TEXT,
+    archived BOOLEAN NOT NULL,
+    starred BOOLEAN NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     edited_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     collection_id INTEGER REFERENCES collections(id)
