@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { pool } from '../database/db';
 
-export const getAllFlashcards = async (req: Request, res: Response) => {
+export const getAllFlashcards = async (_: any, res: Response) => {
     try {
         const result = await pool.query('SELECT * FROM flashcards');
         res.json(result.rows);
