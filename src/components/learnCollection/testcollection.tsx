@@ -9,5 +9,5 @@ export default function TestThis () {
 
 
 
-  return <StudyCards prop={testCollection} />
+  return (<StudyCards prop={testCollection} />)
 }

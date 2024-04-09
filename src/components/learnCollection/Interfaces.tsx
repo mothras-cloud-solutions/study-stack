@@ -35,6 +35,42 @@ let testCollection: collection[] = [
     collectionid: 3,
     archived: true,
     starred: false
+  },
+  {
+    term: "bandwidth",
+    definition: "I'll compress the online SSL matrix, that should hard drive the DNS pixel!",
+    confidenceLevel: 1,
+    keywords: "Chair",
+    collectionid: 3,
+    archived: false,
+    starred: false
+  },
+  {
+    term: "circuit",
+    definition: "We need to index the optical API feed!",
+    confidenceLevel: 3,
+    keywords: "Liaison, colorful, however",
+    collectionid: 3,
+    archived: false,
+    starred: false
+  },
+  {
+    term: "interface",
+    definition: "I'll input the neural SMTP alarm, that should matrix the PCI array!",
+    confidenceLevel: 8,
+    keywords: "blah",
+    collectionid: 3,
+    archived: false,
+    starred: false
+  },
+  {
+    term: "circuit",
+    definition: "The DRAM interface is down, back up the digital application so we can transmit the FTP microchip!",
+    confidenceLevel: 10,
+    keywords: "Handmade, female",
+    collectionid: 3,
+    archived: false,
+    starred: false
   }
 ];
 

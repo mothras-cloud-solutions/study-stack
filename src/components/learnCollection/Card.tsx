@@ -95,7 +95,6 @@ export default function Card ({card, setIndex, index, length, studyDeck, setStud
    <div className='buttons'>
       <button name="skip-back" type="button" onClick={handleClick}>Skip Back</button>
       <button name="skip-forward" type="button" onClick={handleClick}>Skip Forward</button>
-      <button name="next" type="button" onClick={handleClick}>Next</button>
       <button name="study-again" type="button" onClick={handleClick}>Study again</button>
       <button name="got-it" type="button" onClick={handleClick}>Got it!</button>
       <button name="done" type="button" onClick={handleClick}>Done</button>
