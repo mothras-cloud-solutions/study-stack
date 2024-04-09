@@ -65,7 +65,7 @@ let testCollection: collection[] = [
   },
   {
     term: "orange",
-    definition: "The DRAM interface is down, back up the digital application so we can transmit the FTP microchip!",
+    definition: "The DRAM interface is down, back up the banana application so we can transmit the FTP microchip!",
     confidenceLevel: 10,
     keywords: "Handmade, female",
     collectionid: 3,
