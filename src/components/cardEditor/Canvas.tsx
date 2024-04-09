@@ -3,6 +3,7 @@ import { Stage, Layer, Transformer } from 'react-konva';
 import Rectangle from './shapes/Reactangle';
 import Circle from './shapes/Circle.tsx';
 import Line from './shapes/Line.tsx';
+import Text from './shapes/Text.tsx';
 // import uri from './data.js';
 import { shapes } from 'konva/lib/Shape';
 
@@ -12,7 +13,9 @@ export default function Canvas () {
   const [rectangles, setRectangles] = useState([]);
   const [circles, setCircles] = useState([]);
   const [lines, setLines] = useState([]);
-  const [shapes, setShapes] = useState({rectangles: [], circles: [], lines: [], number: 0});
+  const [texts, setTexts] = useState([]);
+  const [textField, setTextField] = useState('');
+  const [shapes, setShapes] = useState({rectangles: [], circles: [], lines: [], texts: [], number: 0});
 
   const stageRef = useRef();
 
@@ -26,10 +29,46 @@ export default function Canvas () {
   const onSave = () => {
     let canvas = JSON.stringify(shapes);
   };
+  const onTextInput = (e) => {
+    setTextField(e.target.value);
+  };
+  const onDelete = () => {
+    if (selectId !== '') {
+      if (selectId.substring(0,1) === 'r') {
+        for (var i = 0; i < rectangles.length; i++) {
+          if (rectangles[i].id === selectId) {
+            let newRectangles = rectangles.slice(0, i).concat(rectangles.slice(i+1));
+            setRectangles(newRectangles);
+          }
+        }
+      } else if (selectId.substring(0,1) === 'l') {
+        for (var i = 0; i < lines.length; i++) {
+          if (lines[i].id === selectId) {
+            let newLines = lines.slice(0, i).concat(lines.slice(i+1));
+            setLines(newLines);
+          }
+        }
+      } else if (selectId.substring(0,1) === 'c') {
+        for (var i = 0; i < circles.length; i++) {
+          if (circles[i].id === selectId) {
+            let newCircles = circles.slice(0, i).concat(circles.slice(i+1));
+            setCircles(newCircles);
+          }
+        }
+      } else if (selectId.substring(0,1) === 't') {
+        for (var i = 0; i < texts.length; i++) {
+          if (texts[i].id === selectId) {
+            let newTexts = texts.slice(0, i).concat(texts.slice(i+1));
+            setTexts(newTexts);
+          }
+        }
+      }
+    }
+  };
 
   useEffect(() => {
-    let saveFile = '{"rectangles":[{"x":98,"y":101,"width":100,"height":100,"fill":"rgba(0,0,0,0.01)","strokeWidth":1,"stroke":"black","id":"rect2"},{"x":83,"y":132,"width":100,"height":100,"fill":"rgba(0,0,0,0.01)","strokeWidth":1,"stroke":"black","id":"rect3"}],"circles":[{"x":265,"y":222,"width":100,"height":100,"fill":"rgba(0,0,0,0.01)","strokeWidth":1,"stroke":"black","id":"circ1"},{"x":124,"y":153,"width":100,"height":100,"fill":"rgba(0,0,0,0.01)","strokeWidth":1,"stroke":"black","id":"circ4"}],"lines":[{"points":[175.00000000000006,50,437.50000000000017,50],"stroke":"black","strokeWidth":5,"fill":"black","id":"line5","x":132,"y":93}],"number":5}'
-    setShapes(JSON.parse(saveFile));
+    // let saveFile = '{"rectangles":[{"x":98,"y":101,"width":100,"height":100,"fill":"rgba(0,0,0,0.01)","strokeWidth":1,"stroke":"black","id":"rect2"},{"x":83,"y":132,"width":100,"height":100,"fill":"rgba(0,0,0,0.01)","strokeWidth":1,"stroke":"black","id":"rect3"}],"circles":[{"x":265,"y":222,"width":100,"height":100,"fill":"rgba(0,0,0,0.01)","strokeWidth":1,"stroke":"black","id":"circ1"},{"x":124,"y":153,"width":100,"height":100,"fill":"rgba(0,0,0,0.01)","strokeWidth":1,"stroke":"black","id":"circ4"}],"lines":[{"points":[175.00000000000006,50,437.50000000000017,50],"stroke":"black","strokeWidth":5,"fill":"black","id":"line5","x":132,"y":93}],"number":5}'
+    // setShapes(JSON.parse(saveFile));
   }, []);
 
   useEffect(() => {
@@ -82,6 +121,20 @@ export default function Canvas () {
     setLines(newLines);
     shapes.lines = newLines;
     shapes.number ++;
+  };
+  const addText = () => {
+    const newText = {
+      x: 50,
+      y: 50,
+      fill: 'black',
+      align: 'center',
+      text: `${textField}`,
+      id: `text${shapes.number+1}`
+    }
+    const newTexts = texts.concat([newText]);
+    setTexts(newTexts);
+    shapes.texts = newTexts;
+    shapes.number ++;
   }
 
   return (
@@ -91,6 +144,10 @@ export default function Canvas () {
         <button onClick={addCircle}>Circles</button>
         <button onClick={addLine}>Lines</button>
         <button onClick={onSave}>Save</button>
+        <button onClick={onDelete}>Delete</button>
+        <label for='text'>Text</label>
+        <input type='text' name="text" onChange={onTextInput}></input>
+        <button onClick={addText}>CreateText</button>
       </div>
       <Stage ref={stageRef} width={500} style={{zIndex: 50}} height={500} onClick={checkDeselect} onTouchStart={checkDeselect}>
         <Layer>
@@ -146,6 +203,23 @@ export default function Canvas () {
             )
           })
           }
+          {texts.length > 0 && texts.map((tex, i) => {
+            return (
+              <Text
+                textSpecs={tex}
+                isSelected={tex.id === selectId}
+                onSelect={() => {
+                  selectElement(tex.id);
+                }}
+                onChange={(newAttrs) => {
+                  const otherTexts = texts.slice();
+                  otherTexts[i] = newAttrs;
+                  setTexts(otherTexts);
+                  shapes.texts = otherTexts;
+                }}
+              />
+            )
+          })}
         </Layer>
       </Stage>
     </Fragment>
