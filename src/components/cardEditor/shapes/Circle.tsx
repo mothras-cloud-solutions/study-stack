@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, Fragment } from 'react';
-import { Stage, Layer, Rect, Transformer } from 'react-konva';
+import { Stage, Layer, Circle, Transformer } from 'react-konva';
 
 interface ShapeSpecs {
   x?: number;
@@ -19,21 +19,21 @@ interface Props {
   onChange: (newSpecs: ShapeSpecs) => void;
 };
 
+const CircleMaker: React.FC<Props> = ({ shapeSpecs, isSelected, onSelect, onChange }) => {
 
-const RectangleMaker: React.FC<Props> = ({ shapeSpecs, isSelected, onSelect, onChange }) => {
   const shapeRef = useRef<Node>();
   const trRef = useRef<Transformer>();
 
-   useEffect(() => {
+  useEffect(() => {
     if (isSelected) {
-      trRef.current?.nodes([shapeRef.current]);
-      trRef.current?.getLayer().batchDraw();
+      trRef.current.nodes([shapeRef.current]);
+      trRef.current.getLayer().batchDraw();
     }
-  });
+  })
 
   return (
     <Fragment>
-      <Rect
+      <Circle
         onClick={onSelect}
         onTap={onSelect}
         ref={shapeRef}
@@ -78,9 +78,7 @@ const RectangleMaker: React.FC<Props> = ({ shapeSpecs, isSelected, onSelect, onC
         />
       )}
     </Fragment>
-  );
+  )
 };
 
-
-export default RectangleMaker;
-
+export default CircleMaker;
