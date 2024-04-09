@@ -14,12 +14,10 @@ type DeckType = {
 const DeckCollection: React.FC = () => {
   const [selectedDeck, setSelectedDeck] = useState<DeckType | null>(null);
 
-  // Create a handler for when a deck is selected
   const handleDeckSelect = (deck: DeckType) => {
     setSelectedDeck(deck);
   };
 
-  // Filter the flashcards for the selected deck
   const selectedFlashcards = selectedDeck
     ? flashcardData.filter(fc => fc.collectionId === selectedDeck.collectionId)
     : [];
