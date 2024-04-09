@@ -6,7 +6,12 @@ import Pagination from '../Skeleton/components/Pagination';
 // confidenceLevel: number}>
 export default function Card ({card, setIndex, index, length, studyDeck, setStudyDeck, shuffleTheDeck}) {
 
-  const {term, definition, confidenceLevel} = card;
+  const {term, definition, starred} = card;
+
+// temp state, with the endpoint I'll just hit the backend
+  const [starryNight, setStarryNight] =(starred)
+
+
   const [isFlipped, setIsFlipped] = useState(false);
 
     // Function to flip the card on click
@@ -18,6 +23,7 @@ export default function Card ({card, setIndex, index, length, studyDeck, setStud
 
   // need these buttons - Skip Forward, Skip Back, Got it :saluting_face:, Repeat, and Done.
   // display keywords somewhere
+  //figure out how to add fontawesome icon - talk to Raul
 
 
   function handleClick(e) {
@@ -34,7 +40,8 @@ export default function Card ({card, setIndex, index, length, studyDeck, setStud
     } else if (buttonClicked === "Skip Forward"){
       let newIndex = index + 1;
       if (newIndex < length){
-        setIndex(newIndex)
+        setIsFlipped(false);
+        setIndex(newIndex);
       } else {
         console.log("No more cards")
       }
@@ -50,9 +57,9 @@ export default function Card ({card, setIndex, index, length, studyDeck, setStud
       // setStudyDeck(newDeck);
 
       // insert axios call once we get the route
+      setStarryNight(1)
 
-
-
+      setIsFlipped(false);
 
     } else if (buttonClicked === "Got it!") {
       // increment confidence in the backend route,
@@ -61,6 +68,7 @@ export default function Card ({card, setIndex, index, length, studyDeck, setStud
       // then got it can just update the confidence instead
       let newIndex = index + 1;
       if (newIndex < length){
+        setIsFlipped(false);
         setIndex(newIndex)
       } else {
         console.log("No more cards")
@@ -71,9 +79,16 @@ export default function Card ({card, setIndex, index, length, studyDeck, setStud
       setIndex(0);
     } else if (buttonClicked === "Shuffle") {
       shuffleTheDeck();
+      setIsFlipped(false);
     }
     return
   }
+
+  // add conditional that reads the starred value and displays something in the return statement.
+  // make "Study again" send the directions to the DB to update the field to have 1 and go to the next card.
+  // add a conditional inside "got it" that not only updates the confidence in the backend, but checks to see
+  // "If" the current card has starred set to 1. If so and they click "got it" then send the route to the backend
+  // to turn it to 0
 
  return <div className='box'>
   <h2 className="title is-2">Deck Title</h2>

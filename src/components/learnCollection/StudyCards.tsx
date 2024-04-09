@@ -17,7 +17,7 @@ export default function StudyCards (prop: collection) {
   const [index, setIndex] = useState(0);
 
   const currDeck = prop.prop.filter((card) => {
-    return card.archived === false;
+    return card.archived !== 1;
   })
 
   const [studyDeck, setStudyDeck] = useState(currDeck);
