@@ -4,14 +4,15 @@ import React, { useState } from 'react';
 //   definition: string,
 //  keywords:string,
 // confidenceLevel: number}>
-export default function Card ({card, setIndex, index, length, studyDeck, setStudyDeck}) {
+export default function Card ({card, setIndex, index, length, studyDeck, setStudyDeck, shuffleTheDeck}) {
 
-  let {term, definition, keywords, confidenceLevel} = card;
+  const {term, definition, keywords, confidenceLevel} = card;
 
   // Build confidence increasing functionality later
 
   // need these buttons - Skip Forward, Skip Back, Got it :saluting_face:, Repeat, and Done.
   // display keywords somewhere
+
 
   function handleClick(e) {
     e.preventDefault();
@@ -57,6 +58,8 @@ export default function Card ({card, setIndex, index, length, studyDeck, setStud
       console.log("Here's where I'll route to another page")
       // needs another page to go to with the react router etc.
       setIndex(0);
+    } else if (buttonClicked === "Shuffle") {
+      shuffleTheDeck();
     }
     return
   }
@@ -98,6 +101,7 @@ export default function Card ({card, setIndex, index, length, studyDeck, setStud
       <button name="study-again" type="button" onClick={handleClick}>Study again</button>
       <button name="got-it" type="button" onClick={handleClick}>Got it!</button>
       <button name="done" type="button" onClick={handleClick}>Done</button>
+      <button name="shuffle" type="button" onClick={handleClick}>Shuffle</button>
    </div>
 </div>
 }
