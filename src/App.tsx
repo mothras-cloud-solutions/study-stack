@@ -1,15 +1,13 @@
 import React from 'react';
-import { Interface } from 'readline';
-import TestThis from './components/learnCollection/testcollection.tsx'
+import Skeleton from './components/Skeleton';
+import DeckCollection from './components/inspectCollection/DeckCollection';
+
 function App() {
-
-
   return (
     <div>
-      {/* <p>Hello Inside of App!</p> */}
-      <TestThis />
+      <DeckCollection />
     </div>
-  )
+  );
 }
 
 export default App;
