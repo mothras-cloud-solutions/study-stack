@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 // const Card: React.FC<{term: string,
 //   definition: string,
@@ -6,7 +6,7 @@ import React, { useState } from 'react';
 // confidenceLevel: number}>
 export default function Card ({card, setIndex, index, length, studyDeck, setStudyDeck, shuffleTheDeck}) {
 
-  const {term, definition, keywords, confidenceLevel} = card;
+  const {term, definition, confidenceLevel} = card;
 
   // Build confidence increasing functionality later
 
@@ -25,7 +25,7 @@ export default function Card ({card, setIndex, index, length, studyDeck, setStud
       } else {
           setIndex(newIndex)
       }
-    } else if (buttonClicked === "Skip Forward" || buttonClicked === "Next"){
+    } else if (buttonClicked === "Skip Forward"){
       let newIndex = index + 1;
       if (newIndex < length){
         setIndex(newIndex)
@@ -36,16 +36,21 @@ export default function Card ({card, setIndex, index, length, studyDeck, setStud
       // add a property to this card object ("StudyAgain : true")
       // then change its position in the array to the length to put it at the end of the arr
       // then delete its current index from the array
+      // Never mind - they want to instead persist a star or something. Will comment this out for now
 
-      studyDeck[index].studyAgain = true;
-      studyDeck[length] = studyDeck[index];
-      let newDeck = studyDeck.toSpliced(index, 1)
-      setStudyDeck(newDeck);
+      // studyDeck[index].studyAgain = true;
+      // studyDeck[length] = studyDeck[index];
+      // let newDeck = studyDeck.toSpliced(index, 1)
+      // setStudyDeck(newDeck);
+
+      // insert axios call once we get the route
+
+
 
 
     } else if (buttonClicked === "Got it!") {
       // increment confidence in the backend route,
-      // for now just skip to the next card
+      // for now just skip to the next cardrrrrr
       // should we only move to the next card when they click next?
       // then got it can just update the confidence instead
       let newIndex = index + 1;
