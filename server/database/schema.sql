@@ -4,11 +4,6 @@ DROP TABLE IF EXISTS flashcards;
 DROP TABLE IF EXISTS collections;
 DROP TABLE IF EXISTS users;
 
--- -- Create the study_stack database
--- CREATE DATABASE IF NOT EXISTS study_stack;
-
--- \c study_stack;
-
 -- Create Users table
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
@@ -24,6 +19,8 @@ CREATE TABLE collections (
     title VARCHAR(255) NOT NULL,
     description TEXT,
     subjects VARCHAR(255),
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    edited_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     user_id INTEGER REFERENCES users(id)
 );
 
@@ -34,15 +31,15 @@ CREATE TABLE flashcards (
     definition TEXT NOT NULL,
     confidenceLevel INTEGER NOT NULL,
     keywords TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    edited_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     collection_id INTEGER REFERENCES collections(id)
 );
 
 -- Create Canvases table
 CREATE TABLE canvases (
     id UUID PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
-    width INTEGER NOT NULL,
-    height INTEGER NOT NULL,
-    imageUrl TEXT NOT NULL,
-    user_id INTEGER REFERENCES users(id)
+    archived BOOLEAN NOT NULL,
+    canvas_data TEXT,
+    flashcards_id INTEGER REFERENCES flashcards(id)
 );
