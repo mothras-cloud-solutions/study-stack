@@ -53,7 +53,7 @@ const NavBar: React.FC<NavBarProps> = ({ user, onLoginLinkClick, onHomeLinkClick
               <a className="navbar-item" onClick={onHomeLinkClick}>
                 Home
               </a>
-              <a className="navbar-item">
+              <a className="navbar-item is-hidden-touch">
                 <span className="navbar-item-separator"></span>
               </a>
 
