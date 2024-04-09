@@ -54,7 +54,7 @@ const Flashcard: React.FC = () => {
         <div className="level-left">
           <div className="tags are-large">
             {/* You can change this buttons/tags based on the view */}
-            <span className="tag has-text-light">Flashcards</span>
+            <span className="tag ">Flashcards</span>
             <span className="tag has-text-light">Learn</span>
             <span className="tag has-text-light">Test</span>
             <span className="tag has-text-light">Shuffle</span>
@@ -82,7 +82,7 @@ const Flashcard: React.FC = () => {
         </div>
       </div>
       {/* Pagination component for card depending on the view */}
-      <Pagination />
+      {/* <Pagination sdfsd/> */}
     </div>
   );
 };

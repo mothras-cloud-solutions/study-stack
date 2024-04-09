@@ -122,14 +122,14 @@ const CreateEditDeck = ({ deckId }) => {
         handleSave={handleSave}
         handleCancel={handleCancel}
       />
-      <DeckCardCollection
+      {/* <DeckCardCollection
         cards={cards}
         handleCardEdit={handleCardEdit}
         handleCardDelete={handleCardDelete}
         handleCardArchive={handleCardArchive}
         handleCardUnarchive={handleCardUnarchive}
         handleCardOrderChange={handleCardOrderChange}
-      />
+      /> */}
       <CardForm
         term={term}
         definition={definition}

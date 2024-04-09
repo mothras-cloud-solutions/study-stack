@@ -57,16 +57,16 @@ const Skeleton: React.FC = () => {
             <>
               {/* Render components for signed-in users */}
               {/* <CreateSearch /> */}
-              {/* <CreateDeck  /> */}
+              <CreateDeck />
 
-              <HomePage />
+              {/* <HomePage /> */}
 
-              <Card  />
+              {/* <Card /> */}
               {/* <EditCard  /> */}
 
-              <DeckCardCollection />
+              {/* <DeckCardCollection /> */}
 
-              <DeckCollection decks={decksData}/>
+              {/* <DeckCollection decks={decksData}/> */}
 
             </>
           ) : (
