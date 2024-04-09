@@ -1,11 +1,9 @@
 import React, { useState, useEffect, useRef, Fragment } from 'react';
-import { Stage, Layer, Transformer } from 'react-konva';
+import { Stage, Layer } from 'react-konva';
 import Rectangle from './shapes/Reactangle';
 import Circle from './shapes/Circle.tsx';
 import Line from './shapes/Line.tsx';
 import Text from './shapes/Text.tsx';
-// import uri from './data.js';
-import { shapes } from 'konva/lib/Shape';
 
 
 export default function Canvas () {
@@ -15,6 +13,7 @@ export default function Canvas () {
   const [lines, setLines] = useState([]);
   const [texts, setTexts] = useState([]);
   const [textField, setTextField] = useState('');
+  const [numberOfShapes, setNumberOfShapes] = useState(0);
   const [shapes, setShapes] = useState({rectangles: [], circles: [], lines: [], texts: [], number: 0});
 
   const stageRef = useRef();
@@ -77,65 +76,81 @@ export default function Canvas () {
     setLines(shapes.lines);
   }, [shapes])
 
+  useEffect(() => {
+    let shapeNumber = rectangles.length + circles.length + lines.length + texts.length;
+    setNumberOfShapes(shapeNumber);
+  }, [rectangles, circles, lines, texts])
+
   const addRectangle = () => {
-    const rect = {
-      x: 10,
-      y: 10,
-      width: 100,
-      height: 100,
-      fill: 'rgba(0,0,0,0.01)',
-      strokeWidth: 1,
-      stroke: 'black',
-      id: `rect${shapes.number+1}`
+    if (numberOfShapes < 50) {
+      const rect = {
+        x: 10,
+        y: 10,
+        width: 100,
+        height: 100,
+        fill: 'rgba(0,0,0,0.01)',
+        strokeWidth: 1,
+        stroke: 'black',
+        id: `rect${shapes.number+1}`
+      }
+      const rects = rectangles.concat([rect]);
+      setRectangles(rects);
+      shapes.rectangles = rects;
+      shapes.number ++;
     }
-    const rects = rectangles.concat([rect]);
-    setRectangles(rects);
-    shapes.rectangles = rects;
-    shapes.number ++;
   };
+
   const addCircle = () => {
-    const circ = {
-      x: 50,
-      y: 50,
-      width: 100,
-      height: 100,
-      fill: 'rgba(0,0,0,0.01)',
-      strokeWidth: 1,
-      stroke: 'black',
-      id: `circ${shapes.number+1}`
+    if (numberOfShapes < 50) {
+      const circ = {
+        x: 50,
+        y: 50,
+        width: 100,
+        height: 100,
+        fill: 'rgba(0,0,0,0.01)',
+        strokeWidth: 1,
+        stroke: 'black',
+        id: `circ${shapes.number+1}`
+      }
+      const circs = circles.concat([circ]);
+      setCircles(circs);
+      shapes.circles = circs;
+      shapes.number ++;
     }
-    const circs = circles.concat([circ]);
-    setCircles(circs);
-    shapes.circles = circs;
-    shapes.number ++;
   };
+
   const addLine = () => {
-    const line = {
-      points: [50, 50, 125, 50],
-      stroke: 'black',
-      strokeWidth: 5,
-      fill: 'black',
-      id: `line${shapes.number+1}`
+    if (numberOfShapes < 50) {
+      const line = {
+        points: [50, 50, 125, 50],
+        stroke: 'black',
+        strokeWidth: 5,
+        fill: 'black',
+        id: `line${shapes.number+1}`
+      }
+      const newLines = lines.concat([line]);
+      setLines(newLines);
+      shapes.lines = newLines;
+      shapes.number ++;
     }
-    const newLines = lines.concat([line]);
-    setLines(newLines);
-    shapes.lines = newLines;
-    shapes.number ++;
   };
+
   const addText = () => {
-    const newText = {
-      x: 50,
-      y: 50,
-      fill: 'black',
-      align: 'center',
-      text: `${textField}`,
-      id: `text${shapes.number+1}`
+    if (numberOfShapes < 50) {
+      const newText = {
+        x: 50,
+        y: 50,
+        fill: 'black',
+        align: 'center',
+        text: `${textField}`,
+        id: `text${shapes.number+1}`
+      }
+      const newTexts = texts.concat([newText]);
+      setTexts(newTexts);
+      shapes.texts = newTexts;
+      shapes.number ++;
     }
-    const newTexts = texts.concat([newText]);
-    setTexts(newTexts);
-    shapes.texts = newTexts;
-    shapes.number ++;
-  }
+  };
 
   return (
     <Fragment>
