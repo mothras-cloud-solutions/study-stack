@@ -2,6 +2,7 @@ import express from 'express';
 import {
     getAllFlashcards,
     getFlashcardById,
+    getFlashcardsByCollection,
     createFlashcard,
     updateFlashcard,
     updateFlashcardConfidenceLevel,
@@ -11,6 +12,7 @@ import {
 const router = express.Router();
 
 router.get('/', getAllFlashcards);
+router.get('/collection_id/:collection_id', getFlashcardsByCollection);
 router.get('/:id', getFlashcardById);
 router.post('/', createFlashcard);
 router.put('/:id', updateFlashcard);

@@ -5,7 +5,7 @@
   "main": "index.jsx",
   "scripts": {
     "test": "test",
-    "start": "nodemon server/index.tsx",
+    "start": "nodemon server/app.ts",
     "build": "npx webpack --watch"
   },
   "repository": {

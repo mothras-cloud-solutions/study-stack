@@ -26,6 +26,22 @@ export const getFlashcardById = async (req: Request, res: Response) => {
     }
 };
 
+export const getFlashcardsByCollection = async (req: Request, res: Response) => {
+    const collectionId = req.params.collection_id; // Use req.params here, not req.query
+    console.log('Collection ID:', collectionId);
+
+    try {
+        let query = 'SELECT * FROM flashcards WHERE collection_id = $1'; // Moved the WHERE clause inside the query
+        const params = [collectionId];
+
+        const result = await pool.query(query, params);
+        res.json(result.rows);
+    } catch (err) {
+        console.error('Error fetching flashcards:', err);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+};
+
 export const createFlashcard = async (req: Request, res: Response) => {
     const { term, definition, confidenceLevel, keywords, collection_id } = req.body;
     try {
@@ -68,18 +84,13 @@ export const updateFlashcardConfidenceLevel = async (req: Request, res: Response
 
         if (currentResult.rows.length > 0) {
             let confidenceLevel = currentResult.rows[0].confidencelevel;
-            // console.log('cr[0]:', currentResult.rows[0].confidencelevel);
             confidenceLevel += 1;  // Increment by 1
-            // console.log('updated confdence level:', confidenceLevel);
-            // console.log('Updating flashcard:', id, 'with new confidence level:', confidenceLevel);
 
             // Then, update the confidenceLevel in the database
             const updateResult = await pool.query(
                 'UPDATE flashcards SET confidenceLevel = $1 WHERE id = $2 RETURNING *',
                 [confidenceLevel, id]
             );
-
-            // console.log('Update result:', updateResult);
 
             if (updateResult.rows.length > 0) {
                 res.json(updateResult.rows[0]);
