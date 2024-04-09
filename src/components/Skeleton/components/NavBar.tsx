@@ -37,7 +37,7 @@ const NavBar: React.FC<NavBarProps> = ({ user, onLoginLinkClick, onHomeLinkClick
             </a>
             <a
               role="button"
-              className={`navbar-burger burger ${isActive ? 'is-active' : ''}`}
+              className={`navbar-burger burger ${isActive ? 'is-active mb-4' : ''}`}
               aria-label="menu"
               aria-expanded="false"
               onClick={toggleMenu}
@@ -48,7 +48,7 @@ const NavBar: React.FC<NavBarProps> = ({ user, onLoginLinkClick, onHomeLinkClick
             </a>
           </div>
 
-          <div className={`navbar-menu ${isActive ? 'is-active' : ''}`}>
+          <div className={`navbar-menu ${isActive ? 'is-active mb-4' : ''}`}>
             <div className="navbar-end">
               <a className="navbar-item" onClick={onHomeLinkClick}>
                 Home
