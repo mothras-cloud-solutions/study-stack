@@ -1,11 +1,20 @@
 import { Pool } from 'pg';
+import 'dotenv/config';
+
+console.log(process.env.PORT);
+
+const user: string = process.env.DB_USER || 'postgres';
+const host: string = process.env.DB_HOST || 'localhost';
+const database: string = process.env.DB_DATABASE || 'study_stack';
+const password: string = process.env.DB_PASSWORD || 'password';
+const port: number = parseInt(process.env.DB_PORT || '5432');
 
 const pool = new Pool({
-    user: 'postgres',
-    host: 'localhost',
-    database: 'study_stack',
-    password: 'password',
-    port: 5432,
+    user: user,
+    host: host,
+    database: database,
+    password: password,
+    port: port,
 });
 
 type GenericObject = { [key: string]: unknown };
