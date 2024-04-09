@@ -1,14 +1,13 @@
 import React from 'react';
-import Card from './components/Card.tsx';
-import { Interface } from 'readline';
+import Skeleton from './components/Skeleton';
+import DeckCollection from './components/inspectCollection/DeckCollection';
+
 function App() {
-
-
   return (
     <div>
-      <p>Hello Inside of App!</p>
+      <DeckCollection />
     </div>
-  )
+  );
 }
 
 export default App;

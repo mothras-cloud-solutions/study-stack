@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import CardThumbnail from './CardThumbnail';
 
 type FlashcardType = {
@@ -8,58 +8,63 @@ type FlashcardType = {
   confidenceLevel: number;
   keywords: string;
   collectionId: number;
-  isArchived?: boolean;
+  isArchived: boolean;
 };
 
 type CardThumbnailContainerProps = {
   flashcards: FlashcardType[];
   onEdit: (flashcardId: number) => void;
-  onStudy: (flashcardId: number) => void;
+  onDelete: (flashcardId: number) => void;
+  onArchiveToggle: (flashcardId: number) => void;
 };
 
-const CardThumbnailContainer: React.FC<CardThumbnailContainerProps> = ({ flashcards, onEdit, onStudy }) => {
-  // Initialize the local state with the flashcards prop
-  const [flashcardsState, setFlashcardsState] = useState<FlashcardType[]>([]);
+const CardThumbnailContainer: React.FC<CardThumbnailContainerProps> = ({
+  flashcards,
+  onEdit,
+  onDelete,
+  onArchiveToggle,
+}) => {
   const [showArchived, setShowArchived] = useState(false);
+  const [localFlashcards, setLocalFlashcards] = useState(flashcards);
 
-  // Use the useEffect hook to update the local state whenever the flashcards prop changes
   useEffect(() => {
-    setFlashcardsState(flashcards);
+    setLocalFlashcards(flashcards);
   }, [flashcards]);
 
-  // Handler to toggle the archived status of a flashcard
-  const toggleArchive = (id: number) => {
-    const updatedFlashcards = flashcardsState.map(flashcard =>
+  const toggleArchiveStatus = (id: number) => {
+    const updatedFlashcards = localFlashcards.map(flashcard =>
       flashcard.id === id ? { ...flashcard, isArchived: !flashcard.isArchived } : flashcard
     );
-    setFlashcardsState(updatedFlashcards);
+    setLocalFlashcards(updatedFlashcards);
+    onArchiveToggle(id);
   };
 
-  // Filter the flashcards based on the showArchived state
-  const displayedFlashcards = flashcardsState.filter(flashcard =>
-    showArchived === !!flashcard.isArchived
+  const displayedFlashcards = localFlashcards.filter(flashcard =>
+    showArchived ? flashcard.isArchived : !flashcard.isArchived
   );
 
   return (
     <div>
-      <button onClick={() => setShowArchived(!showArchived)}>
+      <button onClick={() => setShowArchived(!showArchived)} className="mb-4">
         {showArchived ? 'Show Unarchived' : 'Show Archived'}
       </button>
-      <div className="card-thumbnail-container">
-        {displayedFlashcards.map(flashcard => (
-          <div key={flashcard.id} className="flashcard-thumbnail">
-            <CardThumbnail flashcard={flashcard} />
-            <div className="flashcard-actions">
-              <button onClick={() => onEdit(flashcard.id)}>Edit</button>
-              <button onClick={() => onStudy(flashcard.id)}>Study</button>
-              <button onClick={() => toggleArchive(flashcard.id)}>
-                {flashcard.isArchived ? 'Unarchive' : 'Archive'}
-              </button>
-            </div>
-          </div>
-        ))}
+
+      <div className="box">
+        <h2 className="title is-4 mb-3">Cards in this Deck ({displayedFlashcards.length})</h2>
+        <div className="columns is-multiline">
+          {displayedFlashcards.map(flashcard => (
+            <CardThumbnail
+              key={flashcard.id}
+              flashcard={flashcard}
+              onEdit={onEdit}
+              onDelete={onDelete}
+              onArchiveToggle={toggleArchiveStatus}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );
 };
+
 export default CardThumbnailContainer;
