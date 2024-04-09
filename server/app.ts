@@ -6,6 +6,7 @@ import flashcardsRoutes from './routes/flashcardsRoutes';
 import canvasesRoutes from './routes/canvasesRoutes';
 
 const app = express();
+app.use(express.static('client/dist'));
 const port = process.env.PORT || 3000;
 
 app.use(cors());

@@ -16,12 +16,12 @@ function generateCollections(count) {
 }
 
 const collectionData = generateCollections(100);
-const collectionsFilePath = '/home/andrewpark0408/BlueOcean/study-stack/src/scripts/collectionData.json';
+const collectionsFilePath = '/home/andrewpark0408/StudyStack/study-stack/server/database/scripts/collectionData.json';
 
 fs.writeFile(collectionsFilePath, JSON.stringify(collectionData, null, 2), (err) => {
     if (err) {
         console.error('Error writing file:', err);
     } else {
-        console.log('Successfully wrote collection data to collectionData.json');
+        // console.log('Successfully wrote collection data to collectionData.json');
     }
 });
