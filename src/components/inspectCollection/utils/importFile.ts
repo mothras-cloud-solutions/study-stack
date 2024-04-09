@@ -46,7 +46,7 @@ const importCollection = (file: File): Promise<CollectionType> => {
 };
 
 //function that opens a file dialog and triggers the importCollection function
-export const openFile = () => {
+export const importFile = () => {
   const input: HTMLInputElement = document.createElement('input');
   input.type = 'file';
   input.accept = '.json';
