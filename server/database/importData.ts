@@ -24,9 +24,10 @@ const main = async () => {
     const flashcardsData = loadJsonFile('./scripts/flashcardsData.json');
     const canvasesData = loadJsonFile('./scripts/canvasData.json');
 
-    // Ensure the column names match exactly with your database schema
+    // Insert users data
     await insertData(usersData, 'users', ['username', 'email', 'password', 'role']);
 
+    // Insert collections data
     const userRows = await pool.query('SELECT id FROM users');
     const userIds = userRows.rows.map(row => row.id);
     for (const collection of collectionsData) {
@@ -34,7 +35,7 @@ const main = async () => {
         await pool.query(`INSERT INTO collections (title, description, subjects, user_id) VALUES ($1, $2, $3, $4)`, [collection.title, collection.description, collection.subjects, user_id]);
     }
 
-    // Insert flashcards data and assign collection_id dynamically
+    // Insert flashcards data
     const collectionRows = await pool.query('SELECT id FROM collections');
     const collectionIds = collectionRows.rows.map(row => row.id);
     for (const flashcard of flashcardsData) {
@@ -42,7 +43,13 @@ const main = async () => {
         await pool.query(`INSERT INTO flashcards (term, definition, confidenceLevel, keywords, collection_id) VALUES ($1, $2, $3, $4, $5)`, [flashcard.term, flashcard.definition, flashcard.confidenceLevel, flashcard.keywords, collection_id]);
     }
 
-    await insertData(canvasesData, 'canvases', ['id', 'name', 'width', 'height', 'imageUrl', 'archived', 'user_id']);
+    // Insert canvases data
+    const flashcardRows = await pool.query('SELECT id FROM flashcards');
+    const flashcardIds = flashcardRows.rows.map(row => row.id);
+    for (const canvas of canvasesData) {
+        const flashcards_id = flashcardIds[Math.floor(Math.random() * flashcardIds.length)];
+        await pool.query(`INSERT INTO canvases (id, archived, canvas_data, flashcards_id) VALUES ($1, $2, $3, $4)`, [canvas.id, canvas.archived, canvas.canvas_data, flashcards_id]);
+    }
 };
 
 // Execute the main function and catch any errors

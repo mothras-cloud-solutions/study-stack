@@ -1,5 +1,5 @@
-import fs from 'fs';
-import { faker } from '@faker-js/faker';
+const fs = require('fs');
+const { faker } = require('@faker-js/faker');
 
 function generateUsers(count) {
     let users = [];
@@ -10,7 +10,7 @@ function generateUsers(count) {
             username: faker.internet.userName(),
             email: faker.internet.email(),
             password: faker.internet.password(),
-            role: roles[faker.datatype.number({ min: 0, max: roles.length - 1 })]
+            role: roles[faker.number.int({ min: 0, max: roles.length - 1 })]
         });
     }
     return users;
