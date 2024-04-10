@@ -35,7 +35,7 @@ function App() {
       {user ? (
         <>
         <SignOut />
-        <DeckCollection />
+        <DeckCollection uid={uid} />
         <StudyPageTest />
         </>
       ) : (
