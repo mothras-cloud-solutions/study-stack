@@ -1,4 +1,4 @@
-.button {
+.action-button {
   background-color: white;
   color: black;
   border: 2px solid black;
@@ -9,26 +9,27 @@
   transition: background-color 150ms ease-in-out;
 }
 
-.button:hover {
+.action-button:hover {
   background-color: #f3f4f6;
 }
 
-.button:focus {
+.action-button:focus {
   outline: 2px solid transparent;
   outline-offset: 2px;
   ring-width: 2px;
   ring-color: #cbd5e1;
 }
 
-.button:not(:last-child) {
+.action-button:not(:last-child) {
   margin-bottom: 0.5rem;
 }
 
-.more-actions {
+
+.additional-actions {
   display: none;
 }
 
-.more-actions.show {
+.additional-actions.show {
   display: flex;
   flex-direction: row;
 }
@@ -37,3 +38,5 @@
   max-width: 200px;
   margin: 0 auto;
 }
+
+
