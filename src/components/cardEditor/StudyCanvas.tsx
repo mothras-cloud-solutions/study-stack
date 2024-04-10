@@ -58,14 +58,14 @@ const StudyCanvas: React.FC<Props> = ({ rectangles, circles, lines, texts }) => 
         {rectangles.length > 0 && rectangles.map((rect) => {
           return (<Rectangle shapeSpecs={rect}/>)
         })}
-        {circles.length > 0 && circles.map((rect) => {
-          return (<Circle shapeSpecs={rect}/>)
+        {circles.length > 0 && circles.map((circ) => {
+          return (<Circle shapeSpecs={circ}/>)
         })}
-        {lines.length > 0 && lines.map((rect) => {
-          return (<Line shapeSpecs={rect}/>)
+        {lines.length > 0 && lines.map((lin) => {
+          return (<Line shapeSpecs={lin}/>)
         })}
-        {texts.length > 0 && texts.map((rect) => {
-          return (<Text shapeSpecs={rect}/>)
+        {texts.length > 0 && texts.map((tex) => {
+          return (<Text textSpecs={tex}/>)
         })}
       </Layer>
     </Stage>
