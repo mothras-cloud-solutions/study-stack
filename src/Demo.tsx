@@ -11,7 +11,7 @@ import NavBar from './components/overview/components/NavBar';
 import { Routes, Route } from 'react-router-dom';
 import Overview from './components/overview/index';
 
-function App() {
+function Demo() {
   const [user, setUser] = useState<User | null>(null);
   const [uid, setUid] = useState<string | null>(null);
 
@@ -35,14 +35,13 @@ function App() {
 
   return (
     <Fragment>
-
+      {/* <Routes location="">
+        <Route path="" element={<Overview />} />
+      </Routes> */}
       {user ? (
         <>
           <NavBar />
-          <Overview />
-          <SignOut />
-          <DeckCollection />
-          <StudyPageTest />
+          {/* <Overview /> */}
         </>
       ) : (
         <Fragment>
@@ -53,9 +52,11 @@ function App() {
       <Routes>
         <Route path="/register" element={<Register />} />
         <Route path="/home" element={<Overview />} />
+        <Route path="/learn" element={<StudyPageTest />} />
+        <Route path="/collections" element={<DeckCollection />} />
       </Routes>
     </Fragment>
   )
 }
 
-export default App;
+export default Demo;
