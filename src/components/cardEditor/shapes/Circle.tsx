@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, Fragment } from 'react';
-import { Stage, Layer, Circle, Transformer } from 'react-konva';
+import { Circle, Transformer } from 'react-konva';
 
 interface ShapeSpecs {
   x?: number;

@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, Fragment } from 'react';
-import { Stage, Layer, Text, Transformer } from 'react-konva';
+import { Text, Transformer } from 'react-konva';
 
 interface textSpecs {
   x?: number;
