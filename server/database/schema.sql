@@ -31,8 +31,8 @@ CREATE TABLE flashcards (
     definition TEXT NOT NULL,
     confidenceLevel INTEGER NOT NULL,
     keywords TEXT,
-    archived INTEGER NOT NULL,
-    starred INTEGER NOT NULL,
+    archived BOOLEAN NOT NULL,
+    starred BOOLEAN NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     edited_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     collection_id INTEGER REFERENCES collections(id)
