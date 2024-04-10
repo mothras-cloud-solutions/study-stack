@@ -8,7 +8,9 @@ import StudyCanvas from '../cardEditor/StudyCanvas';
 // confidenceLevel: number}>
 export default function Card ({card, setIndex, index, length, studyDeck, setStudyDeck, shuffleTheDeck}) {
 
-  const {term, definition, starred} = card;
+  console.log(card);
+
+  const {term, definition, starred, canvas_back, canvas_front} = card;
 
 // temp state, with the endpoint I'll just hit the backend
   // const [starryNight, setStarryNight] = useState(starred);
