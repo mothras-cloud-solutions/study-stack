@@ -1,10 +1,10 @@
 import React, { useEffect, useState, Fragment } from 'react';
 import Register from './components/Register/Register.tsx';
 import Login from './components/Login/Login.tsx';
-import SignOut from './components/SignOut/SignOut.tsx';
+// import SignOut from './components/SignOut/SignOut.tsx';
 import { onAuthStateChange } from '../firebase/firebase.ts';
 import { User } from 'firebase/auth';
-import Skeleton from './components/Skeleton';
+// import Skeleton from './components/Skeleton';
 import DeckCollection from './components/inspectCollection/DeckCollection';
 import StudyPageTest from './components/learnCollection/testcollection';
 import NavBar from './components/overview/components/NavBar';
@@ -29,7 +29,6 @@ function Demo() {
   useEffect(() => {
     if (user) {
       const uid = user.uid;
-      console.log('User UID:', uid);
       setUid(uid);
     }
   }, [user]);
