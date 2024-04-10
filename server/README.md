@@ -54,10 +54,11 @@ GET /api/flashcards/    get all flashcards (decks)
 GET /api/flashcards/collection_id/:collection_id    get all flashcards for a given collection id
 GET /api/flashcards/:id    get a specific flashcard for a given flashcard id
 
-POST /api/flashcards/    create a new flashcard [need data format]
+POST /api/flashcards/    create a new flashcard expected fields in object in body: term: text, definition: text; confidenceLevel: 0, keywords: text, collection_id: integer   ; note for confidence level the number 0 should always be used for new cards
 
-PUT /api/flashcards/:id    update flashcard with given flashcard id [need data format]
+PUT /api/flashcards/:id    update flashcard with given flashcard id [see post request for format for data to be updated - confidenceLevel may be an integer not equal to 0]
 PUT /api/flashcards/:id/confidenceLevel    increase confidence level by 1 for a given flashcard id
+
 PUT /api/flashcards/:id/archived    toggle archived boolean for a given flashcard id
 PUT /api/flashcards/:id/starred    toggle starred boolean for a given flashcard id
 
@@ -70,24 +71,12 @@ Canvases API:
 GET /api/canvases/    get all canvases
 GET /api/canvases/:flashcards_id    get a specific canvas for a given flashcard id
 
-POST /api/canvases/    create a new canvas
+POST none: canvas record will automatically be created when Flashcard is created with archived set to false, and canvas_front and canvas_back both set to empty string ''
 
-PUT /api/canvases/:flashcards_id    update canvas with given flashcard id
+PUT /api/canvases/:flashcards_id/canvasFront    update canvas_front for given flashcard id by passing {canvas_front: "newCanvasFrontString"}
+PUT /api/canvases/:flashcards_id/canvasBack    update canvas_back for given flashcard id by passing {canvas_back: "newCanvasBackString"}
+PUT /api/canvases/:flashcards_id/archived    toggle archived property on canvas for given flashcard id (i.e. if previously false set to true, if true set to false)
 
 DELETE /api/canvases/:flashcards_id    delete canvas with given flashcard id
-
-
-
-
-router.get('/', getAllCanvases);
-router.get('/flashcards_id', getCanvasById);
-
-router.post('/', createCanvas);
-
-router.put('/flashcards_id', updateCanvas);
-router.put('/:flashcards_id/canvasFront', updateCanvasFront);
-router.put('/:flashcards_id/canvasBack', updateCanvasBack);
-
-router.delete('/flashcards_id', deleteCanvas);
 
 
