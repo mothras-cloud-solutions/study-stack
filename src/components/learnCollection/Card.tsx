@@ -6,10 +6,10 @@ import Pagination from '../Skeleton/components/Pagination';
 // confidenceLevel: number}>
 export default function Card ({card, setIndex, index, length, studyDeck, setStudyDeck, shuffleTheDeck}) {
 
-  const {term, definition, starred} = card;
+  const {term, definition, starred, id, deck_title} = card;
 
 // temp state, with the endpoint I'll just hit the backend
-  const [starryNight, setStarryNight] = useState(starred);
+  // const [starryNight, setStarryNight] = useState(starred);
 
 
   const [isFlipped, setIsFlipped] = useState(false);
@@ -57,7 +57,7 @@ export default function Card ({card, setIndex, index, length, studyDeck, setStud
       // setStudyDeck(newDeck);
 
       // insert axios call once we get the route
-      setStarryNight(1)
+      // setStarryNight(1)
 
       setIsFlipped(false);
 
@@ -91,12 +91,17 @@ export default function Card ({card, setIndex, index, length, studyDeck, setStud
   // to turn it to 0
 
  return <div className='box'>
-  <h2 className="title is-2">Deck Title</h2>
+  <h2 className="title is-2">{deck_title}</h2>
   {/* {function(){
     if (studyDeck[index].studyAgain) {
       return <>Studying Again</>
     }
   }()} */}
+   {function(){
+    if (starred === 1) {
+      return <>This question was challenging for you, try to get it this time!</>
+    }
+  }()}
  <nav className="nav">
    <div className='left'>
        </div>
