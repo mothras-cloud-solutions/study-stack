@@ -68,7 +68,7 @@ export default function Card ({card, setIndex, index, length, studyDeck, setStud
       // insert axios call once we get the route
       // only toggle it if the star is 0 (what if they got it wrong twice?)
       if (starred === 0){
-        axios.put(`http://localhost:3000/api/flashcards/${id}/starred`).then(() => {
+        axios.put(`/api/flashcards/${id}/starred`).then(() => {
           console.log('starred should be changed to 1')
         })
       }
@@ -88,7 +88,7 @@ export default function Card ({card, setIndex, index, length, studyDeck, setStud
       // should we only move to the next card when they click next?
       // then got it can just update the confidence instead
       if (starred === 1){
-        axios.put(`http://localhost:3000/api/flashcards/${id}/starred`).then(() => {
+        axios.put(`/api/flashcards/${id}/starred`).then(() => {
           console.log('starred should be changed back to 0')
         })
       }
@@ -116,9 +116,10 @@ export default function Card ({card, setIndex, index, length, studyDeck, setStud
   // "If" the current card has starred set to 1. If so and they click "got it" then send the route to the backend
   // to turn starred to 0
 
+  // {Deck Title goes here}
 
  return <div className='box'>
-  <h2 className="title is-2">{deck_title}</h2>
+  <h2 className="title is-2">Deck Title</h2>
   {/* {function(){
     if (studyDeck[index].studyAgain) {
       return <>Studying Again</>
