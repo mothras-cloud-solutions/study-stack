@@ -1,0 +1,602 @@
+[
+  {
+    "username": "Garrick45",
+    "email": "Floy.OConnell@gmail.com",
+    "password": "CbSOKpMuyTOclwA",
+    "role": "admin"
+  },
+  {
+    "username": "Alana24",
+    "email": "Carson_Miller@hotmail.com",
+    "password": "PZo8gYbrz3oitqZ",
+    "role": "admin"
+  },
+  {
+    "username": "Ulices67",
+    "email": "Jensen_Gottlieb90@yahoo.com",
+    "password": "s04nLuj1ISdqOtR",
+    "role": "student"
+  },
+  {
+    "username": "Danika14",
+    "email": "Bernardo.Brakus@gmail.com",
+    "password": "mumkGL0vFfAEcTO",
+    "role": "student"
+  },
+  {
+    "username": "Janelle_Schoen-Weissnat76",
+    "email": "Quincy47@yahoo.com",
+    "password": "w5dfEPcGJHLDOVV",
+    "role": "student"
+  },
+  {
+    "username": "Mellie_Kulas",
+    "email": "Jamarcus_Mohr@yahoo.com",
+    "password": "zf1qoWlEsFbgSTy",
+    "role": "admin"
+  },
+  {
+    "username": "Giovanny4",
+    "email": "Ramona.Goyette11@yahoo.com",
+    "password": "vy8pNCuQu7KuySN",
+    "role": "student"
+  },
+  {
+    "username": "Adah_Langworth40",
+    "email": "Luciano_Kertzmann@gmail.com",
+    "password": "wl5LZDeNytdKSrm",
+    "role": "admin"
+  },
+  {
+    "username": "Danny.Rau59",
+    "email": "Sallie.Altenwerth12@gmail.com",
+    "password": "P1D2UJKuIbdZdjN",
+    "role": "admin"
+  },
+  {
+    "username": "Duane_Russel",
+    "email": "Danyka3@gmail.com",
+    "password": "qp8VzxQtvu2y0F4",
+    "role": "teacher"
+  },
+  {
+    "username": "Hal_Okuneva25",
+    "email": "Lou4@hotmail.com",
+    "password": "IsJ66DC46l7rkDL",
+    "role": "admin"
+  },
+  {
+    "username": "Frederique.Schroeder",
+    "email": "Joana85@gmail.com",
+    "password": "Dek9CtWMZJKyFhp",
+    "role": "student"
+  },
+  {
+    "username": "Nicholas.Haley",
+    "email": "Amos.Roberts@yahoo.com",
+    "password": "7jTjaQ9xDPS1mOF",
+    "role": "admin"
+  },
+  {
+    "username": "Marjory_Stracke",
+    "email": "Lucious.Wiza-Oberbrunner@gmail.com",
+    "password": "lbFUVWHTWpJXVG1",
+    "role": "admin"
+  },
+  {
+    "username": "Terrence.Donnelly49",
+    "email": "Freida.Heaney@yahoo.com",
+    "password": "HBmdGoFGCjTqi5t",
+    "role": "student"
+  },
+  {
+    "username": "Brendan13",
+    "email": "Miguel_Wiegand@gmail.com",
+    "password": "2DjDY_0UwKGASnB",
+    "role": "admin"
+  },
+  {
+    "username": "Celestino6",
+    "email": "Rita_Dickinson@gmail.com",
+    "password": "MZPg_blWceu0CRu",
+    "role": "teacher"
+  },
+  {
+    "username": "Peggie_Langworth",
+    "email": "Mozelle89@gmail.com",
+    "password": "Ozdq5N00Ug66xSC",
+    "role": "student"
+  },
+  {
+    "username": "Reyes.Schaden",
+    "email": "Talon.Krajcik@yahoo.com",
+    "password": "jrm9wLdawatRg5M",
+    "role": "teacher"
+  },
+  {
+    "username": "Tony.Bednar",
+    "email": "Nick.Bartoletti-Kuvalis@hotmail.com",
+    "password": "TowqNXv3nswC6mV",
+    "role": "admin"
+  },
+  {
+    "username": "Mario13",
+    "email": "Tatum15@gmail.com",
+    "password": "Va7kMTOx7ftAOMm",
+    "role": "student"
+  },
+  {
+    "username": "Armand26",
+    "email": "Sabina68@yahoo.com",
+    "password": "51pKInnSx5nkk_5",
+    "role": "teacher"
+  },
+  {
+    "username": "Hank.Luettgen93",
+    "email": "Felton_Kris@gmail.com",
+    "password": "cinur9zb5qFbH7v",
+    "role": "student"
+  },
+  {
+    "username": "Carissa.Stokes81",
+    "email": "Lorna.Huel1@hotmail.com",
+    "password": "qMEWVWQvga6NewN",
+    "role": "student"
+  },
+  {
+    "username": "Luciano.Legros32",
+    "email": "Misty.Hayes@hotmail.com",
+    "password": "63iKC8LU1Kc1rcU",
+    "role": "student"
+  },
+  {
+    "username": "Nora_Walker51",
+    "email": "Lilly.Haag54@hotmail.com",
+    "password": "9SY7FWlkD26Lded",
+    "role": "admin"
+  },
+  {
+    "username": "Kenyatta.Rohan",
+    "email": "Sharon52@hotmail.com",
+    "password": "Pnzdh7t8Q8rS5TZ",
+    "role": "teacher"
+  },
+  {
+    "username": "Myron.Monahan",
+    "email": "Helen_Murphy@yahoo.com",
+    "password": "6egNSD74RgCE3Wk",
+    "role": "teacher"
+  },
+  {
+    "username": "Zoey76",
+    "email": "Noah91@gmail.com",
+    "password": "AlDHUQhGbVpHuL9",
+    "role": "student"
+  },
+  {
+    "username": "Miller5",
+    "email": "Adam_Ullrich@gmail.com",
+    "password": "3IGy8kvs9sn5POE",
+    "role": "student"
+  },
+  {
+    "username": "Anastacio81",
+    "email": "Talia.Kutch39@yahoo.com",
+    "password": "tppkidhQGGHO67S",
+    "role": "student"
+  },
+  {
+    "username": "Alycia_Gutkowski66",
+    "email": "Burnice78@gmail.com",
+    "password": "oeK9iar2oJfIMK0",
+    "role": "student"
+  },
+  {
+    "username": "Mellie.Boyer-Wisozk",
+    "email": "Justina.Bogisich@yahoo.com",
+    "password": "Y4fSdK01Z5Xw2zA",
+    "role": "teacher"
+  },
+  {
+    "username": "Estella73",
+    "email": "Efren_Bauch72@yahoo.com",
+    "password": "kH9BHmgHd2yRykl",
+    "role": "teacher"
+  },
+  {
+    "username": "Angelica.Lesch58",
+    "email": "Arvilla85@yahoo.com",
+    "password": "_TREfBeP6rakzCX",
+    "role": "student"
+  },
+  {
+    "username": "Randal_Schneider",
+    "email": "Jackson.Goodwin74@yahoo.com",
+    "password": "4H885mfdFQIMBQ_",
+    "role": "student"
+  },
+  {
+    "username": "Estell56",
+    "email": "Horace.Sanford@gmail.com",
+    "password": "rLAqaZo0FGoaQTg",
+    "role": "teacher"
+  },
+  {
+    "username": "Madge.Kautzer13",
+    "email": "Filiberto41@yahoo.com",
+    "password": "TUlHD23upunIxT4",
+    "role": "admin"
+  },
+  {
+    "username": "Ayana.Carroll11",
+    "email": "Garnet.Kunze@hotmail.com",
+    "password": "jUdsEAlpMEwrzQF",
+    "role": "admin"
+  },
+  {
+    "username": "Araceli23",
+    "email": "Mitchell_Powlowski@yahoo.com",
+    "password": "XECzi8wyUajkv0p",
+    "role": "admin"
+  },
+  {
+    "username": "Annabell_Konopelski",
+    "email": "Lempi.Dibbert@yahoo.com",
+    "password": "R_mUu2BIheZECFZ",
+    "role": "student"
+  },
+  {
+    "username": "Antonetta_Blick10",
+    "email": "Rodrigo_Weimann@hotmail.com",
+    "password": "Gn_z_L3ucAkjVq2",
+    "role": "student"
+  },
+  {
+    "username": "Gordon9",
+    "email": "Ashley.Kling@gmail.com",
+    "password": "X8Y50T1GGOLw7FJ",
+    "role": "teacher"
+  },
+  {
+    "username": "Kellie_Herman",
+    "email": "Helga.Yundt29@yahoo.com",
+    "password": "m8ZnpZOZqIfo1si",
+    "role": "teacher"
+  },
+  {
+    "username": "Otilia88",
+    "email": "Yasmin_Kohler@gmail.com",
+    "password": "Qg_uaPnlCkuJ2AV",
+    "role": "admin"
+  },
+  {
+    "username": "Bianka89",
+    "email": "Keyon.Swift@gmail.com",
+    "password": "nQneGJXK_b5R_ZW",
+    "role": "teacher"
+  },
+  {
+    "username": "Jalyn.Erdman48",
+    "email": "Mina.Lindgren86@yahoo.com",
+    "password": "og6fXMPeM87oRcP",
+    "role": "admin"
+  },
+  {
+    "username": "Francis_Upton",
+    "email": "Maximillian.Dickens@gmail.com",
+    "password": "mxLGTFXAoyZ1f9M",
+    "role": "teacher"
+  },
+  {
+    "username": "Jaida_Roberts",
+    "email": "Lafayette80@gmail.com",
+    "password": "DOmBkBQ4J7_eDsQ",
+    "role": "admin"
+  },
+  {
+    "username": "Josiane.Auer9",
+    "email": "Hilario.Littel7@yahoo.com",
+    "password": "sP2zwjWWc5_F5RU",
+    "role": "student"
+  },
+  {
+    "username": "Domingo_Crooks75",
+    "email": "Christop5@gmail.com",
+    "password": "tEBKrIaFndNV3Tm",
+    "role": "student"
+  },
+  {
+    "username": "Rosendo_Bartoletti49",
+    "email": "Kavon.Haley@hotmail.com",
+    "password": "1RllPy2Sqcd8fBl",
+    "role": "teacher"
+  },
+  {
+    "username": "Cortney_Jaskolski",
+    "email": "Mose_Beahan71@hotmail.com",
+    "password": "atbLbl1uURa5wSH",
+    "role": "student"
+  },
+  {
+    "username": "Ivah.Rolfson",
+    "email": "Scotty.Spinka3@gmail.com",
+    "password": "sPxjVI1zCQmljs6",
+    "role": "admin"
+  },
+  {
+    "username": "Noel_Heathcote13",
+    "email": "Maude.Herzog@hotmail.com",
+    "password": "6aYvOZJVoWRNB8A",
+    "role": "teacher"
+  },
+  {
+    "username": "Dorris22",
+    "email": "Deja.Nienow@yahoo.com",
+    "password": "i9b_MuO9tKqCrRl",
+    "role": "admin"
+  },
+  {
+    "username": "Rosemarie77",
+    "email": "Remington_Tremblay3@yahoo.com",
+    "password": "xCuQOY8_bUb2eDs",
+    "role": "admin"
+  },
+  {
+    "username": "Antonina.Connelly",
+    "email": "Kattie9@gmail.com",
+    "password": "LTRwS2p5rlB6pr_",
+    "role": "student"
+  },
+  {
+    "username": "Amari_Schmidt79",
+    "email": "Reid_Jenkins@gmail.com",
+    "password": "nd5jNf_M2BbHx4t",
+    "role": "teacher"
+  },
+  {
+    "username": "Brennon69",
+    "email": "Felicia_Lakin25@yahoo.com",
+    "password": "gs2KfAGHRtAPbtX",
+    "role": "teacher"
+  },
+  {
+    "username": "Liliana.Wilderman13",
+    "email": "Maya.Reinger14@gmail.com",
+    "password": "9zHQiBIw64O6ZxC",
+    "role": "teacher"
+  },
+  {
+    "username": "Winnifred_Hagenes",
+    "email": "Ervin.Crooks@gmail.com",
+    "password": "PkAfMkArXP5pJs5",
+    "role": "teacher"
+  },
+  {
+    "username": "Kay.Frami",
+    "email": "Hertha47@hotmail.com",
+    "password": "JgyCt7YKJSjdG8A",
+    "role": "admin"
+  },
+  {
+    "username": "Kurtis_Maggio73",
+    "email": "Nolan31@gmail.com",
+    "password": "TRmIQwHr8Unb8w0",
+    "role": "student"
+  },
+  {
+    "username": "Patricia_Simonis0",
+    "email": "Furman.Orn70@gmail.com",
+    "password": "KiP1Tr60ACmzDxi",
+    "role": "student"
+  },
+  {
+    "username": "Vergie26",
+    "email": "Verner.Kuhn@gmail.com",
+    "password": "K7nsJO2E0AFXTQR",
+    "role": "admin"
+  },
+  {
+    "username": "Josianne.Yundt1",
+    "email": "Arianna75@yahoo.com",
+    "password": "lC9N04XQdfHjzQy",
+    "role": "admin"
+  },
+  {
+    "username": "Eulalia71",
+    "email": "Lorenzo.Kuhn50@yahoo.com",
+    "password": "dqI27LZfqUbhVp7",
+    "role": "teacher"
+  },
+  {
+    "username": "Soledad_Franey",
+    "email": "Elwin98@gmail.com",
+    "password": "zuWcdEagR7cnRdP",
+    "role": "student"
+  },
+  {
+    "username": "Bette76",
+    "email": "Candelario_Wiza99@hotmail.com",
+    "password": "UNP2B8jnOJIqqjX",
+    "role": "admin"
+  },
+  {
+    "username": "Prince_Anderson",
+    "email": "Hilma25@gmail.com",
+    "password": "gsYgTV8x3roiqU6",
+    "role": "student"
+  },
+  {
+    "username": "Shayne34",
+    "email": "Elton_Brekke@gmail.com",
+    "password": "r2Gr9fRyaEvqfJ8",
+    "role": "teacher"
+  },
+  {
+    "username": "Willa_Kautzer",
+    "email": "Koby_Boyer-Borer@gmail.com",
+    "password": "b8SHwmS455EULBf",
+    "role": "admin"
+  },
+  {
+    "username": "Elijah.Buckridge49",
+    "email": "Ebony51@hotmail.com",
+    "password": "nRLGYUN6XbgM15O",
+    "role": "teacher"
+  },
+  {
+    "username": "Sarina6",
+    "email": "Boyd_Waters91@gmail.com",
+    "password": "7F8Fm7NQVjxb1h7",
+    "role": "teacher"
+  },
+  {
+    "username": "Elmira66",
+    "email": "Benedict4@gmail.com",
+    "password": "u43Wex6NNBSyAn6",
+    "role": "teacher"
+  },
+  {
+    "username": "Erika58",
+    "email": "Mathew_Olson@yahoo.com",
+    "password": "R11e9HrmO5F40v_",
+    "role": "student"
+  },
+  {
+    "username": "Mark.Rutherford8",
+    "email": "Kaleigh37@yahoo.com",
+    "password": "wkzooFRPVWzn72r",
+    "role": "admin"
+  },
+  {
+    "username": "Vida.Collier",
+    "email": "Zelma_Lueilwitz4@yahoo.com",
+    "password": "5xhwbmBOTPHvhNL",
+    "role": "admin"
+  },
+  {
+    "username": "Junius.Runolfsson44",
+    "email": "Yazmin.Watsica@hotmail.com",
+    "password": "JUe5a2tYJqslGDb",
+    "role": "teacher"
+  },
+  {
+    "username": "Catherine_Rowe94",
+    "email": "Hollis95@hotmail.com",
+    "password": "t3iWhiaDnlOPk5b",
+    "role": "student"
+  },
+  {
+    "username": "Larissa3",
+    "email": "Thad_Hickle13@gmail.com",
+    "password": "zNDRqdm2lrJVYvb",
+    "role": "student"
+  },
+  {
+    "username": "Derrick_Smith9",
+    "email": "Karley46@gmail.com",
+    "password": "3hY_giqjWYeR_c2",
+    "role": "admin"
+  },
+  {
+    "username": "Meta98",
+    "email": "Hans.Goodwin-Hegmann@hotmail.com",
+    "password": "ec1SQsEV7qvVHrW",
+    "role": "teacher"
+  },
+  {
+    "username": "Annie11",
+    "email": "Charlene.Ruecker@hotmail.com",
+    "password": "wJKDhBwkGCTpajf",
+    "role": "teacher"
+  },
+  {
+    "username": "Cathrine_Spinka32",
+    "email": "Onie48@gmail.com",
+    "password": "BuA7mLT07JeOBEy",
+    "role": "teacher"
+  },
+  {
+    "username": "Pete62",
+    "email": "Kelly_Gislason@hotmail.com",
+    "password": "9m2T88Q5bcxtHq4",
+    "role": "student"
+  },
+  {
+    "username": "Demarcus_Keebler-Braun64",
+    "email": "Karlie.Sauer-Renner@gmail.com",
+    "password": "lv632R2cdndeZFj",
+    "role": "teacher"
+  },
+  {
+    "username": "Edward_Mitchell",
+    "email": "Brenden.Feest89@hotmail.com",
+    "password": "GxuaKjaImL8796Q",
+    "role": "student"
+  },
+  {
+    "username": "Annette.Mayer11",
+    "email": "Mohammed_Leffler51@hotmail.com",
+    "password": "_RpIRsGEUNzqAz3",
+    "role": "student"
+  },
+  {
+    "username": "Reba66",
+    "email": "Tyreek2@gmail.com",
+    "password": "FexDMj5XwiE1aUq",
+    "role": "student"
+  },
+  {
+    "username": "Vivien_Reinger",
+    "email": "Nels_Weber@hotmail.com",
+    "password": "Y7pv5mn0IfRO3vE",
+    "role": "admin"
+  },
+  {
+    "username": "Ursula79",
+    "email": "Cordell_Cormier79@hotmail.com",
+    "password": "ed8CNG84zHDYW23",
+    "role": "student"
+  },
+  {
+    "username": "Effie64",
+    "email": "Dolly.Kassulke@yahoo.com",
+    "password": "A502DgYvWXG2pqW",
+    "role": "student"
+  },
+  {
+    "username": "Randi.Blick92",
+    "email": "Zaria.Heaney92@yahoo.com",
+    "password": "vSGop7TZfOR8B2g",
+    "role": "admin"
+  },
+  {
+    "username": "Marty.OReilly",
+    "email": "Ludwig98@yahoo.com",
+    "password": "xw0txYEt_RUV93A",
+    "role": "admin"
+  },
+  {
+    "username": "Aisha91",
+    "email": "Nedra.Cole@hotmail.com",
+    "password": "5Zgvd1dklHDrcCz",
+    "role": "student"
+  },
+  {
+    "username": "Jerry_Herman",
+    "email": "Kristoffer.Rempel@hotmail.com",
+    "password": "ixqXgmvphGI7NLT",
+    "role": "student"
+  },
+  {
+    "username": "Nick61",
+    "email": "Jeffry_Kuvalis56@hotmail.com",
+    "password": "eXPFLQYmi3u6bfB",
+    "role": "student"
+  },
+  {
+    "username": "Opal.Jaskolski",
+    "email": "Aylin68@hotmail.com",
+    "password": "b9OPizvW6dwDa_W",
+    "role": "teacher"
+  }
+]

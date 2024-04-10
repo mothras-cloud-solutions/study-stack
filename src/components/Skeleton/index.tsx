@@ -59,10 +59,10 @@ const Skeleton: React.FC = () => {
               {/* <CreateSearch /> */}
               {/* <CreateDeck  /> */}
 
-              <HomePage />
+              {/* <HomePage />
 
               <Card  />
-              {/* <EditCard  /> */}
+              <EditCard  /> */}
 
               <DeckCardCollection />
 
