@@ -1,72 +1,67 @@
 import React, { useState } from 'react';
-import './Actions.css'; // Make sure this import path is correct
+import './Actions.css';
 
 const Actions: React.FC = () => {
   const [showMoreActions, setShowMoreActions] = useState(false);
 
   const handleEdit = () => {
     console.log('Edit clicked');
-    // Implementation for edit
   };
 
   const handleStudy = () => {
     console.log('Study clicked');
-    // Implementation for study
   };
 
   const handleDeleteDeck = () => {
     console.log('Delete Deck clicked');
-    // Implementation for delete
   };
 
   const handleImportDeck = () => {
     console.log('Import Deck clicked');
-    // Implementation for import
   };
 
   const handleExportDeck = () => {
     console.log('Export Deck clicked');
-    // Implementation for export
   };
 
   return (
-    <div className="actions-container space-y-2">
+    <div className="action-container space-y-2">
       <button
         onClick={handleEdit}
-        className="button"
+        className="action-button"
       >
         Edit
       </button>
       <button
         onClick={handleStudy}
-        className="button"
+        className="action-button"
       >
         Study
       </button>
       <button
         onClick={() => setShowMoreActions(!showMoreActions)}
-        className="button"
+        className="action-button"
       >
         ...
       </button>
 
       {showMoreActions && (
-        <div className={`more-actions ${showMoreActions ? 'show' : ''}`}>
+        <div className={`additional-actions ${showMoreActions ? 'show' : ''}`}>
           <button
             onClick={handleDeleteDeck}
-            className="button"
+            className="action-button"
           >
             Delete Deck
           </button>
           <button
             onClick={handleImportDeck}
-            className="button"
+            className="action-button"
           >
             Import Deck
           </button>
           <button
             onClick={handleExportDeck}
-            className="button"
+            className="action-button"
           >
             Export Deck
           </button>
