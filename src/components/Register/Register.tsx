@@ -22,12 +22,10 @@ function Register() {
 
       await createUser(email, password);
 
-      // Clear form fields after successful registration
       setEmail('');
       setPassword('');
       setConfirmPassword('');
 
-      // Optionally, you can redirect the user to another page after successful registration
       // history.push('/create-edit-deck'); probably want to use navigate but I think it needs router?
     } catch (error) {
       setError(error.message);
@@ -37,7 +35,6 @@ function Register() {
   }
 
   const handleCancel = () => {
-    // Clear form fields
     setEmail('');
     setPassword('');
     setConfirmPassword('');

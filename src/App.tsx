@@ -24,8 +24,7 @@ function App() {
 
   useEffect(() => {
     if (user) {
-      const uid = user.uid;
-      console.log('User UID:', uid);
+     const uid = user.uid;
       setUid(uid);
     }
   }, [user]);

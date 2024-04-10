@@ -11,23 +11,21 @@ function Login() {
     event.preventDefault();
     try {
       const userCredential = await signInWithEmail(email, password);
-      console.log("success")
-      console.log("user credetnial", userCredential);
+
       const user = userCredential.user;
-      console.log("user", user);
-      const uid = user.uid;
-      console.log("uid", uid);
-      // Successful login
+
+     setUid(user.uid);
+
+
     } catch (error) {
       setError(error.message);
     }
-    console.log("success after login?");
   };
 
   const handleLoginWithGoogle = async () => {
     try {
       await signInWithGoogle();
-      // Successful login
+
     } catch (error) {
       setError(error.message);
     }
