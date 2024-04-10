@@ -61,7 +61,7 @@ interface Props {
 
 const NewCanvas: React.FC<Props> = ({ rectangles, circles, lines, texts, shapes, selectId, click, selectElement, setR, setC, setL, setT }) => {
   return (
-    <Stage onClick={click} width={1800} height={400}>
+    <Stage onClick={click} width={1900} height={400}>
       <Layer>
         {rectangles.length > 0 && rectangles.map((rect, i) => {
           return (

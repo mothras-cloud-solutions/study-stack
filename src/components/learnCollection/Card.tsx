@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import Pagination from '../Skeleton/components/Pagination';
+import StudyCanvas from '../cardEditor/StudyCanvas';
 // const Card: React.FC<{term: string,
 //   definition: string,
 //  keywords:string,
 // confidenceLevel: number}>
 export default function Card ({card, setIndex, index, length, studyDeck, setStudyDeck, shuffleTheDeck}) {
 
-  const {term, definition, starred} = card;
+  const {term, definition, starred, canvas_front, canvas_back} = card;
 
 // temp state, with the endpoint I'll just hit the backend
   const [starryNight, setStarryNight] = useState(starred);
@@ -90,6 +91,13 @@ export default function Card ({card, setIndex, index, length, studyDeck, setStud
   // "If" the current card has starred set to 1. If so and they click "got it" then send the route to the backend
   // to turn it to 0
 
+  const style = {
+    zIndex: 50,
+    position: 'absolute',
+    width: '100%',
+    height: '100%',
+  };
+
  return <div className='box'>
   <h2 className="title is-2">Deck Title</h2>
   {/* {function(){
@@ -108,6 +116,9 @@ export default function Card ({card, setIndex, index, length, studyDeck, setStud
    </div>
  </nav>
 <div className="flip-container" onClick={flipCard}>
+  <div className='flip-card' style={style}>
+    <StudyCanvas front={canvas_front} back={canvas_back} index={index} flipped={isFlipped}/>
+  </div>
      <div className={`flip-card${isFlipped ? ' is-flipped' : ''}`}>
        <div className="flip-card-inner">
          <div className="flip-card-front">
