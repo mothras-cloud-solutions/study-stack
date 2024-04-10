@@ -1,32 +1,48 @@
+//import React, { useState, useEffect } from 'react';
 import React, { useState } from 'react';
 import DeckSelector from './DeckSelector';
 import CardThumbnailContainer from './CardThumbnailContainer';
-import collectionData from './collectionData.json';
-import flashcardData from './flashcardData.json';
+import Actions from './Actions';
+//import { useAuth } from './AuthContext';
 
 type DeckType = {
-  collectionId: number;
+  id: number;
   title: string;
   description: string;
   subjects: string[];
 };
 
 const DeckCollection: React.FC = () => {
+  //const [decks, setDecks] = useState<DeckType[]>([]);
   const [selectedDeck, setSelectedDeck] = useState<DeckType | null>(null);
+  //const { userId } = useAuth();
+
+  // useEffect(() => {
+  //   if (userId) {
+  //     fetch(`/api/collections/user/${userId}`)
+  //       .then(response => response.json())
+  //       .then(data => setDecks(data))
+  //       .catch(error => console.error('Error fetching collections:', error));
+  //   }
+  // }, [userId]);
 
   const handleDeckSelect = (deck: DeckType) => {
     setSelectedDeck(deck);
   };
 
-  const selectedFlashcards = selectedDeck
-    ? flashcardData.filter(fc => fc.collectionId === selectedDeck.collectionId)
-    : [];
-
   return (
     <div>
-      <DeckSelector decks={collectionData} onDeckSelect={handleDeckSelect} />
+      <DeckSelector onDeckSelect={handleDeckSelect} />
       {selectedDeck && (
-        <CardThumbnailContainer flashcards={selectedFlashcards} />
+        <>
+          <CardThumbnailContainer
+            collection_id={selectedDeck.id}
+            onEdit={() => {}}
+            onDelete={() => {}}
+            onArchiveToggle={() => {}}
+          />
+          <Actions />
+        </>
       )}
     </div>
   );

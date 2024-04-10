@@ -1,0 +1,39 @@
+.button {
+  background-color: white;
+  color: black;
+  border: 2px solid black;
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+  transition: background-color 150ms ease-in-out;
+}
+
+.button:hover {
+  background-color: #f3f4f6;
+}
+
+.button:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+  ring-width: 2px;
+  ring-color: #cbd5e1;
+}
+
+.button:not(:last-child) {
+  margin-bottom: 0.5rem;
+}
+
+.more-actions {
+  display: none;
+}
+
+.more-actions.show {
+  display: flex;
+  flex-direction: row;
+}
+
+.button-small {
+  max-width: 200px;
+  margin: 0 auto;
+}
