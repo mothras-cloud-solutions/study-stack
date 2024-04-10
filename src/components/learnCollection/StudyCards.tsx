@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import Card from './Card.tsx';
 import {collection} from './Interfaces.tsx';
 
+// hba.conf need to change it to promisify
+
 // three levels are needed
 // the card itself with the buttons etc.
 // the logic on top of the cards where the collection can be incremented
@@ -17,7 +19,7 @@ export default function StudyCards (prop: collection) {
   const [index, setIndex] = useState(0);
 
   const currDeck = prop.prop.filter((card) => {
-    return card.archived === false;
+    return card.archived !== 1;
   })
 
   const [studyDeck, setStudyDeck] = useState(currDeck);
