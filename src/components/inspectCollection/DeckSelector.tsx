@@ -9,19 +9,21 @@ type DeckSelectorProps = {
   onDeckSelect: (collection: CollectionType) => void;
 };
 
-const DeckSelector: React.FC<DeckSelectorProps> = ({ onDeckSelect }) => {
+const DeckSelector: React.FC<DeckSelectorProps> = ({ uid, onDeckSelect }) => {
   const [collections, setCollections] = useState<CollectionType[]>([]);
-  const userId = 10;
+
   useEffect(() => {
-    fetch(`/api/collections/user/${userId}`)
-      .then(response => response.json())
-      .then(data => {
-        setCollections(data);
-      })
-      .catch(error => {
-        console.error('Error fetching collections:', error);
-      });
-  }, [userId]);
+    if (uid) {
+      fetch(`/api/collections/user/${uid}`)
+        .then(response => response.json())
+        .then(data => {
+          setCollections(data);
+        })
+        .catch(error => {
+          console.error('Error fetching collections:', error);
+        });
+    }
+  }, [uid]);
 
   return (
     <div className="w-full mb-4">

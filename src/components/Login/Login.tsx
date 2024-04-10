@@ -11,23 +11,21 @@ function Login() {
     event.preventDefault();
     try {
       const userCredential = await signInWithEmail(email, password);
-      console.log("success")
-      console.log("user credetnial", userCredential);
+
       const user = userCredential.user;
-      console.log("user", user);
-      const uid = user.uid;
-      console.log("uid", uid);
-      // Successful login
+
+     setUid(user.uid);
+
+
     } catch (error) {
       setError(error.message);
     }
-    console.log("success after login?");
   };
 
   const handleLoginWithGoogle = async () => {
     try {
       await signInWithGoogle();
-      // Successful login
+
     } catch (error) {
       setError(error.message);
     }
@@ -42,7 +40,7 @@ function Login() {
     <div className="columns is-centered is-vcentered fullPageCenteredComponent">
       <div className="column is-two-fifths">
         <div className="box">
-          <h2>Login</h2>
+          <h2 className="title">Login</h2>
           {error && <p style={{ color: 'red' }}>{error}</p>}
           <form onSubmit={handleLoginWithEmail}>
             <div className="field">
