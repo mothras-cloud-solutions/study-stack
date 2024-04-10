@@ -7,39 +7,53 @@ type FlashcardType = {
   definition: string;
   confidenceLevel: number;
   keywords: string;
-  collectionId: number;
+  collection_id: number;
   isArchived: boolean;
 };
 
 type CardThumbnailContainerProps = {
-  flashcards: FlashcardType[];
-  onEdit: (flashcardId: number) => void;
-  onDelete: (flashcardId: number) => void;
-  onArchiveToggle: (flashcardId: number) => void;
+  collection_id: number;
+  onEdit: (id: number) => void;
+  onDelete: (id: number) => void;
+  onArchiveToggle: (id: number) => void;
 };
 
 const CardThumbnailContainer: React.FC<CardThumbnailContainerProps> = ({
-  flashcards,
+  collection_id,
   onEdit,
   onDelete,
   onArchiveToggle,
 }) => {
+  const [flashcards, setFlashcards] = useState<FlashcardType[]>([]);
   const [showArchived, setShowArchived] = useState(false);
-  const [localFlashcards, setLocalFlashcards] = useState(flashcards);
 
   useEffect(() => {
-    setLocalFlashcards(flashcards);
-  }, [flashcards]);
+    if (collection_id) {
+      fetch(`/api/flashcards/collection_id/${collection_id}`)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          return response.json();
+        })
+        .then(data => {
+          setFlashcards(data);
+        })
+        .catch(error => {
+          console.error('Error fetching flashcards:', error);
+        });
+    }
+  }, [collection_id]);
 
   const toggleArchiveStatus = (id: number) => {
-    const updatedFlashcards = localFlashcards.map(flashcard =>
+    const updatedFlashcards = flashcards.map(flashcard =>
       flashcard.id === id ? { ...flashcard, isArchived: !flashcard.isArchived } : flashcard
     );
-    setLocalFlashcards(updatedFlashcards);
+    setFlashcards(updatedFlashcards);
     onArchiveToggle(id);
   };
 
-  const displayedFlashcards = localFlashcards.filter(flashcard =>
+  const displayedFlashcards = flashcards.filter(flashcard =>
     showArchived ? flashcard.isArchived : !flashcard.isArchived
   );
 
