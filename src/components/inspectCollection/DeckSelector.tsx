@@ -1,38 +1,50 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
-type DeckType = {
-  collectionId: number;
+type CollectionType = {
+  id: number;
   title: string;
 };
 
 type DeckSelectorProps = {
-  decks: DeckType[];
-  onDeckSelect: (deck: DeckType) => void;
+  onDeckSelect: (collection: CollectionType) => void;
 };
 
-const DeckSelector: React.FC<DeckSelectorProps> = ({ decks, onDeckSelect }) => {
+const DeckSelector: React.FC<DeckSelectorProps> = ({ onDeckSelect }) => {
+  const [collections, setCollections] = useState<CollectionType[]>([]);
+  const userId = 10;
+  useEffect(() => {
+    fetch(`/api/collections/user/${userId}`)
+      .then(response => response.json())
+      .then(data => {
+        setCollections(data);
+      })
+      .catch(error => {
+        console.error('Error fetching collections:', error);
+      });
+  }, [userId]);
+
   return (
     <div className="w-full mb-4">
-      <label htmlFor="deck-select" className="block text-lg font-medium text-gray-700 mb-2">
+      <label htmlFor="collection-select" className="block text-lg font-medium text-gray-700 mb-2">
         Decks:
       </label>
       <select
-        id="deck-select"
+        id="collection-select"
         className="block w-full pl-4 pr-10 py-3 text-lg border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 rounded-md shadow-sm"
         defaultValue=""
         onChange={(e) => {
           const index = parseInt(e.target.value, 10);
-          if (index >= 0 && index < decks.length) {
-            onDeckSelect(decks[index]);
+          if (index >= 0 && index < collections.length) {
+            onDeckSelect(collections[index]);
           }
         }}
       >
         <option value="" disabled>
           Please select a deck
         </option>
-        {decks.map((deck, index) => (
-          <option key={deck.collectionId} value={index} className="text-lg">
-            {deck.title}
+        {collections.map((collection, index) => (
+          <option key={collection.id} value={index} className="text-lg">
+            {collection.title}
           </option>
         ))}
       </select>
