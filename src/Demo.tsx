@@ -55,7 +55,7 @@ function Demo() {
         <Route path="/home" element={<Overview />} />
         <Route path="/learn" element={<StudyPageTest />} />
         <Route path="/create" element={<CreateDeck />} />
-        <Route path="/collections" element={<DeckCollection />} />
+        {/* <Route path="/collections" element={<DeckCollection uid={uid}/>} /> */}
       </Routes>
     </Fragment>
   )
