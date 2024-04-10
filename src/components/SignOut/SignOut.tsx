@@ -13,7 +13,7 @@ function SignOut() {
   };
 
   return (
-    <button onClick={handleSignOut}>Sign Out</button>
+    <button className="signout button is-link" onClick={handleSignOut}>Sign Out</button>
   );
 }
 

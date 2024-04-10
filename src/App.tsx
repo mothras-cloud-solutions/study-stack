@@ -4,7 +4,10 @@ import Login from './components/Login/Login.tsx';
 import SignOut from './components/SignOut/SignOut.tsx';
 import { onAuthStateChange } from '../firebase/firebase.ts';
 import { User } from 'firebase/auth';
-import Skeleton from './components/Skeleton';
+import HomePage from './components/Skeleton/components/HomePage';
+import NavBar from './components/Skeleton/components/NavBar';
+import Footer from './components/Skeleton/components/Footer';
+import CreateDeck from './components/Skeleton/components/CreateDeck';
 import DeckCollection from './components/inspectCollection/DeckCollection';
 import StudyPageTest from './components/learnCollection/testcollection';
 
@@ -24,28 +27,35 @@ function App() {
 
   useEffect(() => {
     if (user) {
-      const uid = user.uid;
-      console.log('User UID:', uid);
+     const uid = user.uid;
       setUid(uid);
     }
   }, [user]);
 
   return (
     <Fragment>
+      <NavBar />
+    <section className="section">
+    <div className="container">
 
       {user ? (
         <>
-        <SignOut />
-        <DeckCollection />
-        <StudyPageTest />
+          <CreateDeck uid={uid}/>
+        {/* <SignOut />
+        <DeckCollection uid={uid} />
+        <StudyPageTest /> */}
         </>
       ) : (
         <Fragment>
+          {/* <CreateDeck /> */}
+          <HomePage />
           <Register />
           <Login />
         </Fragment>
       )}
-
+      </div>
+      </section>
+      <Footer />
     </Fragment>
   )
 }

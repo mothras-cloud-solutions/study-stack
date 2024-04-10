@@ -1,6 +1,7 @@
 export interface collection {
 
   id: number;
+  deck_title: string;
   term: string;
   definition: string;
   confidenceLevel: number;
@@ -16,9 +17,10 @@ export interface collection {
 // can use that to make the axios calls afterwards
 
 
-let testCollection: collection[] = [
+const testCollection: collection[] = [
   {
     id: 1,
+    deck_title: "Fake Deck",
     term: "firewall",
     definition: "Use the cross-platform JBOD panel, then you can transmit the solid state circuit!",
     confidenceLevel: 9,
@@ -31,6 +33,7 @@ let testCollection: collection[] = [
   },
   {
     id:2,
+    deck_title: "Fake Deck",
     term: "program",
     definition: "Use the back-end UTF8 capacitor, then you can generate the auxiliary pixel!",
     confidenceLevel: 7,
@@ -43,6 +46,7 @@ let testCollection: collection[] = [
   },
   {
     id: 3,
+    deck_title: "Fake Deck",
     term: "transmitter",
     definition: "Try to copy the IB firewall, maybe it will hack the redundant firewall!",
     confidenceLevel: 3,
@@ -55,18 +59,20 @@ let testCollection: collection[] = [
   },
   {
     id: 4,
+    deck_title: "Fake Deck",
     term: "bandwidth",
     definition: "I'll compress the online SSL matrix, that should hard drive the DNS pixel!",
     confidenceLevel: 1,
     keywords: "Chair",
     collectionid: 3,
     archived: 0,
-    starred: 0,
+    starred: 1,
     canvas_front: '{"rectangles":[{"x":624.1487037800322,"y":47.377369632935114,"width":175.47392658703308,"height":175.4739265870331,"fill":"rgba(0,0,0,0.01)","strokeWidth":1,"stroke":"black","id":"rect4"}],"circles":[{"x":471.38078838087563,"y":223.61921161912448,"width":237.85982498836532,"height":237.85982498836518,"fill":"rgba(0,0,0,0.01)","strokeWidth":1,"stroke":"black","id":"circ3"},{"x":294.4859503774878,"y":117.514049622512,"width":255.47336558913273,"height":255.47336558913273,"fill":"rgba(0,0,0,0.01)","strokeWidth":1,"stroke":"black","id":"circ5"}],"lines":[{"points":[50,50,125,50],"stroke":"black","strokeWidth":5,"fill":"black","id":"line2","x":72,"y":27}],"texts":[{"x":230.00000000000006,"y":151.99999999999997,"fill":"black","align":"center","text":"ONE WAT","id":"text1","width":258.51600851226004,"height":56.75214765067088,"fontSize":56.75214765067088}],"number":5}',
     canvas_back: ''
   },
   {
     id: 5,
+    deck_title: "Fake Deck",
     term: "circuit",
     definition: "We need to index the optical API feed!",
     confidenceLevel: 3,
@@ -79,18 +85,20 @@ let testCollection: collection[] = [
   },
   {
     id: 6,
+    deck_title: "Fake Deck",
     term: "interface",
     definition: "I'll input the neural SMTP alarm, that should matrix the PCI array!",
     confidenceLevel: 8,
     keywords: "blah",
     collectionid: 3,
     archived: 0,
-    starred: 0,
+    starred: 1,
     canvas_front: '{"rectangles":[{"x":624.1487037800322,"y":47.377369632935114,"width":175.47392658703308,"height":175.4739265870331,"fill":"rgba(0,0,0,0.01)","strokeWidth":1,"stroke":"black","id":"rect4"},{"x":412,"y":339,"width":100,"height":100,"fill":"rgba(0,0,0,0.01)","strokeWidth":1,"stroke":"black","id":"rect8"}],"circles":[{"x":615.3807883808756,"y":244.61921161912448,"width":237.85982498836532,"height":237.85982498836518,"fill":"rgba(0,0,0,0.01)","strokeWidth":1,"stroke":"black","id":"circ3"},{"x":373.4859503774878,"y":200.514049622512,"width":255.47336558913273,"height":255.47336558913273,"fill":"rgba(0,0,0,0.01)","strokeWidth":1,"stroke":"black","id":"circ5"},{"x":374,"y":254,"width":100,"height":100,"fill":"rgba(0,0,0,0.01)","strokeWidth":1,"stroke":"black","id":"circ6"},{"x":602,"y":285,"width":100,"height":100,"fill":"rgba(0,0,0,0.01)","strokeWidth":1,"stroke":"black","id":"circ7"}],"lines":[{"points":[50,50,125,50],"stroke":"black","strokeWidth":5,"fill":"black","id":"line2","x":72,"y":27}],"texts":[{"x":230.00000000000006,"y":151.99999999999997,"fill":"black","align":"center","text":"ONE WAT","id":"text1","width":258.51600851226004,"height":56.75214765067088,"fontSize":56.75214765067088}],"number":8}',
     canvas_back: '{"rectangles":[],"circles":[],"lines":[],"texts":[{"x":54,"y":96.00000000000007,"fill":"black","align":"center","text":"HELOLO","id":"text1","width":965.9959153676622,"height":238.0984034989737,"fontSize":238.0984034989737}],"number":1}'
   },
   {
     id: 7,
+    deck_title: "Fake Deck",
     term: "orange",
     definition: "The DRAM interface is down, back up the bananas application so we can transmit the FTP microchip!",
     confidenceLevel: 10,
