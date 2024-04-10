@@ -1,6 +1,7 @@
 // NavBar.tsx
 import React, { Fragment, useState } from 'react';
 import { Link } from 'react-router-dom';
+import Signout from '../../SignOut/SignOut';
 
 interface User {
   // Define the type for the user object
@@ -79,7 +80,7 @@ const NavBar: React.FC<NavBarProps> = ({ user, onLoginLinkClick, onHomeLinkClick
                       Create
                     </Link>
                   </a>
-                  <a className="navbar-item" onClick={handleSignOut}>Sign Out</a>
+                  <Signout/>
                   <a className="navbar-item" onClick={onLoginLinkClick}>Sign In</a>
                   {/* Add more links as needed */}
                 </>

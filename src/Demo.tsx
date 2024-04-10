@@ -10,6 +10,7 @@ import StudyPageTest from './components/learnCollection/testcollection';
 import NavBar from './components/overview/components/NavBar';
 import { Routes, Route } from 'react-router-dom';
 import Overview from './components/overview/index';
+import CreateDeck from './components/Skeleton/components/CreateDeck';
 
 function Demo() {
   const [user, setUser] = useState<User | null>(null);
@@ -53,6 +54,7 @@ function Demo() {
         <Route path="/register" element={<Register />} />
         <Route path="/home" element={<Overview />} />
         <Route path="/learn" element={<StudyPageTest />} />
+        <Route path="/create" element={<CreateDeck />} />
         <Route path="/collections" element={<DeckCollection />} />
       </Routes>
     </Fragment>

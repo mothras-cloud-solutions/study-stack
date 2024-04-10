@@ -4,7 +4,7 @@ import CardThumbnailContainer from './CardThumbnailContainer';
 import Actions from './Actions';
 
 type DeckType = {
-  id: number;
+  uid: number;
   title: string;
   description: string;
   subjects: string[];
