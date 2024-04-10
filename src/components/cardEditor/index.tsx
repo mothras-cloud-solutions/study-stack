@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import NewCanvas from './NewCanvas.tsx';
 
 const CardEditor: React.FC = () => {
@@ -9,6 +10,7 @@ const CardEditor: React.FC = () => {
   const [lines, setLines] = useState([]);
   const [texts, setTexts] = useState([]);
   const [textField, setTextField] = useState('');
+  const [showText, setShowText] = useState(false);
   const [numberOfShapes, setNumberOfShapes] = useState(0);
   const [shapes, setShapes] = useState({rectangles: [], circles: [], lines: [], texts: [], number: 0});
   const [frontShapes, setFront] = useState({rectangles: [], circles: [], lines: [], texts: [], number: 0});
@@ -86,12 +88,17 @@ const CardEditor: React.FC = () => {
       }
     }
   };
+  //Reset Canvas
+  function resetCanvas() {
+    setShapes({rectangles: [], circles: [], lines: [], texts: [], number: 0});
+  };
 
   //Load saved canvas
   useEffect(() => {
     setRectangles(shapes.rectangles);
     setCircles(shapes.circles);
     setLines(shapes.lines);
+    setTexts(shapes.texts);
   }, [shapes]);
 
   // Sets limit on # of objects
@@ -156,20 +163,23 @@ const CardEditor: React.FC = () => {
   };
 
   const addText = () => {
-    if (numberOfShapes < 50) {
-      const newText = {
-        x: 50,
-        y: 50,
-        fill: 'black',
-        align: 'center',
-        text: `${textField}`,
-        id: `text${shapes.number+1}`
+    if (showText && textField.length > 0) {
+      if (numberOfShapes < 50) {
+        const newText = {
+          x: 50,
+          y: 50,
+          fill: 'black',
+          align: 'center',
+          text: `${textField}`,
+          id: `text${shapes.number+1}`
+        }
+        const newTexts = texts.concat([newText]);
+        setTexts(newTexts);
+        shapes.texts = newTexts;
+        shapes.number ++;
       }
-      const newTexts = texts.concat([newText]);
-      setTexts(newTexts);
-      shapes.texts = newTexts;
-      shapes.number ++;
     }
+    setShowText(!showText);
   };
 
   //Set state functions to pass down
@@ -206,15 +216,17 @@ const CardEditor: React.FC = () => {
             <span className="tag" onClick={addRectangle}>Rectangle</span>
             <span className="tag" onClick={addCircle}>Circle</span>
             <span className="tag" onClick={addLine}>Line</span>
-            <span className="tag has-text-light">Text</span>
-            <span className="tag" onClick={onDelete}>Delete</span>
-            <span className="tag" onClick={flipCard}>Flip Card</span>
+            {!showText && <span className="tag" onClick={addText}> Create Text</span>}
+            {showText && <span className="tag" onClick={addText}>Add Text</span>}
           </div>
+          {showText && <input type='text' maxLength={50} onChange={onTextInput}></input>}
         </div>
         <div className="level-right">
           <div className="tags are-large">
             <span className="tag" onClick={onSave}>Save</span>
-            <span className="tag has-text-light">Reset</span>
+            <span className="tag" onClick={resetCanvas}>Reset</span>
+            <span className="tag" onClick={onDelete}>Delete</span>
+            <span className="tag" onClick={flipCard}>Flip Card</span>
           </div>
         </div>
       </nav>
