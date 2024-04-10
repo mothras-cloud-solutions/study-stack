@@ -9,7 +9,7 @@ export default function Card ({card, setIndex, index, length, studyDeck, setStud
   const {term, definition, starred} = card;
 
 // temp state, with the endpoint I'll just hit the backend
-  const [starryNight, setStarryNight] =(starred)
+  const [starryNight, setStarryNight] = useState(starred);
 
 
   const [isFlipped, setIsFlipped] = useState(false);
