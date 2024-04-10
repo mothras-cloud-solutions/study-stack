@@ -75,13 +75,13 @@ const NavBar: React.FC<NavBarProps> = ({ user, onLoginLinkClick, onHomeLinkClick
                       Study
                     </Link>
                   </a>
-                  <a className="navbar-item" onClick={onCreateLinkClick} href="#">
+                  <a className="navbar-item" href="#">
                     <Link to="/create">
                       Create
                     </Link>
                   </a>
                   <Signout/>
-                  <a className="navbar-item" onClick={onLoginLinkClick}>Sign In</a>
+                  {/* <a className="navbar-item">Sign In</a> */}
                   {/* Add more links as needed */}
                 </>
                 {/* // ) : ( */}
