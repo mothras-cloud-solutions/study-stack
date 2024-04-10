@@ -4,17 +4,15 @@ const { faker } = require('@faker-js/faker');
 function generateCanvasData(count) {
     let canvases = [];
     for (let i = 0; i < count; i++) {
-        const id = faker.datatype.uuid();
-        const archived = faker.datatype.boolean();
-        const flashcards_id = faker.number.int(); // Example, assuming you have such IDs in your flashcards table
-        const canvas_data = JSON.stringify({
-            name: `Canvas ${i + 1}`,
-            width: faker.number.int({ min: 100, max: 1000 }),
-            height: faker.number.int({ min: 100, max: 1000 }),
-            imageUrl: faker.image.imageUrl()
-        });
+        const archived = false;
+        const canvas_front = '';
+        const canvas_back = '';
 
-        canvases.push({ id, archived, canvas_data, flashcards_id });
+        canvases.push({
+            archived,
+            canvas_front,
+            canvas_back
+        });
     }
     return canvases;
 }

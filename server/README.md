@@ -33,17 +33,6 @@ Use Postman and test a get request to “localhost:3000/api/users”
 
 List of APIs:
 
-Users API:
-
-GET /api/users/    get all users
-GET /api/users/:id    get user by id, where :id is the user id (e.g. /api/users/1 )
-
-POST /api/users/    post a new user; expected data fields: username, email, password, role; all as string
-
-PUT /api/users/:id    update record for a user with given id; fields can update: username, email, password, role; all as string; (e.g. /api/users/1 )
-
-DELETE /api/users/:id    delete record for user with given id (e.g. /api/users/1 )
-
 
 Collections API:
 
@@ -52,9 +41,9 @@ GET /api/collections/:id    get a specific collection by it's collection id
 GET /api/collections/user/:user_id    get all collections for a specific user by the user id
 GET /api/collections/user/:user_id/:id    get a specific collection for a given user_id and collection id
 
-POST /api/collections/    create a new collection [need data format]
+POST /api/collections/    create a new collection; expected fields in body: title: text, description: text; subjects: text, user_id: text
 
-PUT /api/collections/:id    update collection with given collection id [need data format]
+PUT /api/collections/:id    update collection with given collection id; expected fields to be updated in body: title: text, description: text; subjects: text
 
 DELETE /api/collections/:id    delete collection with given collection id
 
@@ -65,10 +54,11 @@ GET /api/flashcards/    get all flashcards (decks)
 GET /api/flashcards/collection_id/:collection_id    get all flashcards for a given collection id
 GET /api/flashcards/:id    get a specific flashcard for a given flashcard id
 
-POST /api/flashcards/    create a new flashcard [need data format]
+POST /api/flashcards/    create a new flashcard expected fields in object in body: term: text, definition: text; confidenceLevel: 0, keywords: text, collection_id: integer   ; note for confidence level the number 0 should always be used for new cards
 
-PUT /api/flashcards/:id    update flashcard with given flashcard id [need data format]
+PUT /api/flashcards/:id    update flashcard with given flashcard id [see post request for format for data to be updated - confidenceLevel may be an integer not equal to 0]
 PUT /api/flashcards/:id/confidenceLevel    increase confidence level by 1 for a given flashcard id
+
 PUT /api/flashcards/:id/archived    toggle archived boolean for a given flashcard id
 PUT /api/flashcards/:id/starred    toggle starred boolean for a given flashcard id
 
@@ -79,13 +69,14 @@ Canvases API:
 
 
 GET /api/canvases/    get all canvases
-GET /api/canvases/:id    get a specific canvas for a given canvas id
+GET /api/canvases/:flashcards_id    get a specific canvas for a given flashcard id
 
-POST /api/canvases/    create a new canvas
+POST none: canvas record will automatically be created when Flashcard is created with archived set to false, and canvas_front and canvas_back both set to empty string ''
 
-PUT /api/canvases/:id    update canvas with given canvas id
+PUT /api/canvases/:flashcards_id/canvasFront    update canvas_front for given flashcard id by passing {canvas_front: "newCanvasFrontString"}
+PUT /api/canvases/:flashcards_id/canvasBack    update canvas_back for given flashcard id by passing {canvas_back: "newCanvasBackString"}
+PUT /api/canvases/:flashcards_id/archived    toggle archived property on canvas for given flashcard id (i.e. if previously false set to true, if true set to false)
 
-DELETE /api/canvases/:id    delete canvas with given canvas id
-
+DELETE /api/canvases/:flashcards_id    delete canvas with given flashcard id
 
 

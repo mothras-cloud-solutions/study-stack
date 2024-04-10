@@ -2,7 +2,7 @@
 import fs from 'fs';
 import path from 'path';
 
-import { pool, insertData } from './db'; // Adjust this path to the correct location of your db module
+import { pool } from './db'; // Adjust this path to the correct location of your db module
 
 // Function to load JSON data from a file
 const loadJsonFile = (filePath: string) => {
@@ -19,20 +19,17 @@ const loadJsonFile = (filePath: string) => {
 
 // Main function to orchestrate the data import process
 const main = async () => {
-    const usersData = loadJsonFile('./scripts/userData.json');
+    // const usersData = loadJsonFile('./scripts/userData.json');
     const collectionsData = loadJsonFile('./scripts/collectionData.json');
     const flashcardsData = loadJsonFile('./scripts/flashcardsData.json');
     const canvasesData = loadJsonFile('./scripts/canvasData.json');
 
-    // Insert users data
-    await insertData(usersData, 'users', ['username', 'email', 'password', 'role']);
+    // // Insert users data
+    // await insertData(usersData, 'users', ['username', 'email', 'password', 'role']);
 
     // Insert collections data
-    const userRows = await pool.query('SELECT id FROM users');
-    const userIds = userRows.rows.map(row => row.id);
     for (const collection of collectionsData) {
-        const user_id = userIds[Math.floor(Math.random() * userIds.length)];
-        await pool.query(`INSERT INTO collections (title, description, subjects, user_id) VALUES ($1, $2, $3, $4)`, [collection.title, collection.description, collection.subjects, user_id]);
+        await pool.query(`INSERT INTO collections (title, description, subjects, user_id) VALUES ($1, $2, $3, $4)`, [collection.title, collection.description, collection.subjects, collection.user_id]);
     }
 
     // Insert flashcards data
@@ -52,11 +49,11 @@ const main = async () => {
     }
 
     // Insert canvases data
-    const flashcardRows = await pool.query('SELECT id FROM flashcards');
-    const flashcardIds = flashcardRows.rows.map(row => row.id);
+    let i = 1;
     for (const canvas of canvasesData) {
-        const flashcards_id = flashcardIds[Math.floor(Math.random() * flashcardIds.length)];
-        await pool.query(`INSERT INTO canvases (id, archived, canvas_data, flashcards_id) VALUES ($1, $2, $3, $4)`, [canvas.id, canvas.archived, canvas.canvas_data, flashcards_id]);
+        const flashcards_id = i;
+        i ++;
+        await pool.query(`INSERT INTO canvases (archived, canvas_front, canvas_back, flashcards_id) VALUES ($1, $2, $3, $4)`, [canvas.archived, canvas.canvas_front, canvas.canvas_back, flashcards_id]);
     }
 };
 
