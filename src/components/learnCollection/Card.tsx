@@ -87,6 +87,11 @@ export default function Card ({card, setIndex, index, length, studyDeck, setStud
       // for now just skip to the next cardrrrrr
       // should we only move to the next card when they click next?
       // then got it can just update the confidence instead
+      if (starred === 1){
+        axios.put(`http://localhost:3000/api/flashcards/${id}/starred`).then(() => {
+          console.log('starred should be changed back to 0')
+        })
+      }
       const newIndex = index + 1;
       if (newIndex < length){
         setIsFlipped(false);
