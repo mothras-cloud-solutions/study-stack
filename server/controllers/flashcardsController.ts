@@ -44,6 +44,7 @@ export const getFlashcardsByCollection = async (req: Request, res: Response) => 
 
 export const createFlashcard = async (req: Request, res: Response) => {
     const { term, definition, confidenceLevel, keywords, collection_id } = req.body;
+    console.log('Data from card form: ', term, definition, confidenceLevel, keywords, collection_id);
     try {
         const result = await pool.query(
             'INSERT INTO flashcards (term, definition, confidenceLevel, keywords, collection_id) VALUES ($1, $2, $3, $4, $5) RETURNING *',
