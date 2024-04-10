@@ -15,7 +15,7 @@ export interface collection {
 // can use that to make the axios calls afterwards
 
 
-let testCollection: collection[] = [
+const testCollection: collection[] = [
   {
     id: 1,
     deck_title: "Fake Deck",
