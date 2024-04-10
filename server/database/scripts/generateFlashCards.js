@@ -8,8 +8,8 @@ function generateFlashcards(count) {
         const definition = faker.hacker.phrase();
         const confidenceLevel = 0;
         const keywords = faker.lorem.words().split(' ').slice(0, faker.number.int({ min: 1, max: 5 })).join(', ');
-        const archived = false;  // Add a default value for archived
-        const starred = false;   // Add a default value for starred
+        const archived = 0;  // Add a default value for archived
+        const starred = 0;   // Add a default value for starred
 
         flashcards.push({
             term,

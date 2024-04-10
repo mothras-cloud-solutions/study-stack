@@ -40,7 +40,15 @@ const main = async () => {
     const collectionIds = collectionRows.rows.map(row => row.id);
     for (const flashcard of flashcardsData) {
         const collection_id = collectionIds[Math.floor(Math.random() * collectionIds.length)];
-        await pool.query(`INSERT INTO flashcards (term, definition, confidenceLevel, keywords, archived, starred, collection_id) VALUES ($1, $2, $3, $4, $5, $6, $7)`, [flashcard.term, flashcard.definition, flashcard.confidenceLevel, flashcard.keywords, flashcard.archived, flashcard.starred, collection_id]);
+        try {
+            await pool.query(
+                `INSERT INTO flashcards (term, definition, confidenceLevel, keywords, archived, starred, collection_id) VALUES ($1, $2, $3, $4, $5, $6, $7)`,
+                [flashcard.term, flashcard.definition, flashcard.confidenceLevel, flashcard.keywords, flashcard.archived, flashcard.starred, collection_id]
+            );
+        } catch (err) {
+            console.error('Error inserting flashcard:', flashcard, err);
+            // Handle the error appropriately - maybe continue with the next flashcard, or log the error, etc.
+        }
     }
 
     // Insert canvases data
