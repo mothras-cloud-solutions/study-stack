@@ -68,7 +68,7 @@ const StudyCanvas: React.FC<Props> = ({ front, back, flipped, index }) => {
   }, [flipped, index])
 
   return (
-    <Stage width={1305} height={400}>
+    <Stage width={1304} height={400}>
       <Layer>
         {(shapes.rectangles && shapes.rectangles.length > 0) && shapes.rectangles.map((rect) => {
           return (<Rectangle shapeSpecs={rect}/>)

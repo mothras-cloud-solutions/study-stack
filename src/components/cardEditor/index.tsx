@@ -218,8 +218,8 @@ const CardEditor: React.FC = () => {
             <span className="tag" onClick={addLine}>Line</span>
             {!showText && <span className="tag" onClick={addText}> Create Text</span>}
             {showText && <span className="tag" onClick={addText}>Add Text</span>}
+            {showText && <input type='text' maxLength={50} onChange={onTextInput}></input>}
           </div>
-          {showText && <input type='text' maxLength={50} onChange={onTextInput}></input>}
         </div>
         <div className="level-right">
           <div className="tags are-large">
