@@ -27,8 +27,7 @@ function App() {
 
   useEffect(() => {
     if (user) {
-      const uid = user.uid;
-      console.log('User UID:', uid);
+     const uid = user.uid;
       setUid(uid);
     }
   }, [user]);
@@ -38,11 +37,9 @@ function App() {
 
       {user ? (
         <>
-          <NavBar />
-          <Overview />
-          <SignOut />
-          <DeckCollection />
-          <StudyPageTest />
+        <SignOut />
+        <DeckCollection uid={uid} />
+        <StudyPageTest />
         </>
       ) : (
         <Fragment>
