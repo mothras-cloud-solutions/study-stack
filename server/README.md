@@ -33,17 +33,6 @@ Use Postman and test a get request to “localhost:3000/api/users”
 
 List of APIs:
 
-Users API:
-
-GET /api/users/    get all users
-GET /api/users/:id    get user by id, where :id is the user id (e.g. /api/users/1 )
-
-POST /api/users/    post a new user; expected data fields: username, email, password, role; all as string
-
-PUT /api/users/:id    update record for a user with given id; fields can update: username, email, password, role; all as string; (e.g. /api/users/1 )
-
-DELETE /api/users/:id    delete record for user with given id (e.g. /api/users/1 )
-
 
 Collections API:
 
@@ -52,9 +41,9 @@ GET /api/collections/:id    get a specific collection by it's collection id
 GET /api/collections/user/:user_id    get all collections for a specific user by the user id
 GET /api/collections/user/:user_id/:id    get a specific collection for a given user_id and collection id
 
-POST /api/collections/    create a new collection [need data format]
+POST /api/collections/    create a new collection; expected fields in body: title: text, description: text; subjects: text, user_id: text
 
-PUT /api/collections/:id    update collection with given collection id [need data format]
+PUT /api/collections/:id    update collection with given collection id; expected fields to be updated in body: title: text, description: text; subjects: text
 
 DELETE /api/collections/:id    delete collection with given collection id
 
@@ -79,13 +68,26 @@ Canvases API:
 
 
 GET /api/canvases/    get all canvases
-GET /api/canvases/:id    get a specific canvas for a given canvas id
+GET /api/canvases/:flashcards_id    get a specific canvas for a given flashcard id
 
 POST /api/canvases/    create a new canvas
 
-PUT /api/canvases/:id    update canvas with given canvas id
+PUT /api/canvases/:flashcards_id    update canvas with given flashcard id
 
-DELETE /api/canvases/:id    delete canvas with given canvas id
+DELETE /api/canvases/:flashcards_id    delete canvas with given flashcard id
 
+
+
+
+router.get('/', getAllCanvases);
+router.get('/flashcards_id', getCanvasById);
+
+router.post('/', createCanvas);
+
+router.put('/flashcards_id', updateCanvas);
+router.put('/:flashcards_id/canvasFront', updateCanvasFront);
+router.put('/:flashcards_id/canvasBack', updateCanvasBack);
+
+router.delete('/flashcards_id', deleteCanvas);
 
 
