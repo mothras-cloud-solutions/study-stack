@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import Card from './Card.tsx';
 import {collection} from './Interfaces.tsx';
 
+// hba.conf need to change it to promisify
+
 // three levels are needed
 // the card itself with the buttons etc.
 // the logic on top of the cards where the collection can be incremented
