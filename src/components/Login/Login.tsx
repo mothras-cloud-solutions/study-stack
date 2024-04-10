@@ -40,7 +40,7 @@ function Login() {
     <div className="columns is-centered is-vcentered fullPageCenteredComponent">
       <div className="column is-two-fifths">
         <div className="box">
-          <h2>Login</h2>
+          <h2 className="title">Login</h2>
           {error && <p style={{ color: 'red' }}>{error}</p>}
           <form onSubmit={handleLoginWithEmail}>
             <div className="field">
