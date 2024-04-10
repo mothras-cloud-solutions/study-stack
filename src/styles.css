@@ -121,3 +121,11 @@ body {
   transform: translateY(-5px);
 }
 /* END OF Effects on hover */
+.google {
+  margin-top: 4px;
+  margin-right: 4px;
+}
+
+.logcancel {
+  margin-top: 4px;
+}
