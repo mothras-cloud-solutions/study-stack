@@ -127,7 +127,7 @@ export default function Card ({card, setIndex, index, length, studyDeck, setStud
   }()} */}
    {function(){
     if (starred === 1) {
-      return <>This question was challenging for you, try to get it this time!</>
+      return <span className='starr-prompt'>This question was challenging for you, try to get it this time!</span>
     }
   }()}
  <nav className="nav">
