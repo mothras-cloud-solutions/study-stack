@@ -9,6 +9,9 @@
 /* Font Awesome CSS Icons */
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css');
 
+/* Simle Text Editor For Edit/Create Card */
+@import url('https://cdn.quilljs.com/1.3.6/quill.snow.css');
+
 /* Set The Main Font To Be Used Gobally */
 body {
   font-family: 'Quicksand', sans-serif;
