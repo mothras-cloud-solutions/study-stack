@@ -2,26 +2,17 @@
 DROP TABLE IF EXISTS canvases CASCADE;
 DROP TABLE IF EXISTS flashcards CASCADE;
 DROP TABLE IF EXISTS collections CASCADE;
-DROP TABLE IF EXISTS users CASCADE;
-
--- Create Users table
-CREATE TABLE users (
-    id SERIAL PRIMARY KEY,
-    username VARCHAR(255) NOT NULL UNIQUE,
-    email VARCHAR(255) NOT NULL UNIQUE,
-    password VARCHAR(255) NOT NULL,
-    role VARCHAR(50) NOT NULL
-);
 
 -- Create Collections table
 CREATE TABLE collections (
     id SERIAL PRIMARY KEY,
-    title VARCHAR(255) NOT NULL,
+    title TEXT NOT NULL,
     description TEXT,
-    subjects VARCHAR(255),
+    subjects TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     edited_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    user_id INTEGER REFERENCES users(id)
+    user_id TEXT,
+    created_from_id INTEGER
 );
 
 -- Create Flashcards table
@@ -29,10 +20,10 @@ CREATE TABLE flashcards (
     id SERIAL PRIMARY KEY,
     term TEXT NOT NULL,
     definition TEXT NOT NULL,
-    confidenceLevel INTEGER NOT NULL,
+    confidenceLevel INTEGER NOT NULL DEFAULT 0,
     keywords TEXT,
-    archived INTEGER NOT NULL,
-    starred INTEGER NOT NULL,
+    archived INTEGER NOT NULL DEFAULT 0,
+    starred INTEGER NOT NULL DEFAULT 0,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     edited_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     collection_id INTEGER REFERENCES collections(id)
@@ -40,8 +31,9 @@ CREATE TABLE flashcards (
 
 -- Create Canvases table
 CREATE TABLE canvases (
-    id UUID PRIMARY KEY,
+    id SERIAL PRIMARY KEY,
     archived BOOLEAN NOT NULL,
-    canvas_data TEXT,
+    canvas_front TEXT,
+    canvas_back TEXT,
     flashcards_id INTEGER REFERENCES flashcards(id)
 );

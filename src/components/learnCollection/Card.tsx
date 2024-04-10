@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
-import Pagination from '../Skeleton/components/Pagination';
+import axios from 'axios';
+
 // const Card: React.FC<{term: string,
 //   definition: string,
 //  keywords:string,
 // confidenceLevel: number}>
 export default function Card ({card, setIndex, index, length, studyDeck, setStudyDeck, shuffleTheDeck}) {
 
-  const {term, definition, starred} = card;
+  const {term, definition, starred, id, deck_title} = card;
 
 // temp state, with the endpoint I'll just hit the backend
-  const [starryNight, setStarryNight] = useState(starred);
+  // const [starryNight, setStarryNight] = useState(starred);
 
 
   const [isFlipped, setIsFlipped] = useState(false);
@@ -21,9 +22,15 @@ export default function Card ({card, setIndex, index, length, studyDeck, setStud
 
   // Build confidence increasing functionality later
 
-  // need these buttons - Skip Forward, Skip Back, Got it :saluting_face:, Repeat, and Done.
-  // display keywords somewhere
   //figure out how to add fontawesome icon - talk to Raul
+
+  // routes needed - update starred
+  // later - update confidence
+
+
+  // routes below
+  // PUT /api/flashcards/:id/confidenceLevel
+  // PUT /api/flashcards/:id/starred
 
 
   function handleClick(e) {
@@ -35,7 +42,8 @@ export default function Card ({card, setIndex, index, length, studyDeck, setStud
       if (newIndex < 0){
         console.log("That's far enough")
       } else {
-          setIndex(newIndex)
+        setIsFlipped(false);
+        setIndex(newIndex)
       }
     } else if (buttonClicked === "Skip Forward"){
       let newIndex = index + 1;
@@ -56,17 +64,35 @@ export default function Card ({card, setIndex, index, length, studyDeck, setStud
       // let newDeck = studyDeck.toSpliced(index, 1)
       // setStudyDeck(newDeck);
 
-      // insert axios call once we get the route
-      setStarryNight(1)
 
-      setIsFlipped(false);
+      // insert axios call once we get the route
+      // only toggle it if the star is 0 (what if they got it wrong twice?)
+      if (starred === 0){
+        axios.put(`/api/flashcards/${id}/starred`).then(() => {
+          console.log('starred should be changed to 1')
+        })
+      }
+      const newIndex = index + 1;
+      if (newIndex < length){
+        setIsFlipped(false);
+        setIndex(newIndex);
+      } else {
+        // implement "Done" functionality here once route is ready
+        console.log("No more cards")
+      }
+
 
     } else if (buttonClicked === "Got it!") {
       // increment confidence in the backend route,
       // for now just skip to the next cardrrrrr
       // should we only move to the next card when they click next?
       // then got it can just update the confidence instead
-      let newIndex = index + 1;
+      if (starred === 1){
+        axios.put(`/api/flashcards/${id}/starred`).then(() => {
+          console.log('starred should be changed back to 0')
+        })
+      }
+      const newIndex = index + 1;
       if (newIndex < length){
         setIsFlipped(false);
         setIndex(newIndex)
@@ -76,7 +102,7 @@ export default function Card ({card, setIndex, index, length, studyDeck, setStud
     } else if (buttonClicked === "Done") {
       console.log("Here's where I'll route to another page")
       // needs another page to go to with the react router etc.
-      setIndex(0);
+      setIndex(0); // for now
     } else if (buttonClicked === "Shuffle") {
       shuffleTheDeck();
       setIsFlipped(false);
@@ -88,7 +114,9 @@ export default function Card ({card, setIndex, index, length, studyDeck, setStud
   // make "Study again" send the directions to the DB to update the field to have 1 and go to the next card.
   // add a conditional inside "got it" that not only updates the confidence in the backend, but checks to see
   // "If" the current card has starred set to 1. If so and they click "got it" then send the route to the backend
-  // to turn it to 0
+  // to turn starred to 0
+
+  // {Deck Title goes here}
 
  return <div className='box'>
   <h2 className="title is-2">Deck Title</h2>
@@ -97,13 +125,16 @@ export default function Card ({card, setIndex, index, length, studyDeck, setStud
       return <>Studying Again</>
     }
   }()} */}
+   {function(){
+    if (starred === 1) {
+      return <>This question was challenging for you, try to get it this time!</>
+    }
+  }()}
  <nav className="nav">
    <div className='left'>
        </div>
    <div className="right">
      <div className="tags are-large">
-       <span className="tag">Edit</span>
-       <span className="tag">Settings</span>
      </div>
    </div>
  </nav>
