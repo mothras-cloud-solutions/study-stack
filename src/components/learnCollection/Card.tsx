@@ -41,7 +41,7 @@ export default function Card ({card, setIndex, index, length, studyDeck, setStud
 
   function handleClick(e) {
     e.preventDefault();
-    let buttonClicked = e.target.innerText
+    const buttonClicked = e.target.innerText
 
     if (buttonClicked === "Skip Back"){
       let newIndex = index - 1;
@@ -132,12 +132,13 @@ export default function Card ({card, setIndex, index, length, studyDeck, setStud
   };
 
  return <div className='box'>
-  <h2 className="title is-2">Deck Title</h2>
+  <h2 className="title is-2">{deck_title}</h2>
   {/* {function(){
     if (studyDeck[index].studyAgain) {
       return <>Studying Again</>
     }
   }()} */}
+  <span className='flip-notice'>Click a card to flip it</span>
   <span className='index-count'>Card {currPosition}/{length}</span>
    {function(){
     if (starred === 1) {
