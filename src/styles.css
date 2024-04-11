@@ -140,6 +140,7 @@ body {
 
 .title, .is-2 {
   display: inline-block;
+  margin-right: 1rem;
 }
 
 .starr-prompt {
