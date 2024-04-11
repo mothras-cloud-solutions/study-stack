@@ -15,10 +15,12 @@ import NavBarLogIn from './components/overview/components/NavBarLogIn';
 import NavBarLogOut from './components/overview/components/NavBarLogOut';
 import { Routes, Route } from 'react-router-dom';
 import Overview from './components/overview/index';
+import StudyCards from './components/learnCollection/StudyCards';
 
 function App() {
   const [user, setUser] = useState<User | null>(null);
   const [uid, setUid] = useState<string | null>(null);
+  const [currentDeck, setCurrentDeck] = useState<Array | null>(null);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChange((user) => {
@@ -37,6 +39,10 @@ function App() {
       setUid(uid);
     }
   }, [user]);
+
+  function changeDeck(deck: Array) {
+    setCurrentDeck(deck);
+  }
 
   return (
     <Fragment>
@@ -59,9 +65,9 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/home" element={<Overview />} />
-        <Route path="/learn" element={<StudyPageTest />} />
+        <Route path="/learn" element={<StudyCards prop={currentDeck}/>} />
         <Route path="/create" element={<CreateDeck uid={uid} />} />
-        <Route path="/collections" element={<DeckCollection uid={uid} />} />
+        <Route path="/collections" element={<DeckCollection uid={uid} changeDeck={changeDeck} />} />
       </Routes>
       </div>
       </section>

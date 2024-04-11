@@ -14,11 +14,14 @@ type DeckType = {
 
 type DeckCollectionProps = {
   uid: string | null;
+  changeDeck: (deck: DeckType) => void;
 };
 
-const DeckCollection: React.FC<DeckCollectionProps> = ({ uid }) => {
+const DeckCollection: React.FC<DeckCollectionProps> = ({ uid, changeDeck }) => {
   const [decks, setDecks] = useState<DeckType[]>([]);
   const [selectedDeck, setSelectedDeck] = useState<DeckType | null>(null);
+
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -38,6 +41,7 @@ const DeckCollection: React.FC<DeckCollectionProps> = ({ uid }) => {
 
   const handleDeckSelect = (deck: DeckType) => {
     setSelectedDeck(deck);
+    changeDeck(deck);
   };
 
   return (
