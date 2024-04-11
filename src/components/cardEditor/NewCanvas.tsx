@@ -64,7 +64,8 @@ const NewCanvas: React.FC<Props> = ({ rectangles, circles, lines, texts, shapes,
   let baseHeight = 400;
 
   const [parentDimensions, setParentDimensions] = useState({width: baseWidth, height: baseHeight});
-  const [scale, setScale] = useState(1);
+  const [scaleW, setScaleW] = useState(1);
+  const [scaleH, setScaleH] = useState(1);
 
   useEffect(() => {
     function updateParentDimensions() {
@@ -83,14 +84,12 @@ const NewCanvas: React.FC<Props> = ({ rectangles, circles, lines, texts, shapes,
   },[]);
 
   useEffect(() => {
-    const scaleX = parentDimensions.width / baseWidth;
-    const scaleY = parentDimensions.height / baseHeight;
-    const minScale = Math.min(scaleX, scaleY);
-    setScale(minScale);
+    setScaleW(parentDimensions.width / baseWidth);
+    setScaleH(parentDimensions.height / baseHeight);
   }, [parentDimensions]);
 
   return (
-    <Stage onClick={click} width={baseWidth * scale} height={baseHeight * scale}>
+    <Stage onClick={click} width={baseWidth * scaleW} height={baseHeight * scaleH}>
       <Layer>
         {rectangles.length > 0 && rectangles.map((rect, i) => {
           return (
