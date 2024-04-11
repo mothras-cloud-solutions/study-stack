@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+
+import React from 'react';
 
 type CollectionType = {
   id: number;
@@ -6,23 +7,11 @@ type CollectionType = {
 };
 
 type DeckSelectorProps = {
+  decks: CollectionType[];
   onDeckSelect: (collection: CollectionType) => void;
 };
 
-const DeckSelector: React.FC<DeckSelectorProps> = ({ onDeckSelect }) => {
-  const [collections, setCollections] = useState<CollectionType[]>([]);
-  const userId = 10;
-  useEffect(() => {
-    fetch(`/api/collections/user/${userId}`)
-      .then(response => response.json())
-      .then(data => {
-        setCollections(data);
-      })
-      .catch(error => {
-        console.error('Error fetching collections:', error);
-      });
-  }, [userId]);
-
+const DeckSelector: React.FC<DeckSelectorProps> = ({ decks, onDeckSelect }) => {
   return (
     <div className="w-full mb-4">
       <label htmlFor="collection-select" className="block text-lg font-medium text-gray-700 mb-2">
@@ -34,17 +23,17 @@ const DeckSelector: React.FC<DeckSelectorProps> = ({ onDeckSelect }) => {
         defaultValue=""
         onChange={(e) => {
           const index = parseInt(e.target.value, 10);
-          if (index >= 0 && index < collections.length) {
-            onDeckSelect(collections[index]);
+          if (index >= 0 && index < decks.length) {
+            onDeckSelect(decks[index]);
           }
         }}
       >
         <option value="" disabled>
           Please select a deck
         </option>
-        {collections.map((collection, index) => (
-          <option key={collection.id} value={index} className="text-lg">
-            {collection.title}
+        {decks.map((deck, index) => (
+          <option key={deck.id} value={index} className="text-lg">
+            {deck.title}
           </option>
         ))}
       </select>

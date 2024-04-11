@@ -1,9 +1,13 @@
 import { Request, Response } from 'express';
 import { pool } from '../database/db';
 
-export const getAllFlashcards = async (_req: any, res: Response) => {
+export const getAllFlashcards = async (_req: Request, res: Response) => {
     try {
-        const result = await pool.query('SELECT * FROM flashcards');
+        const result = await pool.query(`
+            SELECT f.*, c.canvas_front, c.canvas_back, col.title as deck_title
+            FROM flashcards f
+            LEFT JOIN canvases c ON f.id = c.flashcards_id
+            LEFT JOIN collections col ON f.collection_id = col.id`);
         res.json(result.rows);
     } catch (err) {
         console.error('Error fetching flashcards:', err);
@@ -14,7 +18,15 @@ export const getAllFlashcards = async (_req: any, res: Response) => {
 export const getFlashcardById = async (req: Request, res: Response) => {
     const { id } = req.params;
     try {
-        const result = await pool.query('SELECT * FROM flashcards WHERE id = $1', [id]);
+        const result = await pool.query(`
+            SELECT f.*, c.canvas_front, c.canvas_back, col.title as deck_title
+            FROM flashcards f
+            LEFT JOIN canvases c ON f.id = c.flashcards_id
+            LEFT JOIN collections col ON f.collection_id = col.id
+            WHERE f.id = $1`,
+            [id]
+        );
+
         if (result.rows.length > 0) {
             res.json(result.rows[0]);
         } else {
@@ -27,14 +39,18 @@ export const getFlashcardById = async (req: Request, res: Response) => {
 };
 
 export const getFlashcardsByCollection = async (req: Request, res: Response) => {
-    const collectionId = req.params.collection_id; // Use req.params here, not req.query
-    console.log('Collection ID:', collectionId);
+    const collectionId = req.params.collection_id;
 
     try {
-        let query = 'SELECT * FROM flashcards WHERE collection_id = $1'; // Moved the WHERE clause inside the query
-        const params = [collectionId];
+        const result = await pool.query(`
+            SELECT f.*, c.canvas_front, c.canvas_back, col.title as deck_title
+            FROM flashcards f
+            LEFT JOIN canvases c ON f.id = c.flashcards_id
+            LEFT JOIN collections col ON f.collection_id = col.id
+            WHERE f.collection_id = $1`,
+            [collectionId]
+        );
 
-        const result = await pool.query(query, params);
         res.json(result.rows);
     } catch (err) {
         console.error('Error fetching flashcards:', err);
@@ -44,13 +60,21 @@ export const getFlashcardsByCollection = async (req: Request, res: Response) => 
 
 export const createFlashcard = async (req: Request, res: Response) => {
     const { term, definition, confidenceLevel, keywords, collection_id } = req.body;
-    console.log('Data from card form: ', term, definition, confidenceLevel, keywords, collection_id);
+    const canvas_front = '';
+    const canvas_back = '';
+    const archived = false;
+
     try {
         const result = await pool.query(
             'INSERT INTO flashcards (term, definition, confidenceLevel, keywords, collection_id) VALUES ($1, $2, $3, $4, $5) RETURNING *',
             [term, definition, confidenceLevel, keywords, collection_id]
         );
-        res.status(201).json(result.rows[0]);
+        const flashcards_id = result.rows[0].id
+        const result2 = await pool.query(
+            'INSERT INTO canvases (archived, canvas_front, canvas_back, flashcards_id) VALUES ($1, $2, $3, $4) RETURNING *',
+            [archived, canvas_front, canvas_back, flashcards_id]
+        );
+        res.status(201).json({ flashcard: result.rows[0], canvas: result2.rows[0] });
     } catch (err) {
         console.error('Error creating flashcard:', err);
         res.status(500).json({ error: 'Internal server error' });
