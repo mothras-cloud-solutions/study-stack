@@ -43,7 +43,7 @@ export default function Card({ card, setIndex, index, length, studyDeck, setStud
 
   function handleClick(e) {
     e.preventDefault();
-    let buttonClicked = e.target.innerText
+    const buttonClicked = e.target.innerText
 
     if (buttonClicked === "Skip Back") {
       let newIndex = index - 1;
@@ -134,49 +134,50 @@ export default function Card({ card, setIndex, index, length, studyDeck, setStud
     height: '100%',
   };
 
-  return <div className='box'>
-    <h2 className="title is-2">Deck Title</h2>
-    {/* {function(){
+ return <div className='box'>
+  <h2 className="title is-2">{deck_title}</h2>
+  {/* {function(){
     if (studyDeck[index].studyAgain) {
       return <>Studying Again</>
     }
   }()} */}
-    <span className='index-count'>Card {currPosition}/{length}</span>
-    {function () {
-      if (starred === 1) {
-        return <span className='starr-prompt'>This question was challenging for you, try to get it this time!</span>
-      }
-    }()}
-    <nav className="nav">
-      <div className='left'>
-      </div>
-      <div className="right">
-        <div className="tags are-large">
-        </div>
-      </div>
-    </nav>
-    <div className="flip-container" onClick={flipCard}>
-      <div className='flip-card' id="studyCanvas" style={style}>
-        <StudyCanvas front={canvas_front} back={canvas_back} index={index} flipped={isFlipped} />
-      </div>
-      <div className={`flip-card${isFlipped ? ' is-flipped' : ''}`}>
-        <div className="flip-card-inner">
-          <div className="flip-card-front">
-            {function () {
-              if (!isFlipped) {
-                return <h3 className="title is-3">{term}</h3>
-              }
-            }()}
-          </div>
-          <div className="flip-card-back">
-            <p>{definition}</p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div className='buttons'>
-      {function () {
-        if (index === 0) {
+  <span className='flip-notice'>Click a card to flip it</span>
+  <span className='index-count'>Card {currPosition}/{length}</span>
+   {function(){
+    if (starred === 1) {
+      return <span className='starr-prompt'>This question was challenging for you, try to get it this time!</span>
+    }
+  }()}
+ <nav className="nav">
+   <div className='left'>
+       </div>
+   <div className="right">
+     <div className="tags are-large">
+     </div>
+   </div>
+ </nav>
+<div className="flip-container" onClick={flipCard}>
+  <div className='flip-card' id="studyCanvas" style={style}>
+    <StudyCanvas front={canvas_front} back={canvas_back} index={index} flipped={isFlipped}/>
+  </div>
+     <div className={`flip-card${isFlipped ? ' is-flipped' : ''}`}>
+       <div className="flip-card-inner">
+         <div className="flip-card-front">
+          {function(){
+            if (!isFlipped) {
+              return <h3 className="title is-3">{term}</h3>
+            }
+          }()}
+         </div>
+         <div className="flip-card-back">
+           <p>{definition}</p>
+         </div>
+       </div>
+     </div>
+   </div>
+   <div className='buttons'>
+      {function(){
+        if (index === 0){
           return <button>Beginning</button>
         } else {
           return <button name="skip-back" type="button" onClick={handleClick}>Skip Back</button>

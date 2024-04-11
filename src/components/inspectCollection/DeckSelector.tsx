@@ -12,6 +12,7 @@ type DeckSelectorProps = {
 };
 
 const DeckSelector: React.FC<DeckSelectorProps> = ({ decks, onDeckSelect }) => {
+  console.log('Rendering DeckSelector, decks:', decks);
   return (
     <div className="w-full mb-4">
       <label htmlFor="collection-select" className="block text-lg font-medium text-gray-700 mb-2">
