@@ -18,20 +18,15 @@ const DeckCollection: React.FC<DeckCollectionProps> = ({ uid }) => {
   const [decks, setDecks] = useState<DeckType[]>([]);
   const [selectedDeck, setSelectedDeck] = useState<DeckType | null>(null);
 
-  // Fetch decks when the component mounts or when the uid changes
   useEffect(() => {
     const fetchDecks = async () => {
       if (uid) {
-        try {
-          const response = await fetch(`/api/collections/user/${uid}`);
-          if (!response.ok) {
-            throw new Error('Network response was not ok');
-          }
-          const data = await response.json();
-          setDecks(data);
-        } catch (error) {
-          console.error('Error fetching collections:', error);
+        const response = await fetch(`/api/collections/user/${uid}`);
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
         }
+        const data = await response.json();
+        setDecks(data);
       }
     };
 
