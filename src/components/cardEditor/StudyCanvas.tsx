@@ -54,6 +54,35 @@ interface Props {
 const StudyCanvas: React.FC<Props> = ({ front, back, flipped, index }) => {
   const [shapes, setShapes] = useState({"rectangles":[],"circles":[],"lines":[],"texts":[],"number":0});
 
+  let baseWidth = 1304;
+  let baseHeight = 400;
+
+  const [parentDimensions, setParentDimensions] = useState({width: baseWidth, height: baseHeight});
+  const [scale, setScale] = useState(1);
+
+  useEffect(() => {
+    function updateParentDimensions() {
+      const parentDiv = document.getElementById('studyCanvas');
+      if (parentDiv) {
+        let { clientWidth, clientHeight } = parentDiv;
+        setParentDimensions({width: clientWidth, height: clientHeight});
+      }
+    };
+
+    window.addEventListener('resize', updateParentDimensions);
+    updateParentDimensions();
+    return () => {
+      window.removeEventListener('resize', updateParentDimensions);
+    };
+  },[]);
+
+  useEffect(() => {
+    const scaleX = parentDimensions.width / baseWidth;
+    const scaleY = parentDimensions.height / baseHeight;
+    const minScale = Math.min(scaleX, scaleY);
+    setScale(minScale);
+  }, [parentDimensions]);
+
   useEffect(() => {
     if (flipped && back.length > 1) {
       setShapes(JSON.parse(back))
@@ -65,10 +94,10 @@ const StudyCanvas: React.FC<Props> = ({ front, back, flipped, index }) => {
     } else if (!flipped && front.length < 5) {
       setShapes({"rectangles":[],"circles":[],"lines":[],"texts":[],"number":0});
     }
-  }, [flipped, index])
+  }, [flipped, index]);
 
   return (
-    <Stage width={1304} height={400}>
+    <Stage width={baseWidth * scale} height={baseHeight * scale}>
       <Layer>
         {(shapes.rectangles && shapes.rectangles.length > 0) && shapes.rectangles.map((rect) => {
           return (<Rectangle shapeSpecs={rect}/>)

@@ -230,7 +230,7 @@ const CardEditor: React.FC = () => {
           </div>
         </div>
       </nav>
-      <div className="flip-container">
+      <div className="flip-container" id="editorCanvas">
         <div className='flip-card' style={style}>
             <NewCanvas click={checkDeselect} rectangles={rectangles} circles={circles} lines={lines} texts={texts} shapes={shapes} selectId={selectId} selectElement={select} setR={r} setC={c} setL={l} setT={t}/>
         </div>

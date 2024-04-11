@@ -149,7 +149,7 @@ export default function Card ({card, setIndex, index, length, studyDeck, setStud
    </div>
  </nav>
 <div className="flip-container" onClick={flipCard}>
-  <div className='flip-card' style={style}>
+  <div className='flip-card' id="studyCanvas" style={style}>
     <StudyCanvas front={canvas_front} back={canvas_back} index={index} flipped={isFlipped}/>
   </div>
      <div className={`flip-card${isFlipped ? ' is-flipped' : ''}`}>

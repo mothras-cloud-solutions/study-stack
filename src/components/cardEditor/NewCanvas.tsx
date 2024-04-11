@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Stage, Layer } from 'react-konva';
 import Rectangle from './shapes/Reactangle';
 import Circle from './shapes/Circle.tsx';
@@ -60,8 +60,37 @@ interface Props {
 }
 
 const NewCanvas: React.FC<Props> = ({ rectangles, circles, lines, texts, shapes, selectId, click, selectElement, setR, setC, setL, setT }) => {
+  let baseWidth = 1304;
+  let baseHeight = 400;
+
+  const [parentDimensions, setParentDimensions] = useState({width: baseWidth, height: baseHeight});
+  const [scale, setScale] = useState(1);
+
+  useEffect(() => {
+    function updateParentDimensions() {
+      const parentDiv = document.getElementById('editorCanvas');
+      if (parentDiv) {
+        let { clientWidth, clientHeight } = parentDiv;
+        setParentDimensions({width: clientWidth, height: clientHeight});
+      }
+    };
+
+    window.addEventListener('resize', updateParentDimensions);
+    updateParentDimensions();
+    return () => {
+      window.removeEventListener('resize', updateParentDimensions);
+    };
+  },[]);
+
+  useEffect(() => {
+    const scaleX = parentDimensions.width / baseWidth;
+    const scaleY = parentDimensions.height / baseHeight;
+    const minScale = Math.min(scaleX, scaleY);
+    setScale(minScale);
+  }, [parentDimensions]);
+
   return (
-    <Stage onClick={click} width={1304} height={400}>
+    <Stage onClick={click} width={baseWidth * scale} height={baseHeight * scale}>
       <Layer>
         {rectangles.length > 0 && rectangles.map((rect, i) => {
           return (
