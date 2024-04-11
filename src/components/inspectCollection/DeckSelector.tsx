@@ -14,7 +14,12 @@ const DeckSelector: React.FC<DeckSelectorProps> = ({ uid, onDeckSelect }) => {
 
   useEffect(() => {
     if (uid) {
-      fetch(`/api/collections/user/${uid}`)
+
+      const pUrl = 'https://study-stack-production.railway.internal';
+
+      // const url = process.env.NODE_ENV === 'production' ? pUrl : `/api/collections/user/${uid}`;
+
+      fetch(pUrl)
         .then(response => response.json())
         .then(data => {
           setCollections(data);
