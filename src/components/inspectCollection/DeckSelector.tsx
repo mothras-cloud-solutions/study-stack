@@ -15,7 +15,7 @@ const DeckSelector: React.FC<DeckSelectorProps> = ({ uid, onDeckSelect }) => {
   useEffect(() => {
     if (uid) {
 
-      const pUrl = 'https://study-stack-production.railway.internal';
+      const pUrl = `https://study-stack-production.railway.internal/api/collections/user/${uid}`;
 
       // const url = process.env.NODE_ENV === 'production' ? pUrl : `/api/collections/user/${uid}`;
 
