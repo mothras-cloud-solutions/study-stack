@@ -287,7 +287,7 @@ const CardEditor: React.FC<Props> = ({ card }) => {
         <div className={`flip-card${isFlipped ? ' is-flipped' : ''}`}>
           <div className="flip-card-inner">
             <div className="flip-card-front">
-              <h3 className="title is-3">{term}</h3>
+              {!isFlipped && return (<h3 className="title is-3">{term}</h3>)}
               {/* <p>This is the front side of the card.</p> */}
             </div>
             <div className="flip-card-back">
