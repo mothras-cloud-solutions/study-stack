@@ -7,7 +7,8 @@ import { User } from 'firebase/auth';
 import HomePage from './components/Skeleton/components/HomePage';
 import NavBar from './components/Skeleton/components/NavBar';
 import Footer from './components/Skeleton/components/Footer';
-import CreateDeck from './components/Skeleton/components/CreateDeck';
+// import CreateDeck from './components/Skeleton/components/CreateDeck';
+import CreateEditDeck from './components/Skeleton/components/CreateEditDeck';
 import DeckCollection from './components/inspectCollection/DeckCollection';
 import StudyPageTest from './components/learnCollection/testcollection';
 
@@ -40,10 +41,10 @@ function App() {
 
       {user ? (
         <>
-          <CreateDeck uid={uid}/>
-        <SignOut />
-        <DeckCollection uid={uid} />
-        <StudyPageTest />
+          <CreateEditDeck uid={uid} />
+        {/* <SignOut /> */}
+        {/* <DeckCollection uid={uid} /> */}
+        {/* <StudyPageTest /> */}
         </>
       ) : (
         <Fragment>

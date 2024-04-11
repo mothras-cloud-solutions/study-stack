@@ -31,7 +31,7 @@ export const getFlashcardsByCollection = async (req: Request, res: Response) => 
     console.log('Collection ID:', collectionId);
 
     try {
-        let query = 'SELECT * FROM flashcards WHERE collection_id = $1'; // Moved the WHERE clause inside the query
+        let query = 'SELECT * FROM flashcards WHERE collection_id = $1 ORDER BY edited_at DESC'; // Moved the WHERE clause inside the query
         const params = [collectionId];
 
         const result = await pool.query(query, params);
@@ -59,14 +59,16 @@ export const createFlashcard = async (req: Request, res: Response) => {
 
 export const updateFlashcard = async (req: Request, res: Response) => {
     const { id } = req.params;
-    const { term, definition, confidenceLevel, keywords, collection_id } = req.body;
+    const { term, definition, keywords } = req.body;
+
     try {
         const result = await pool.query(
-            'UPDATE flashcards SET term = $1, definition = $2, confidenceLevel = $3, keywords = $4, collection_id = $5 WHERE id = $6 RETURNING *',
-            [term, definition, confidenceLevel, keywords, collection_id, id]
+            'UPDATE flashcards SET term = $1, definition = $2, keywords = $3, edited_at = CURRENT_TIMESTAMP WHERE id = $4 RETURNING *',
+            [term, definition, keywords, id]
         );
+
         if (result.rows.length > 0) {
-            res.json(result.rows[0]);
+            res.status(200).json(result.rows[0]);
         } else {
             res.status(404).json({ error: 'Flashcard not found' });
         }
@@ -75,6 +77,8 @@ export const updateFlashcard = async (req: Request, res: Response) => {
         res.status(500).json({ error: 'Internal server error' });
     }
 };
+
+
 
 export const updateFlashcardConfidenceLevel = async (req: Request, res: Response) => {
     const { id } = req.params;
@@ -109,7 +113,6 @@ export const updateFlashcardConfidenceLevel = async (req: Request, res: Response
 
 export const swapStarredStatus = async (req: Request, res: Response) => {
     const { id } = req.params; // Assuming id is a string, no need to cast
-    console.log('Flashcard ID:', id);
 
     try {
         const result = await pool.query('SELECT starred FROM flashcards WHERE id = $1', [id]);
@@ -141,7 +144,6 @@ export const swapStarredStatus = async (req: Request, res: Response) => {
 
 export const swapArchivedStatus = async (req: Request, res: Response) => {
     const { id } = req.params; // Assuming id is a string, no need to cast
-    console.log('Flashcard ID:', id);
 
     try {
         const currentResult = await pool.query('SELECT archived FROM flashcards WHERE id = $1', [id]);

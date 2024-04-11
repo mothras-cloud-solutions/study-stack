@@ -4,40 +4,64 @@ import axios from 'axios';
 
 interface CardFormProps {
   deckId?: string;
+  editingCard: Card | null;
+  setEditingCard: React.Dispatch<React.SetStateAction<Card | null>>;
+  handleNewCardSave: (newCard: Card) => void;
+  handleCardUpdate: (updatedCard: Card) => void;
 }
 
-const CardForm: React.FC<CardFormProps> = ({ deckId }) => {
+interface Card {
+  id: number;
+  term: string;
+  definition: string;
+  keywords: string;
+  archived: boolean;
+}
+
+const CardForm: React.FC<CardFormProps> = ({
+  deckId,
+  editingCard,
+  setEditingCard,
+  handleNewCardSave,
+  handleCardUpdate,
+}) => {
   const [term, setTerm] = useState('');
   const [definition, setDefinition] = useState('');
   const [keywords, setKeywords] = useState('');
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const [saving, setSaving] = useState(false);
-  // const [editor, setEditor] = useState<Quill | null>(null);
   const editorRef = useRef<HTMLDivElement>(null);
   const quillRef = useRef<Quill | null>(null);
 
   useEffect(() => {
-    if (editorRef.current) {
+    if (editorRef.current && !quillRef.current) {
       const quill = new Quill(editorRef.current, {
         theme: 'snow',
       });
-
-      const content = quill.getModule('clipboard');
-      const observer = new MutationObserver((mutations) => {
-        mutations.forEach((mutation) => {
-          if (mutation.target === content.container) {
-            setDefinition(quill.root.innerHTML);
-          }
-        });
-      });
-
-      observer.observe(content.container, { childList: true, subtree: true });
-
       quillRef.current = quill;
+    }
+  }, []);
+
+  useEffect(() => {
+    if (editingCard && quillRef.current) {
+      const delta = quillRef.current.clipboard.convert(editingCard.definition);
+      quillRef.current.setContents(delta);
+      setTerm(editingCard.term);
+      setKeywords(editingCard.keywords);
+    }
+  }, [editingCard]);
+
+  useEffect(() => {
+    if (quillRef.current) {
+      const handleTextChange = () => {
+        setDefinition(quillRef.current.root.innerHTML);
+      };
+
+      quillRef.current.on('text-change', handleTextChange);
 
       return () => {
-        observer.disconnect();
+        quillRef.current.off('text-change', handleTextChange);
       };
     }
   }, []);
@@ -47,7 +71,7 @@ const CardForm: React.FC<CardFormProps> = ({ deckId }) => {
     if (success) {
       timer = setTimeout(() => {
         setSuccess('');
-      }, 3000); // 3 seconds
+      }, 3000);
     }
     return () => {
       if (timer) {
@@ -58,22 +82,22 @@ const CardForm: React.FC<CardFormProps> = ({ deckId }) => {
 
   const handleTermChange = (e: ChangeEvent<HTMLInputElement>) => {
     setTerm(e.target.value);
-    if (error) setError(''); // Clear error message when user starts typing
+    setError('');
   };
 
   const handleKeywordChange = (e: ChangeEvent<HTMLInputElement>) => {
     setKeywords(e.target.value);
-    if (error) setError(''); // Clear error message when user starts typing
+    setError('');
   };
 
   const handleSaveCard = async () => {
     if (!term.trim()) {
-      setError('Term is required');
+      setError('Prompt is required');
       return;
     }
 
     if (!definition.trim()) {
-      setError('Definition is required');
+      setError('Response is required');
       return;
     }
 
@@ -87,20 +111,34 @@ const CardForm: React.FC<CardFormProps> = ({ deckId }) => {
     setSuccess('');
 
     try {
-      const response = await axios.post('/api/flashcards', {
-        term,
-        definition,
-        confidenceLevel: 0,
-        keywords,
-        archived: 0,
-        starred: 0,
-        collection_id: 12,
-      });
-      console.log('Card saved successfully:', response.data);
+      const response = editingCard
+        ? await axios.put(`/api/flashcards/${editingCard.id}`, {
+            term,
+            definition,
+            keywords,
+          })
+        : await axios.post('/api/flashcards/', {
+            term,
+            definition,
+            confidenceLevel: 0,
+            keywords,
+            archived: 0,
+            starred: 0,
+            collection_id: deckId,
+          });
+      const updatedCard = response.data;
+      console.log('Card saved successfully:', updatedCard);
       setTerm('');
       setDefinition('');
       setKeywords('');
-      setSuccess('Card saved successfully!');
+      setEditingCard(null);
+      quillRef.current?.setText(''); // Clear the text editor
+      setSuccess(editingCard ? 'Card updated successfully!' : 'Card saved successfully!');
+      if (editingCard) {
+        handleCardUpdate(updatedCard);
+      } else {
+        handleNewCardSave(updatedCard);
+      }
     } catch (error) {
       console.error('Error saving card:', error);
       setError('Error saving card. Please try again.');
@@ -108,11 +146,22 @@ const CardForm: React.FC<CardFormProps> = ({ deckId }) => {
       setSaving(false);
     }
   };
+
+  const handleCancelOrEdit = () => {
+    setError('');
+    setSuccess('');
+    setEditingCard(null);
+    setTerm('');
+    setDefinition('');
+    setKeywords('');
+    quillRef.current?.setText(''); // Clear the text editor
+  };
+
   return (
     <div className="box">
-      <h3 className="title is-4">Add New Card</h3>
+      <h3 className="title is-4">{editingCard ? 'Edit Card' : 'Add New Card'}</h3>
       <div className="field">
-        <label className="label">Term</label>
+        <label className="label">Prompt</label>
         <div className="control">
           <input
             className="input"
@@ -123,7 +172,7 @@ const CardForm: React.FC<CardFormProps> = ({ deckId }) => {
         </div>
       </div>
       <div className="field">
-        <label className="label">Definition</label>
+        <label className="label">Response</label>
         <div className="control">
           <div ref={editorRef} style={{ height: '200px' }} />
         </div>
@@ -139,21 +188,29 @@ const CardForm: React.FC<CardFormProps> = ({ deckId }) => {
           />
         </div>
       </div>
-      <div className="field is-grouped">
+      <div className="field is-grouped is-grouped-right">
+        <div className="control">
+          {error && <span className="tag is-danger is-light">{error}</span>}
+          {success && <span className="tag is-success is-light">{success}</span>}
+        </div>
         <div className="control">
           <button
             className={`button is-primary ${saving ? 'is-loading' : ''}`}
             onClick={handleSaveCard}
             disabled={saving}
           >
-            Save Card
+            {editingCard ? 'Update Card' : 'Save Card'}
           </button>
         </div>
         <div className="control">
-          <button className="button is-normal">Cancel</button>
+          <button className="button is-normal" onClick={handleCancelOrEdit}>
+            Cancel
+          </button>
         </div>
-        {error && <p className="help is-danger">{error}</p>}
-        {success && <p className="help is-success">{success}</p>}
+        <div className="control">
+          {/* Button to render to Wyatt's editor or redirect to it */}
+          <button className="button is-light">Advanced Edit Mode</button>
+        </div>
       </div>
     </div>
   );
