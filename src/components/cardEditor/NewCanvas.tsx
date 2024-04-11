@@ -63,10 +63,12 @@ const NewCanvas: React.FC<Props> = ({ rectangles, circles, lines, texts, shapes,
   let baseWidth = 1304;
   let baseHeight = 400;
 
+  //Scaling States
   const [parentDimensions, setParentDimensions] = useState({width: baseWidth, height: baseHeight});
   const [scaleW, setScaleW] = useState(1);
   const [scaleH, setScaleH] = useState(1);
 
+  //Track size
   useEffect(() => {
     function updateParentDimensions() {
       const parentDiv = document.getElementById('editorCanvas');
@@ -83,6 +85,7 @@ const NewCanvas: React.FC<Props> = ({ rectangles, circles, lines, texts, shapes,
     };
   },[]);
 
+  //Scaler
   useEffect(() => {
     setScaleW(parentDimensions.width / baseWidth);
     setScaleH(parentDimensions.height / baseHeight);

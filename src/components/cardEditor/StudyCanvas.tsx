@@ -5,45 +5,6 @@ import Circle from './studyShapes/Circle.tsx';
 import Line from './studyShapes/Line.tsx';
 import Text from './studyShapes/Text.tsx';
 
-interface rectangles {
-  x?: number;
-  y?: number;
-  width?: number;
-  height?: number;
-  fill?: string;
-  strokeWidth?: number;
-  stroke?: string;
-  id?: string;
-}[];
-
-interface circles {
-  x?: number;
-  y?: number;
-  width?: number;
-  height?: number;
-  fill?: string;
-  strokeWidth?: number;
-  stroke?: string;
-  id?: string;
-}[];
-
-interface lines {
-  points?: Array;
-  stroke?: string;
-  strokeWidth?: number;
-  fill?: string;
-  id?: string;
-}[];
-
-interface texts {
-  x?: number;
-  y?: number;
-  fill?: string;
-  align?: string;
-  text?: string;
-  id?: string;
-}[];
-
 interface Props {
   front: string;
   back: string;
@@ -116,3 +77,42 @@ const StudyCanvas: React.FC<Props> = ({ front, back, flipped, index }) => {
 };
 
 export default StudyCanvas;
+
+// interface rectangles {
+//   x?: number;
+//   y?: number;
+//   width?: number;
+//   height?: number;
+//   fill?: string;
+//   strokeWidth?: number;
+//   stroke?: string;
+//   id?: string;
+// }[];
+
+// interface circles {
+//   x?: number;
+//   y?: number;
+//   width?: number;
+//   height?: number;
+//   fill?: string;
+//   strokeWidth?: number;
+//   stroke?: string;
+//   id?: string;
+// }[];
+
+// interface lines {
+//   points?: Array;
+//   stroke?: string;
+//   strokeWidth?: number;
+//   fill?: string;
+//   id?: string;
+// }[];
+
+// interface texts {
+//   x?: number;
+//   y?: number;
+//   fill?: string;
+//   align?: string;
+//   text?: string;
+//   id?: string;
+// }[];
