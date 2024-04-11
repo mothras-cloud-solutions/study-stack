@@ -2,12 +2,14 @@ import React, { useState, useEffect } from 'react';
 import DeckSelector from './DeckSelector';
 import CardThumbnailContainer from './CardThumbnailContainer';
 import Actions from './Actions';
+import { useNavigate } from 'react-router-dom';
 
 type DeckType = {
   id: number;
   title: string;
   description: string;
   subjects: string[];
+  flashcards?: any[];
 };
 
 type DeckCollectionProps = {
@@ -17,6 +19,7 @@ type DeckCollectionProps = {
 const DeckCollection: React.FC<DeckCollectionProps> = ({ uid }) => {
   const [decks, setDecks] = useState<DeckType[]>([]);
   const [selectedDeck, setSelectedDeck] = useState<DeckType | null>(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchDecks = async () => {
@@ -43,12 +46,12 @@ const DeckCollection: React.FC<DeckCollectionProps> = ({ uid }) => {
       {selectedDeck && (
         <>
           <CardThumbnailContainer
-            collection_id={selectedDeck.id}
+            collection_id={selectedDeck ? selectedDeck.id : 0}
             onEdit={() => {}}
             onDelete={() => {}}
             onArchiveToggle={() => {}}
           />
-          <Actions />
+          <Actions selectedDeck={selectedDeck} />
         </>
       )}
     </div>
