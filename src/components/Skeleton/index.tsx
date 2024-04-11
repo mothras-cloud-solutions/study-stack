@@ -9,6 +9,7 @@ import EditCard from './components/EditCard';
 import CreateDeck from './components/CreateDeck';
 import DeckCardCollection from './components/DeckCardCollection';
 import DeckCollection from './components/DeckCollection';
+import { BrowserRouter } from "react-router-dom";
 
 const Skeleton: React.FC = () => {
   const [user, setUser] = useState(true);
@@ -38,13 +39,13 @@ const Skeleton: React.FC = () => {
     setShowLoginForm(false); // Show Home when Home link is clicked
   };
 
-    // Dummy data for decks
-    const decksData = [
-      { id: 1, title: 'Deck 1', description: 'Description for Deck 1', cardCount: 12 },
-      { id: 2, title: 'Deck 2', description: 'Description for Deck 2', cardCount: 10 },
-      { id: 3, title: 'Deck 3', description: 'Description for Deck 3', cardCount: 2 },
-      { id: 4, title: 'Deck 4', description: 'Description for Deck 4', cardCount: 20 }
-    ];
+  // Dummy data for decks
+  const decksData = [
+    { id: 1, title: 'Deck 1', description: 'Description for Deck 1', cardCount: 12 },
+    { id: 2, title: 'Deck 2', description: 'Description for Deck 2', cardCount: 10 },
+    { id: 3, title: 'Deck 3', description: 'Description for Deck 3', cardCount: 2 },
+    { id: 4, title: 'Deck 4', description: 'Description for Deck 4', cardCount: 20 }
+  ];
 
   return (
     <>
@@ -66,13 +67,13 @@ const Skeleton: React.FC = () => {
 
               <DeckCardCollection />
 
-              <DeckCollection decks={decksData}/>
+              <DeckCollection decks={decksData} />
 
             </>
           ) : (
             // If user is not signed in, render auth forms or home components
             <>
-              {showLoginForm ? <AuthForms onCancelClick={handleShowHome} /> :  <HomePage onLoginLinkClick={handleLoginLinkClick} />} {/* Render AuthForms only if showLoginForm is true */}
+              {showLoginForm ? <AuthForms onCancelClick={handleShowHome} /> : <HomePage onLoginLinkClick={handleLoginLinkClick} />} {/* Render AuthForms only if showLoginForm is true */}
             </>
           )}
         </div>

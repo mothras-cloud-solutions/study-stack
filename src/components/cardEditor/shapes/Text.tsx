@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, Fragment } from 'react';
-import { Stage, Layer, Text, Transformer } from 'react-konva';
+import { Text, Transformer } from 'react-konva';
 
 interface textSpecs {
   x?: number;
@@ -65,6 +65,8 @@ const TextMaker: React.FC<Props> = ({ textSpecs, isSelected, onSelect, onChange 
         <Transformer
           ref={trRef}
           flipEnabled={false}
+          rotateEnabled={false}
+          enabledAnchors={['top-left', 'top-right', 'bottom-left', 'bottom-right']}
           boundBoxFunc={(oldBox, newBox) => {
             // limit resize
             if (Math.abs(newBox.width) < 5 || Math.abs(newBox.height) < 5) {

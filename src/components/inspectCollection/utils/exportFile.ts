@@ -1,3 +1,5 @@
+import { getCollectionMeta, getCollectionFlashcards } from './models/getCollectionData.ts';
+
 // Note types will need to be updated to match the actual types used in the final version of the full collection data passed in
 
 type CanvasType = {
@@ -24,8 +26,11 @@ type CollectionType = {
   flashcards: FlashcardType[];
 };
 
-
-export const exportCollection = (collection: CollectionType) => {
+  // This function will export the collection data to a JSON file
+export const exportCollection = (collectionId: number) => {
+  const collectionMeta: CollectionType = await getCollectionMeta(collectionId);
+  const flashcards: FlashcardType[] = await getCollectionFlashcards(collectionId);
+  collectionMeta.flashcards = flashcards;
   // Create a JSON string of the collection data
   const collectionData: string = JSON.stringify(collection);
 
@@ -84,4 +89,4 @@ export const exportCollection = (collection: CollectionType) => {
 //   ],
 // };
 
-// Example of how to use:   <button onClick={() => exportCollection(exampleCollection)}>Export Collection</button>
+// Example of how to use:   <button onClick={() => exportCollection(exampleCollectionID)}>Export Collection</button>
