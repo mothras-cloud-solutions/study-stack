@@ -2,12 +2,14 @@ import React, { useState, useEffect } from 'react';
 import DeckSelector from './DeckSelector';
 import CardThumbnailContainer from './CardThumbnailContainer';
 import Actions from './Actions';
+import { useHistory } from 'react-router-dom';
 
 type DeckType = {
   id: number;
   title: string;
   description: string;
   subjects: string[];
+  flashcards?: any[];
 };
 
 type DeckCollectionProps = {
@@ -17,6 +19,7 @@ type DeckCollectionProps = {
 const DeckCollection: React.FC<DeckCollectionProps> = ({ uid }) => {
   const [decks, setDecks] = useState<DeckType[]>([]);
   const [selectedDeck, setSelectedDeck] = useState<DeckType | null>(null);
+  const history = useHistory();
 
   useEffect(() => {
     const fetchDecks = async () => {
@@ -29,12 +32,15 @@ const DeckCollection: React.FC<DeckCollectionProps> = ({ uid }) => {
         setDecks(data);
       }
     };
-
     fetchDecks();
   }, [uid]);
 
   const handleDeckSelect = (deck: DeckType) => {
     setSelectedDeck(deck);
+  };
+
+  const handleStudy = (cards: any[]) => {
+    history.push('/learn', { cards });
   };
 
   return (
@@ -48,7 +54,7 @@ const DeckCollection: React.FC<DeckCollectionProps> = ({ uid }) => {
             onDelete={() => {}}
             onArchiveToggle={() => {}}
           />
-          <Actions />
+          <Actions selectedDeck={selectedDeck} onStudy={handleStudy} />
         </>
       )}
     </div>
