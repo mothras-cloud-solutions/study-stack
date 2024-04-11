@@ -26,7 +26,7 @@ const CardThumbnail: React.FC<CardThumbnailProps> = ({
         <div className="card-content">
           <div className="content">
             <p><strong>Prompt:</strong> {flashcard.term}</p>
-            <p><strong>Definition:</strong> {flashcard.definition}</p>
+            <p><strong>Response:</strong>  <span dangerouslySetInnerHTML={{ __html: flashcard.definition }} /></p>
           </div>
         </div>
         <footer className="card-footer">
