@@ -7,7 +7,7 @@ interface shapeSpecs {
   strokeWidth?: number;
   fill?: string;
   id?: string;
-}
+};
 
 interface Props {
   shapeSpecs: ShapeSpecs;
@@ -16,7 +16,7 @@ interface Props {
   onChange: (newSpecs: ShapeSpecs) => void;
 };
 
-const LineMaker: React.FC<{ shapeSpecs: object, isSelected: Function, onSelect: Function, onChange: Function }> = ({ shapeSpecs, isSelected, onSelect, onChange }) => {
+const LineMaker: React.FC<Props> = ({ shapeSpecs, isSelected, onSelect, onChange }) => {
   const shapeRef = useRef();
   const trRef = useRef();
 
@@ -46,6 +46,7 @@ const LineMaker: React.FC<{ shapeSpecs: object, isSelected: Function, onSelect: 
           const node = shapeRef.current;
           const scaleX = node.scaleX();
           const scaleY = node.scaleY();
+          const rotation = node.rotation();
 
           // we will reset it back
           node.scaleX(1);
@@ -64,6 +65,7 @@ const LineMaker: React.FC<{ shapeSpecs: object, isSelected: Function, onSelect: 
           onChange({
             ...shapeSpecs,
             points: points,
+            rotation: rotation,
             // x: node.x(),
             // y: node.y(),
             // // set minimal value

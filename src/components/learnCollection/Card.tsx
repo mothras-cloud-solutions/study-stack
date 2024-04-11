@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
+import StudyCanvas from '../cardEditor/StudyCanvas';
 // const Card: React.FC<{term: string,
 //   definition: string,
 //  keywords:string,
 // confidenceLevel: number}>
 export default function Card ({card, setIndex, index, length, studyDeck, setStudyDeck, shuffleTheDeck}) {
 
-  const {term, definition, starred, id, deck_title} = card;
+  console.log(card);
+
+  const {term, definition, starred, id, deck_title, canvas_back, canvas_front} = card;
 
 // temp state, with the endpoint I'll just hit the backend
   // const [starryNight, setStarryNight] = useState(starred);
@@ -118,6 +121,13 @@ export default function Card ({card, setIndex, index, length, studyDeck, setStud
 
   // {Deck Title goes here}
 
+  const style = {
+    zIndex: 50,
+    position: 'absolute',
+    width: '100%',
+    height: '100%',
+  };
+
  return <div className='box'>
   <h2 className="title is-2">Deck Title</h2>
   {/* {function(){
@@ -139,6 +149,9 @@ export default function Card ({card, setIndex, index, length, studyDeck, setStud
    </div>
  </nav>
 <div className="flip-container" onClick={flipCard}>
+  <div className='flip-card' id="studyCanvas" style={style}>
+    <StudyCanvas front={canvas_front} back={canvas_back} index={index} flipped={isFlipped}/>
+  </div>
      <div className={`flip-card${isFlipped ? ' is-flipped' : ''}`}>
        <div className="flip-card-inner">
          <div className="flip-card-front">
