@@ -15,16 +15,16 @@ interface DeckCardsProps {
   handleCardUnarchive: (id: number) => void;
 }
 
-const DeckCards: React.FC<DeckCardsProps> = ({ cardsData, handleCardEdit, handleCardDelete, handleCardArchive, handleCardUnarchive }) => {
+const DeckCards: React.FC<DeckCardsProps> = ({ cards, handleCardEdit, handleCardDelete, handleCardArchive, handleCardUnarchive }) => {
 
   // cards dummy data
-  let cards = [
-      { id: 1, term: 'Component', definition: 'A reusable, self-contained piece of UI', archived: false },
-      { id: 2, term: 'State', definition: 'Local state within a component', archived: false },
-      { id: 3, term: 'Props', definition: 'Properties passed from parent to child component', archived: true },
-      { id: 4, term: 'Hook', definition: 'A function that lets you "hook into" React state and lifecycle features', archived: false },
-      { id: 5, term: 'Virtual DOM', definition: 'A lightweight copy of the DOM tree maintained by React', archived: true },
-    ];
+  // let cards = [
+  //     { id: 1, term: 'Component', definition: 'A reusable, self-contained piece of UI', archived: false },
+  //     { id: 2, term: 'State', definition: 'Local state within a component', archived: false },
+  //     { id: 3, term: 'Props', definition: 'Properties passed from parent to child component', archived: true },
+  //     { id: 4, term: 'Hook', definition: 'A function that lets you "hook into" React state and lifecycle features', archived: false },
+  //     { id: 5, term: 'Virtual DOM', definition: 'A lightweight copy of the DOM tree maintained by React', archived: true },
+  //   ];
 
   // Calculate the number of cards in the deck
   const numCards = cards.length;
@@ -52,12 +52,13 @@ const DeckCards: React.FC<DeckCardsProps> = ({ cardsData, handleCardEdit, handle
             <div className="card">
               <div className="card-content">
                 <div className="content">
-                  <p><strong>Term:</strong> {card.term}</p>
-                  <p><strong>Definition:</strong> {card.definition}</p>
+                  <p><strong>Prompt:</strong> {card.term}</p>
+                  {/* <p><strong>Definition:</strong> {card.definition}</p> */}
+                  <span dangerouslySetInnerHTML={{ __html: card.definition }} />
                 </div>
               </div>
               <footer className="card-footer">
-                <a className="card-footer-item" onClick={() => handleCardEdit(card.id)}>Edit</a>
+                <a className="card-footer-item" onClick={() => handleCardEdit(card)}>Edit</a>
                 <a className="card-footer-item" onClick={() => handleCardDelete(card.id)}>Delete</a>
                 {!card.archived ? (
                   <a className="card-footer-item" onClick={() => handleCardArchive(card.id)}>Archive</a>
