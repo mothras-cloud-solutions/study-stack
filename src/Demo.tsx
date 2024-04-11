@@ -12,7 +12,7 @@ import { Routes, Route } from 'react-router-dom';
 import Overview from './components/overview/index';
 import CreateDeck from './components/Skeleton/components/CreateDeck';
 
-function App() {
+function Demo() {
   const [user, setUser] = useState<User | null>(null);
   const [uid, setUid] = useState<string | null>(null);
 
@@ -60,4 +60,4 @@ function App() {
   )
 }
 
-export default App;
+export default Demo;

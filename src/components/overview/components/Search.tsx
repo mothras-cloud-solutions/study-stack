@@ -9,7 +9,7 @@ interface SearchProps {
   items: Item[];
 }
 
-const Search: React.FC<SearchProps> = ({ items }) => {
+const Search: React.FC<SearchProps> = ({items}) => {
   const [searchTerm, setSearchTerm] = React.useState('');
 
   const filteredItems = items.filter(item =>
