@@ -1,18 +1,20 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 import StudyCanvas from '../cardEditor/StudyCanvas';
 // const Card: React.FC<{term: string,
 //   definition: string,
 //  keywords:string,
 // confidenceLevel: number}>
-export default function Card ({card, setIndex, index, length, studyDeck, setStudyDeck, shuffleTheDeck}) {
+export default function Card({ card, setIndex, index, length, studyDeck, setStudyDeck, shuffleTheDeck }) {
 
+  const navigate = useNavigate();
   console.log(card);
 
-  const {term, definition, starred, id, deck_title, canvas_back, canvas_front} = card;
+  const { term, definition, starred, id, deck_title, canvas_back, canvas_front } = card;
 
-// temp state, with the endpoint I'll just hit the backend
+  // temp state, with the endpoint I'll just hit the backend
   // const [starryNight, setStarryNight] = useState(starred);
 
   // current position counter
@@ -21,10 +23,10 @@ export default function Card ({card, setIndex, index, length, studyDeck, setStud
 
   const [isFlipped, setIsFlipped] = useState(false);
 
-    // Function to flip the card on click
-    const flipCard = () => {
-      setIsFlipped(!isFlipped);
-    };
+  // Function to flip the card on click
+  const flipCard = () => {
+    setIsFlipped(!isFlipped);
+  };
 
   // Build confidence increasing functionality later
 
@@ -43,17 +45,17 @@ export default function Card ({card, setIndex, index, length, studyDeck, setStud
     e.preventDefault();
     let buttonClicked = e.target.innerText
 
-    if (buttonClicked === "Skip Back"){
+    if (buttonClicked === "Skip Back") {
       let newIndex = index - 1;
-      if (newIndex < 0){
+      if (newIndex < 0) {
         console.log("That's far enough")
       } else {
         setIsFlipped(false);
         setIndex(newIndex)
       }
-    } else if (buttonClicked === "Skip Forward"){
+    } else if (buttonClicked === "Skip Forward") {
       let newIndex = index + 1;
-      if (newIndex < length){
+      if (newIndex < length) {
         setIsFlipped(false);
         setIndex(newIndex);
       } else {
@@ -73,13 +75,13 @@ export default function Card ({card, setIndex, index, length, studyDeck, setStud
 
       // insert axios call once we get the route
       // only toggle it if the star is 0 (what if they got it wrong twice?)
-      if (starred === 0){
+      if (starred === 0) {
         axios.put(`/api/flashcards/${id}/starred`).then(() => {
           console.log('starred should be changed to 1')
         })
       }
       const newIndex = index + 1;
-      if (newIndex < length){
+      if (newIndex < length) {
         setIsFlipped(false);
         setIndex(newIndex);
       } else {
@@ -93,13 +95,13 @@ export default function Card ({card, setIndex, index, length, studyDeck, setStud
       // for now just skip to the next cardrrrrr
       // should we only move to the next card when they click next?
       // then got it can just update the confidence instead
-      if (starred === 1){
+      if (starred === 1) {
         axios.put(`/api/flashcards/${id}/starred`).then(() => {
           console.log('starred should be changed back to 0')
         })
       }
       const newIndex = index + 1;
-      if (newIndex < length){
+      if (newIndex < length) {
         setIsFlipped(false);
         setIndex(newIndex)
       } else {
@@ -109,6 +111,7 @@ export default function Card ({card, setIndex, index, length, studyDeck, setStud
       console.log("Here's where I'll route to another page")
       // needs another page to go to with the react router etc.
       setIndex(0); // for now
+      navigate('/collections')
     } else if (buttonClicked === "Shuffle") {
       shuffleTheDeck();
       setIsFlipped(false);
@@ -131,56 +134,56 @@ export default function Card ({card, setIndex, index, length, studyDeck, setStud
     height: '100%',
   };
 
- return <div className='box'>
-  <h2 className="title is-2">Deck Title</h2>
-  {/* {function(){
+  return <div className='box'>
+    <h2 className="title is-2">Deck Title</h2>
+    {/* {function(){
     if (studyDeck[index].studyAgain) {
       return <>Studying Again</>
     }
   }()} */}
-  <span className='index-count'>Card {currPosition}/{length}</span>
-   {function(){
-    if (starred === 1) {
-      return <span className='starr-prompt'>This question was challenging for you, try to get it this time!</span>
-    }
-  }()}
- <nav className="nav">
-   <div className='left'>
-       </div>
-   <div className="right">
-     <div className="tags are-large">
-     </div>
-   </div>
- </nav>
-<div className="flip-container" onClick={flipCard}>
-  <div className='flip-card' id="studyCanvas" style={style}>
-    <StudyCanvas front={canvas_front} back={canvas_back} index={index} flipped={isFlipped}/>
-  </div>
-     <div className={`flip-card${isFlipped ? ' is-flipped' : ''}`}>
-       <div className="flip-card-inner">
-         <div className="flip-card-front">
-          {function(){
-            if (!isFlipped) {
-              return <h3 className="title is-3">{term}</h3>
-            }
-          }()}
-         </div>
-         <div className="flip-card-back">
-           <p>{definition}</p>
-         </div>
-       </div>
-     </div>
-   </div>
-   <div className='buttons'>
-      {function(){
-        if (index === 0){
+    <span className='index-count'>Card {currPosition}/{length}</span>
+    {function () {
+      if (starred === 1) {
+        return <span className='starr-prompt'>This question was challenging for you, try to get it this time!</span>
+      }
+    }()}
+    <nav className="nav">
+      <div className='left'>
+      </div>
+      <div className="right">
+        <div className="tags are-large">
+        </div>
+      </div>
+    </nav>
+    <div className="flip-container" onClick={flipCard}>
+      <div className='flip-card' id="studyCanvas" style={style}>
+        <StudyCanvas front={canvas_front} back={canvas_back} index={index} flipped={isFlipped} />
+      </div>
+      <div className={`flip-card${isFlipped ? ' is-flipped' : ''}`}>
+        <div className="flip-card-inner">
+          <div className="flip-card-front">
+            {function () {
+              if (!isFlipped) {
+                return <h3 className="title is-3">{term}</h3>
+              }
+            }()}
+          </div>
+          <div className="flip-card-back">
+            <p>{definition}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div className='buttons'>
+      {function () {
+        if (index === 0) {
           return <button>Beginning</button>
         } else {
           return <button name="skip-back" type="button" onClick={handleClick}>Skip Back</button>
         }
       }()}
-      {function(){
-        if (index === length - 1){
+      {function () {
+        if (index === length - 1) {
           return <button>End of deck</button>
         } else {
           return <button name="skip-forward" type="button" onClick={handleClick}>Skip Forward</button>
@@ -190,8 +193,8 @@ export default function Card ({card, setIndex, index, length, studyDeck, setStud
       <button name="got-it" type="button" onClick={handleClick}>Got it!</button>
       <button name="done" type="button" onClick={handleClick}>Done</button>
       <button name="shuffle" type="button" onClick={handleClick}>Shuffle</button>
-   </div>
-</div>
+    </div>
+  </div>
 }
 
 
