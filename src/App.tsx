@@ -37,6 +37,8 @@ function App() {
       const uid = user.uid;
       console.log(uid);
       setUid(uid);
+    } else {
+      setUid(null);
     }
   }, [user]);
 
