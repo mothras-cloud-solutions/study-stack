@@ -10,7 +10,7 @@ export default function Card ({card, setIndex, index, length, studyDeck, setStud
 
   console.log(card);
 
-  const {term, definition, starred, canvas_back, canvas_front} = card;
+  const {term, definition, starred, id, deck_title, canvas_back, canvas_front} = card;
 
 // temp state, with the endpoint I'll just hit the backend
   // const [starryNight, setStarryNight] = useState(starred);
