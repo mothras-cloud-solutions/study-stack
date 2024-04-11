@@ -47,7 +47,6 @@ function App() {
         </Fragment>
       )}
       <Routes>
-        <Route path="/success" element={<Success />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/home" element={<Overview />} />
