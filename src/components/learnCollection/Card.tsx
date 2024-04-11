@@ -146,7 +146,11 @@ export default function Card ({card, setIndex, index, length, studyDeck, setStud
      <div className={`flip-card${isFlipped ? ' is-flipped' : ''}`}>
        <div className="flip-card-inner">
          <div className="flip-card-front">
-           <h3 className="title is-3">{term}</h3>
+          {function(){
+            if (!isFlipped) {
+              return <h3 className="title is-3">{term}</h3>
+            }
+          }()}
          </div>
          <div className="flip-card-back">
            <p>{definition}</p>
