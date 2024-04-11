@@ -25,7 +25,7 @@ const CardThumbnail: React.FC<CardThumbnailProps> = ({
       <div className="card">
         <div className="card-content">
           <div className="content">
-            <p><strong>Term:</strong> {flashcard.term}</p>
+            <p><strong>Prompt:</strong> {flashcard.term}</p>
             <p><strong>Definition:</strong> {flashcard.definition}</p>
           </div>
         </div>
