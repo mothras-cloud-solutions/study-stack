@@ -1,6 +1,7 @@
 import React, { useState, ChangeEvent, useEffect, useRef } from 'react';
 import Quill from 'quill';
 import axios from 'axios';
+import CardEditor from '../../cardEditor/index.tsx';
 
 interface CardFormProps {
   deckId?: string;
@@ -12,10 +13,16 @@ interface CardFormProps {
 
 interface Card {
   id: number;
+  deck_title: string;
   term: string;
   definition: string;
+  confidenceLevel: number;
   keywords: string;
-  archived: boolean;
+  collectionid: number;
+  archived: number;
+  starred: number;
+  canvas_front: string;
+  canvas_back: string;
 }
 
 const CardForm: React.FC<CardFormProps> = ({
@@ -33,6 +40,8 @@ const CardForm: React.FC<CardFormProps> = ({
   const [saving, setSaving] = useState(false);
   const editorRef = useRef<HTMLDivElement>(null);
   const quillRef = useRef<Quill | null>(null);
+  //Show advanced editor when true
+  const [showAdvanced, setShowAdvanced] = useState(false);
 
   useEffect(() => {
     if (editorRef.current && !quillRef.current) {
@@ -79,6 +88,10 @@ const CardForm: React.FC<CardFormProps> = ({
       }
     };
   }, [success]);
+
+  const changeAdvancedState = () => {
+    setShowAdvanced(!showAdvanced);
+  };
 
   const handleTermChange = (e: ChangeEvent<HTMLInputElement>) => {
     setTerm(e.target.value);
@@ -209,7 +222,16 @@ const CardForm: React.FC<CardFormProps> = ({
         </div>
         <div className="control">
           {/* Button to render to Wyatt's editor or redirect to it */}
-          <button className="button is-light">Advanced Edit Mode</button>
+          {function(){
+            if (Object.keys(editingCard).length > 0){
+              return <button className="button is-light" onClick={changeAdvancedState}>Advanced Edit Mode</button>
+            }
+          }}
+          {function(){
+            if (showAdvanced) {
+              return <CardEditor card={editingCard}/>
+            }
+          }}
         </div>
       </div>
     </div>
