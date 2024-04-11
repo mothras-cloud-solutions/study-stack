@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { createUser } from '../../../firebase/firebase.ts';
+import { useNavigate } from 'react-router-dom';
 
 function Register() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
+  const navigate = useNavigate();
 
   const handleRegisterSubmit = async (event) => {
     event.preventDefault();
@@ -25,7 +27,7 @@ function Register() {
       setEmail('');
       setPassword('');
       setConfirmPassword('');
-
+      navigate('/home');
       // history.push('/create-edit-deck'); probably want to use navigate but I think it needs router?
     } catch (error) {
       setError(error.message);
@@ -38,6 +40,7 @@ function Register() {
     setEmail('');
     setPassword('');
     setConfirmPassword('');
+    navigate('/home');
   };
 
   return (
