@@ -148,4 +148,10 @@ body {
   margin-left: 5em;
 }
 
+.flip-notice {
+  display: inline;
+  margin-left: 1em;
+  margin-right: 4em;
+}
+
 /* End of make the thing not do the thing (for the study deck) */
