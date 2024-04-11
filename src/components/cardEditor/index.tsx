@@ -2,7 +2,26 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import NewCanvas from './NewCanvas.tsx';
 
-const CardEditor: React.FC = () => {
+interface card {
+
+  id: number;
+  deck_title: string;
+  term: string;
+  definition: string;
+  confidenceLevel: number;
+  keywords: string;
+  collectionid: number;
+  archived: number;
+  starred: number;
+  canvas_front: string;
+  canvas_back: string;
+};
+
+interface Props {
+  card: card
+}
+
+const CardEditor: React.FC<Props> = ({ card }) => {
   const [isFlipped, setIsFlipped] = useState(false);
   const [selectId, selectElement] = useState('');
   const [rectangles, setRectangles] = useState([]);
@@ -12,9 +31,24 @@ const CardEditor: React.FC = () => {
   const [textField, setTextField] = useState('');
   const [showText, setShowText] = useState(false);
   const [numberOfShapes, setNumberOfShapes] = useState(0);
-  const [shapes, setShapes] = useState({rectangles: [], circles: [], lines: [], texts: [], number: 0});
-  const [frontShapes, setFront] = useState({rectangles: [], circles: [], lines: [], texts: [], number: 0});
-  const [backShapes, setBack] = useState({rectangles: [], circles: [], lines: [], texts: [], number: 0});
+  const [shapes, setShapes] = useState({ rectangles: [], circles: [], lines: [], texts: [], number: 0 });
+  const [frontShapes, setFront] = useState({ rectangles: [], circles: [], lines: [], texts: [], number: 0 });
+  const [backShapes, setBack] = useState({ rectangles: [], circles: [], lines: [], texts: [], number: 0 });
+
+  //Data extraction
+  const { canvas_front, canvas_back, id, term, definition } = card;
+
+  //Load canvas if any
+  useEffect(() => {
+    console.log(canvas_front, canvas_back);
+    if (canvas_front.length > 0) {
+      setFront(JSON.parse(canvas_front));
+      setShapes(JSON.parse(canvas_front));
+    }
+    if (canvas_back.length > 0) {
+      setBack(JSON.parse(canvas_back));
+    }
+  }, []);
 
   // Function to flip the card on click
   const flipCard = () => {
@@ -46,42 +80,58 @@ const CardEditor: React.FC = () => {
       back = backShapes;
       front = shapes;
     }
-    let frontCanvas = JSON.stringify(front);
-    let backCanvas = JSON.stringify(back);
-    console.log(frontCanvas, backCanvas);
+    let frontString = JSON.stringify(front);
+    let backString = JSON.stringify(back);
+    let frontCanvas = {
+      canvas_front: frontString
+    };
+    let backCanvas = {
+      canvas_back: backString
+    };
+    Promise.all([
+      axios.put(`/api/flashcards/${id}/canvasFront`, frontCanvas),
+      axios.put(`/api/flashcards/${id}/canvasBack`, backCanvas)
+    ])
+      .then(() => {
+        card.canvas_back = backString;
+        card.canvas_front = frontString;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
   //Change Text field
   const onTextInput = (e) => {
     setTextField(e.target.value);
   };
   // Delete selected object
-  const onDelete = () => {
+  function onDelete() {
     if (selectId !== '') {
-      if (selectId.substring(0,1) === 'r') {
+      if (selectId.substring(0, 1) === 'r') {
         for (var i = 0; i < rectangles.length; i++) {
           if (rectangles[i].id === selectId) {
-            let newRectangles = rectangles.slice(0, i).concat(rectangles.slice(i+1));
+            let newRectangles = rectangles.slice(0, i).concat(rectangles.slice(i + 1));
             setRectangles(newRectangles);
           }
         }
-      } else if (selectId.substring(0,1) === 'l') {
+      } else if (selectId.substring(0, 1) === 'l') {
         for (var i = 0; i < lines.length; i++) {
           if (lines[i].id === selectId) {
-            let newLines = lines.slice(0, i).concat(lines.slice(i+1));
+            let newLines = lines.slice(0, i).concat(lines.slice(i + 1));
             setLines(newLines);
           }
         }
-      } else if (selectId.substring(0,1) === 'c') {
+      } else if (selectId.substring(0, 1) === 'c') {
         for (var i = 0; i < circles.length; i++) {
           if (circles[i].id === selectId) {
-            let newCircles = circles.slice(0, i).concat(circles.slice(i+1));
+            let newCircles = circles.slice(0, i).concat(circles.slice(i + 1));
             setCircles(newCircles);
           }
         }
-      } else if (selectId.substring(0,1) === 't') {
+      } else if (selectId.substring(0, 1) === 't') {
         for (var i = 0; i < texts.length; i++) {
           if (texts[i].id === selectId) {
-            let newTexts = texts.slice(0, i).concat(texts.slice(i+1));
+            let newTexts = texts.slice(0, i).concat(texts.slice(i + 1));
             setTexts(newTexts);
           }
         }
@@ -90,7 +140,7 @@ const CardEditor: React.FC = () => {
   };
   //Reset Canvas
   function resetCanvas() {
-    setShapes({rectangles: [], circles: [], lines: [], texts: [], number: 0});
+    setShapes({ rectangles: [], circles: [], lines: [], texts: [], number: 0 });
   };
 
   //Load saved canvas
@@ -118,12 +168,12 @@ const CardEditor: React.FC = () => {
         fill: 'rgba(0,0,0,0.01)',
         strokeWidth: 1,
         stroke: 'black',
-        id: `rect${shapes.number+1}`
+        id: `rect${shapes.number + 1}`
       }
       const rects = rectangles.concat([rect]);
       setRectangles(rects);
       shapes.rectangles = rects;
-      shapes.number ++;
+      shapes.number++;
     }
   };
 
@@ -137,12 +187,12 @@ const CardEditor: React.FC = () => {
         fill: 'rgba(0,0,0,0.01)',
         strokeWidth: 1,
         stroke: 'black',
-        id: `circ${shapes.number+1}`
+        id: `circ${shapes.number + 1}`
       }
       const circs = circles.concat([circ]);
       setCircles(circs);
       shapes.circles = circs;
-      shapes.number ++;
+      shapes.number++;
     }
   };
 
@@ -153,12 +203,12 @@ const CardEditor: React.FC = () => {
         stroke: 'black',
         strokeWidth: 5,
         fill: 'black',
-        id: `line${shapes.number+1}`
+        id: `line${shapes.number + 1}`
       }
       const newLines = lines.concat([line]);
       setLines(newLines);
       shapes.lines = newLines;
-      shapes.number ++;
+      shapes.number++;
     }
   };
 
@@ -171,12 +221,12 @@ const CardEditor: React.FC = () => {
           fill: 'black',
           align: 'center',
           text: `${textField}`,
-          id: `text${shapes.number+1}`
+          id: `text${shapes.number + 1}`
         }
         const newTexts = texts.concat([newText]);
         setTexts(newTexts);
         shapes.texts = newTexts;
-        shapes.number ++;
+        shapes.number++;
       }
     }
     setShowText(!showText);
@@ -232,17 +282,17 @@ const CardEditor: React.FC = () => {
       </nav>
       <div className="flip-container" id="editorCanvas">
         <div className='flip-card' style={style}>
-            <NewCanvas click={checkDeselect} rectangles={rectangles} circles={circles} lines={lines} texts={texts} shapes={shapes} selectId={selectId} selectElement={select} setR={r} setC={c} setL={l} setT={t}/>
+          <NewCanvas click={checkDeselect} rectangles={rectangles} circles={circles} lines={lines} texts={texts} shapes={shapes} selectId={selectId} selectElement={select} setR={r} setC={c} setL={l} setT={t} />
         </div>
         <div className={`flip-card${isFlipped ? ' is-flipped' : ''}`}>
           <div className="flip-card-inner">
             <div className="flip-card-front">
-              <h3 className="title is-3">Front Side</h3>
-              <p>This is the front side of the card.</p>
+              <h3 className="title is-3">{term}</h3>
+              {/* <p>This is the front side of the card.</p> */}
             </div>
             <div className="flip-card-back">
-              <h3 className="title is-3">Back Side</h3>
-              <p>This is the back side of the card.</p>
+              {/* <h3 className="title is-3">Back Side</h3> */}
+              <p>{definition}</p>
             </div>
           </div>
         </div>
