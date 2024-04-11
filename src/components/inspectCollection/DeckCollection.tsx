@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import DeckSelector from './DeckSelector';
 import CardThumbnailContainer from './CardThumbnailContainer';
 import Actions from './Actions';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 type DeckType = {
   id: number;
@@ -19,7 +19,7 @@ type DeckCollectionProps = {
 const DeckCollection: React.FC<DeckCollectionProps> = ({ uid }) => {
   const [decks, setDecks] = useState<DeckType[]>([]);
   const [selectedDeck, setSelectedDeck] = useState<DeckType | null>(null);
-  const history = useHistory();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchDecks = async () => {
@@ -32,15 +32,12 @@ const DeckCollection: React.FC<DeckCollectionProps> = ({ uid }) => {
         setDecks(data);
       }
     };
+
     fetchDecks();
   }, [uid]);
 
   const handleDeckSelect = (deck: DeckType) => {
     setSelectedDeck(deck);
-  };
-
-  const handleStudy = (cards: any[]) => {
-    history.push('/learn', { cards });
   };
 
   return (
@@ -49,12 +46,12 @@ const DeckCollection: React.FC<DeckCollectionProps> = ({ uid }) => {
       {selectedDeck && (
         <>
           <CardThumbnailContainer
-            collection_id={selectedDeck.id}
+            collection_id={selectedDeck ? selectedDeck.id : 0}
             onEdit={() => {}}
             onDelete={() => {}}
             onArchiveToggle={() => {}}
           />
-          <Actions selectedDeck={selectedDeck} onStudy={handleStudy} />
+          <Actions selectedDeck={selectedDeck} />
         </>
       )}
     </div>
