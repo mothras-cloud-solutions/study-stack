@@ -20,25 +20,10 @@ body {
   background-position: center;
 }
 
-.transparent-bg {
-  background: transparent !important;
-}
-.blur-bg {
-  background-size: cover;
-  position: relative;
-  backdrop-filter: blur(5px);
-  border-radius:10px;
-}
-.blur-bg::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  background: rgba(255, 255, 255, 0.6);
-  width: 100%;
-  height: 100%;
-  filter: blur(5px);
-}
+/* .transparent-bg {
+
+} */
+
 
 .navbar-item-separator {
   display: inline-block;
@@ -58,7 +43,12 @@ body {
   transform: translateY(-5px);
   /* font-weight: bold; */
   transition: all 0.5s;
+}
 
+.navbar {
+  transition: all 0.5s;
+  /* background-color: rgba(255, 255, 255, 0.95); */
+  /* box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px; */
 }
 
 .fullPageCenteredComponent{
