@@ -4,29 +4,19 @@ import { Link } from 'react-router-dom';
 import Signout from '../../SignOut/SignOut';
 
 interface User {
-  // Define the type for the user object
-  // We will modify this according to the actual structure of our user object
   id: string;
   email: string;
-  // Add more properties as needed
 }
 
 interface NavBarProps {
-  user: User | null; // Specify the type for the user prop
-  onLoginLinkClick: () => void;
-  onHomeLinkClick: () => void;
-  onSignOutClick: () => void;
-  onCreateLinkClick: () => void;
+  user: User | null;
 }
 
-const NavBar: React.FC<NavBarProps> = ({ user, onLoginLinkClick, onHomeLinkClick, onSignOutClick, onCreateLinkClick }) => {
+const NavBarLogOut: React.FC<NavBarProps> = () => {
   const [isActive, setIsActive] = useState(false);
 
   const toggleMenu = () => {
     setIsActive(!isActive);
-  };
-
-  const handleSignOut = async () => {
   };
 
   return (
@@ -53,7 +43,7 @@ const NavBar: React.FC<NavBarProps> = ({ user, onLoginLinkClick, onHomeLinkClick
 
             <div className={`navbar-menu ${isActive ? 'is-active' : ''}`}>
               <div className="navbar-end">
-                <a className="navbar-item" onClick={onHomeLinkClick}>
+                <a className="navbar-item">
                   <Link to="/home">
                     Home
                   </Link>
@@ -80,7 +70,7 @@ const NavBar: React.FC<NavBarProps> = ({ user, onLoginLinkClick, onHomeLinkClick
                       Create
                     </Link>
                   </a>
-                  <Signout/>
+                  <Signout />
                   {/* <a className="navbar-item">Sign In</a> */}
                   {/* Add more links as needed */}
                 </>
@@ -98,4 +88,4 @@ const NavBar: React.FC<NavBarProps> = ({ user, onLoginLinkClick, onHomeLinkClick
   );
 };
 
-export default NavBar;
+export default NavBarLogOut;

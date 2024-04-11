@@ -1,22 +1,21 @@
 import React, { useState } from 'react';
 import { signInWithEmail, signInWithGoogle } from '../../../firebase/firebase.ts';
+import { useNavigate } from 'react-router-dom';
 
 function Login() {
   const [uid, setUid] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const navigate = useNavigate();
 
   const handleLoginWithEmail = async (event) => {
     event.preventDefault();
     try {
       const userCredential = await signInWithEmail(email, password);
-
       const user = userCredential.user;
-
-     setUid(user.uid);
-
-
+      setUid(user.uid);
+      navigate('/home');
     } catch (error) {
       setError(error.message);
     }
@@ -25,7 +24,7 @@ function Login() {
   const handleLoginWithGoogle = async () => {
     try {
       await signInWithGoogle();
-
+      navigate('/home');
     } catch (error) {
       setError(error.message);
     }
@@ -34,6 +33,7 @@ function Login() {
   const handleCancel = () => {
     setEmail('');
     setPassword('');
+    navigate('/home');
   };
 
   return (
@@ -73,13 +73,13 @@ function Login() {
                 </span>
               </p>
             </div>
-            <button type="submit" className="button is-link" disabled={!(email && password)}>Submit</button>
+            <button type="submit" className="button is-link" disabled={!(email && password)}> Submit </button>
           </form>
           <button className="google button is-link" onClick={handleLoginWithGoogle}>Login with Google</button>
           <button className="logcancel button is-link" type="button" onClick={handleCancel}>Cancel</button>
         </div>
       </div>
-    </div>
+    </div >
   );
 }
 

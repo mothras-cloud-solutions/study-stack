@@ -7,7 +7,8 @@ import { User } from 'firebase/auth';
 // import Skeleton from './components/Skeleton';
 import DeckCollection from './components/inspectCollection/DeckCollection';
 import StudyPageTest from './components/learnCollection/testcollection';
-import NavBar from './components/overview/components/NavBar';
+import NavBarLogIn from './components/overview/components/NavBarLogIn';
+import NavBarLogOut from './components/overview/components/NavBarLogOut';
 import { Routes, Route } from 'react-router-dom';
 import Overview from './components/overview/index';
 import CreateDeck from './components/Skeleton/components/CreateDeck';
@@ -29,28 +30,26 @@ function App() {
   useEffect(() => {
     if (user) {
       const uid = user.uid;
+      console.log(uid);
       setUid(uid);
     }
   }, [user]);
 
   return (
     <Fragment>
-      {/* <Routes location="">
-        <Route path="" element={<Overview />} />
-      </Routes> */}
       {user ? (
         <>
-          <NavBar />
-          {/* <Overview /> */}
+          <NavBarLogOut />
         </>
       ) : (
         <Fragment>
-          <Register />
-          <Login />
+          <NavBarLogIn />
         </Fragment>
       )}
       <Routes>
+        <Route path="/success" element={<Success />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/home" element={<Overview />} />
         <Route path="/learn" element={<StudyPageTest />} />
         <Route path="/create" element={<CreateDeck uid={uid} />} />
