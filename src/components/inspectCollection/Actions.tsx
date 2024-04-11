@@ -1,15 +1,19 @@
 import React, { useState } from 'react';
 import './Actions.css';
+import { useNavigate } from 'react-router-dom';
 
 const Actions: React.FC = () => {
   const [showMoreActions, setShowMoreActions] = useState(false);
+  const navigate = useNavigate();
 
   const handleEdit = () => {
     console.log('Edit clicked');
+    navigate('/create');
   };
 
   const handleStudy = () => {
     console.log('Study clicked');
+    navigate('/learn');
   };
 
   const handleDeleteDeck = () => {
