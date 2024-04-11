@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './Actions.css';
+import { useNavigate } from 'react-router-dom';
 
 type ActionsProps = {
   selectedDeck: {
@@ -11,15 +12,22 @@ type ActionsProps = {
 
 const Actions: React.FC<ActionsProps> = ({ selectedDeck, onStudy }) => {
   const [showMoreActions, setShowMoreActions] = useState(false);
+  const navigate = useNavigate();
 
   const handleEdit = () => {
     console.log('Edit clicked');
+    navigate('/create');
   };
 
   const handleStudy = () => {
+<<<<<<< HEAD
     if (selectedDeck && selectedDeck.flashcards) {
       onStudy(selectedDeck.flashcards);
     }
+=======
+    console.log('Study clicked');
+    navigate('/learn');
+>>>>>>> 3ff9a0912e490cbde28786187794819601691903
   };
 
   const handleDeleteDeck = () => {

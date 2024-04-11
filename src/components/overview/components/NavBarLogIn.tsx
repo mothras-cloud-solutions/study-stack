@@ -57,7 +57,7 @@ const NavBarLogIn: React.FC<NavBarProps> = () => {
                 {/* {user ? ( */}
                 {/* // If user is signed in, show additional links */}
                 <>
-                  <a className="navbar-item" >
+                  {/* <a className="navbar-item" >
                     <Link to="/collections">
                       Collections
                     </Link>
@@ -71,7 +71,7 @@ const NavBarLogIn: React.FC<NavBarProps> = () => {
                     <Link to="/create">
                       Create
                     </Link>
-                  </a>
+                  </a> */}
                   <a className="navbar-item" href="#">
                     <Link to="/login">
                       Login
