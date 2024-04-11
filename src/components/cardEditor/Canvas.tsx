@@ -1,3 +1,4 @@
+//THIS FILE WAS CUT IN HALF AND REFACTORED INTO NewCanvas AND index, THIS IS REFERENCE FOR BUGS
 import React, { useState, useEffect, useRef, Fragment } from 'react';
 import { Stage, Layer } from 'react-konva';
 import Rectangle from './shapes/Reactangle';
@@ -16,7 +17,6 @@ export default function Canvas () {
   const [numberOfShapes, setNumberOfShapes] = useState(0);
   const [shapes, setShapes] = useState({rectangles: [], circles: [], lines: [], texts: [], number: 0});
 
-  const stageRef = useRef();
 
   const checkDeselect = (e) => {
     // deselect when clicked on empty area
@@ -164,7 +164,7 @@ export default function Canvas () {
         <input type='text' name="text" onChange={onTextInput}></input>
         <button onClick={addText}>CreateText</button>
       </div>
-      <Stage ref={stageRef} width={500} style={{zIndex: 50}} height={500} onClick={checkDeselect} onTouchStart={checkDeselect}>
+      <Stage width={500} style={{zIndex: 50}} height={500} onClick={checkDeselect} onTouchStart={checkDeselect}>
         <Layer>
           {rectangles.length > 0 && rectangles.map((rect, i) => {
             return (

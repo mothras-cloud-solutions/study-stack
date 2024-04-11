@@ -135,3 +135,17 @@ body {
 .signout {
   margin: 5px;
 }
+
+/* Make the thing not do the thing */
+
+.title, .is-2 {
+  display: inline-block;
+  margin-right: 1rem;
+}
+
+.starr-prompt {
+  display: inline;
+  margin-left: 5em;
+}
+
+/* End of make the thing not do the thing (for the study deck) */

@@ -14,6 +14,7 @@ const DeckSelector: React.FC<DeckSelectorProps> = ({ uid, onDeckSelect }) => {
 
   useEffect(() => {
     if (uid) {
+
       fetch(`/api/collections/user/${uid}`)
         .then(response => response.json())
         .then(data => {
