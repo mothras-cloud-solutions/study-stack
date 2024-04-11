@@ -22,7 +22,7 @@ import { response } from 'express';
 function App() {
   const [user, setUser] = useState<User | null>(null);
   const [uid, setUid] = useState<string | null>(null);
-  const [currentDeck, setCurrentDeck] = useState<Array | null>(null);
+  const [currentDeck, setCurrentDeck] = useState<Object | null>(null);
   const [currentCards, setCurrentCards] = useState<Array | null>(null);
 
   useEffect(() => {
@@ -36,13 +36,15 @@ function App() {
   }, []);
 
   useEffect(() => {
-    axios.get(`/api/flashcards/collection_id/${currentDeck.id}`)
-      .then((response) => {
-        setCurrentCards(response.data);
-      })
-      .catch((error) => {
-        console.error('Error fetching flashcards:', error);
-      });
+    if (currentDeck !== null) {
+      axios.get(`/api/flashcards/collection_id/${currentDeck.id}`)
+        .then((response) => {
+          setCurrentCards(response.data);
+        })
+        .catch((error) => {
+          console.error('Error fetching flashcards:', error);
+        });
+    }
   }, [currentDeck]);
 
   useEffect(() => {
