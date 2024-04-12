@@ -10,7 +10,6 @@ import StudyCanvas from '../cardEditor/StudyCanvas';
 export default function Card({ card, setIndex, index, length, studyDeck, setStudyDeck, shuffleTheDeck }) {
 
   const navigate = useNavigate();
-  console.log(card);
 
   const { term, definition, starred, id, deck_title, canvas_back, canvas_front } = card;
 
