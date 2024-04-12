@@ -4,7 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import Pagination from '../Skeleton/components/Pagination';
 import StudyCanvas from '../cardEditor/StudyCanvas';
 import { onAuthStateChange } from '../../../firebase/firebase';
-import { User } from 'firebase/auth';
 
 interface CardProps {
   card: {
@@ -34,20 +33,9 @@ const Card: React.FC<CardProps> = ({
   shuffleTheDeck,
 }) => {
   const navigate = useNavigate();
-  const [user, setUser] = useState<User | null>(null);
   const { term, definition, starred, id, deck_title, canvas_back, canvas_front } = card;
   const currPosition = index + 1;
   const [isFlipped, setIsFlipped] = useState(false);
-
-  useEffect(() => {
-    const unsubscribe = onAuthStateChange((u) => {
-      setUser(u);
-    });
-
-    return () => {
-      unsubscribe();
-    }
-  }, []);
 
   const flipCard = () => {
     setIsFlipped(!isFlipped);
@@ -105,7 +93,6 @@ const Card: React.FC<CardProps> = ({
     shuffleTheDeck();
     setIsFlipped(false);
   };
-console.log(user)
   return (
     <div className='box'>
       <h2 className="title is-2">{deck_title}</h2>
@@ -148,23 +135,6 @@ console.log(user)
           length={length}
         />
       </div>
-      {user && (
-        <div className="card">
-          <div className="card-content">
-            <div className="media">
-              <div className="media-left">
-                <figure className="image is-64x64">
-                  <img className="is-rounded" src={`https://randomuser.me/api/portraits/men/1.jpg`} alt="User Picture" />
-                </figure>
-              </div>
-              <div className="media-content">
-                <p className="title is-4">Craig Castelaz</p>
-                <p className="subtitle is-6">Date Created: April, 12, 2024</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 };
