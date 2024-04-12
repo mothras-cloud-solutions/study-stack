@@ -23,8 +23,8 @@ function App() {
   const [currentDeck, setCurrentDeck] = useState<Array | null>(null);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChange((user) => {
-      setUser(user);
+    const unsubscribe = onAuthStateChange((u) => {
+      setUser(u);
     });
 
     return () => {
@@ -35,12 +35,15 @@ function App() {
   useEffect(() => {
     if (user) {
       const uid = user.uid;
-      console.log(uid);
       setUid(uid);
     } else {
       setUid(null);
     }
   }, [user]);
+
+useEffect(() => {
+  console.log("uid, ", uid)
+},[uid])
 
   function changeDeck(deck: Array) {
     setCurrentDeck(deck);

@@ -22,9 +22,6 @@ const DeckCollection: React.FC<DeckCollectionProps> = ({ uid, changeDeck }) => {
   const [selectedDeck, setSelectedDeck] = useState<DeckType | null>(null);
   const navigate = useNavigate();
 
-
-  const navigate = useNavigate();
-
   useEffect(() => {
     const fetchDecks = async () => {
       if (uid) {
