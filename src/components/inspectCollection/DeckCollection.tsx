@@ -57,7 +57,7 @@ const DeckCollection: React.FC<DeckCollectionProps> = ({ uid, changeDeck }) => {
           <Actions selectedDeck={selectedDeck} onDelete={handleDeleteDeckUpdate} />
           <CardThumbnailContainer collection_id={selectedDeck ? selectedDeck.id : 0} />
         </>
-      ) : <p>Please select a deck.</p>}
+      ) : <p></p>}
     </div>
   );
 };
