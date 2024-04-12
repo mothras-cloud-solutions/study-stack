@@ -42,6 +42,12 @@ const DeckCollection: React.FC<DeckCollectionProps> = ({ uid, changeDeck }) => {
     changeDeck(deck);
   };
 
+  const handleDeleteDeckUpdate = (deletedDeckId) => {
+    const updatedDecks = decks.filter(deck => deck.id !== deletedDeckId);
+    setDecks(updatedDecks);
+    setSelectedDeck(null);
+  };
+
   return (
     <div>
       <DeckSelector decks={decks} onDeckSelect={handleDeckSelect} />
@@ -54,6 +60,8 @@ const DeckCollection: React.FC<DeckCollectionProps> = ({ uid, changeDeck }) => {
             onDelete={() => {}}
             onArchiveToggle={() => {}}
           />
+          <Actions selectedDeck={selectedDeck} onStudy={onStudy} onDelete={handleDeleteDeckUpdate} />
+
         </>
       )}
     </div>

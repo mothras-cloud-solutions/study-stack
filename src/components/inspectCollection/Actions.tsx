@@ -34,7 +34,7 @@ const Actions: React.FC<ActionsProps> = ({ selectedDeck, onStudy }) => {
       axios.delete(`/api/collections/${selectedDeck.id}`)
         .then(response => {
           alert(response.data.message);
-          // refresh
+          onDelete(selectedDeck.id);
           navigate('/collections');
         })
         .catch(error => {
