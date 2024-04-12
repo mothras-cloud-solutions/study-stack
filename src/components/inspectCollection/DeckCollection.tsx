@@ -60,6 +60,7 @@ const DeckCollection: React.FC<DeckCollectionProps> = ({ uid, changeDeck }) => {
         </>
       ) : <p>Please select a deck.</p>}
       <Footer/>
+
     </div>
   );
 };

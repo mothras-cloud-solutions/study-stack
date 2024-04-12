@@ -25,8 +25,10 @@ const Actions: React.FC<ActionsProps> = ({ selectedDeck, onStudy, onDelete }) =>
   };
 
   const handleStudy = () => {
-    if (selectedDeck) {
+    if (selectedDeck && selectedDeck.flashcards.length > 0) {
       navigate('/learn', { state: { cards: selectedDeck.flashcards } });
+    } else {
+      alert('Please add flashcards to the deck before studying!');
     }
   };
 
@@ -68,3 +70,4 @@ const Actions: React.FC<ActionsProps> = ({ selectedDeck, onStudy, onDelete }) =>
 };
 
 export default Actions;
+

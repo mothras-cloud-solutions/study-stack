@@ -41,7 +41,7 @@ const CardForm: React.FC<CardFormProps> = ({
   const [saving, setSaving] = useState(false);
   const editorRef = useRef<HTMLDivElement>(null);
   const quillRef = useRef<Quill | null>(null);
-// Wyatt Advance Editor
+  // Wyatt Advance Editor
   const [showAdvanced, setShowAdvanced] = useState(false);
 
   useEffect(() => {
@@ -90,6 +90,10 @@ const CardForm: React.FC<CardFormProps> = ({
     };
   }, [success]);
 
+  useEffect(() => {
+    setShowAdvanced(false);
+  }, [editingCard]);
+
   const handleTermChange = (e: ChangeEvent<HTMLInputElement>) => {
     setTerm(e.target.value);
     setError('');
@@ -100,7 +104,7 @@ const CardForm: React.FC<CardFormProps> = ({
     setError('');
   };
 
-    const changeAdvancedState = () => {
+  const changeAdvancedState = () => {
     setShowAdvanced(!showAdvanced);
   };
 
@@ -124,50 +128,50 @@ const CardForm: React.FC<CardFormProps> = ({
     setError('');
     setSuccess('');
 
-      try {
-        const response = editingCard
-          ? await axios.put(`/api/flashcards/${editingCard.id}`, {
-              term,
-              definition,
-              keywords,
-              collection_id: editingCard.collection_id,
-            })
-          : await axios.post('/api/flashcards/', {
-              term,
-              definition,
-              confidenceLevel: 0,
-              keywords,
-              archived: 0,
-              starred: 0,
-              collection_id: deckId,
-            });
+    try {
+      const response = editingCard
+        ? await axios.put(`/api/flashcards/${editingCard.id}`, {
+          term,
+          definition,
+          keywords,
+          collection_id: editingCard.collection_id,
+        })
+        : await axios.post('/api/flashcards/', {
+          term,
+          definition,
+          confidenceLevel: 0,
+          keywords,
+          archived: 0,
+          starred: 0,
+          collection_id: deckId,
+        });
 
-        const updatedCard = editingCard ? response.data : response.data.flashcard;
-        if (typeof updatedCard.canvas_front !== 'string') {
-          updatedCard.canvas_front = '';
-        }
-        if (typeof updatedCard.canvas_back !== 'string') {
-          updatedCard.canvas_back = '';
-        }
-        console.log('Card saved successfully:', updatedCard);
-        setTerm('');
-        setDefinition('');
-        setKeywords('');
-        setEditingCard(null);
-        quillRef.current?.setText(''); // Clear the text editor
-        setSuccess(editingCard ? 'Card updated successfully!' : 'Card saved successfully!');
-        if (editingCard) {
-          handleCardUpdate(updatedCard);
-        } else {
-          handleNewCardSave(updatedCard);
-        }
-      } catch (error) {
-        console.error('Error saving card:', error);
-        setError('Error saving card. Please try again.');
-      } finally {
-        setSaving(false);
+      const updatedCard = editingCard ? response.data : response.data.flashcard;
+      if (typeof updatedCard.canvas_front !== 'string') {
+        updatedCard.canvas_front = '';
       }
-    };
+      if (typeof updatedCard.canvas_back !== 'string') {
+        updatedCard.canvas_back = '';
+      }
+      console.log('Card saved successfully:', updatedCard);
+      setTerm('');
+      setDefinition('');
+      setKeywords('');
+      setEditingCard(null);
+      quillRef.current?.setText(''); // Clear the text editor
+      setSuccess(editingCard ? 'Card updated successfully!' : 'Card saved successfully!');
+      if (editingCard) {
+        handleCardUpdate(updatedCard);
+      } else {
+        handleNewCardSave(updatedCard);
+      }
+    } catch (error) {
+      console.error('Error saving card:', error);
+      setError('Error saving card. Please try again.');
+    } finally {
+      setSaving(false);
+    }
+  };
 
   const handleCancelOrEdit = () => {
     setError('');
@@ -235,7 +239,7 @@ const CardForm: React.FC<CardFormProps> = ({
           {editingCard && <button className="button is-light" onClick={changeAdvancedState}>Advanced Edit Mode</button>}
         </div>
       </div>
-      {showAdvanced && <CardEditor card={editingCard} closeEditor={changeAdvancedState}/>}
+      {showAdvanced && <CardEditor card={editingCard} closeEditor={changeAdvancedState} />}
     </div>
   );
 };

@@ -34,7 +34,7 @@ function Login() {
   const handleCancel = () => {
     setEmail('');
     setPassword('');
-    navigate('/home');
+    navigate('/');
   };
 
   return (
