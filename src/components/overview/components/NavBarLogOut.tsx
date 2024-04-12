@@ -62,7 +62,7 @@ const NavBarLogOut: React.FC<NavBarProps> = () => {
                       Collections
                     </Link>
                   </a>
-                  {function () {
+                  {/* {function () {
                     if (currentCards.length > 0) {
                       return (
                         <a className="navbar-item" href="#">
@@ -72,7 +72,7 @@ const NavBarLogOut: React.FC<NavBarProps> = () => {
                         </a>
                       );
                     };
-                  }}
+                  }} */}
                   <a className="navbar-item" href="#">
                     <Link to="/create">
                       Create
