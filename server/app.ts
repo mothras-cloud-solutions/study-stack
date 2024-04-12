@@ -17,7 +17,7 @@ app.use('/api/flashcards', flashcardsRoutes);
 app.use('/api/canvases', canvasesRoutes);
 
 app.get('*', function(_req, res){
-  res.redirect('/home');
+  res.redirect('https://study-stack-production.up.railway.app');
 });
 
 const port: number = Number(process.env.PORT) || 3000;
