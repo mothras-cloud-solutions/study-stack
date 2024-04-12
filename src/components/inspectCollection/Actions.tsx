@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import './Actions.css';
 import { useNavigate } from 'react-router-dom';
@@ -9,11 +10,10 @@ type ActionsProps = {
     id: number;
     flashcards: any[];
   } | null;
-  currentCards: any[];
-  onDelete: (id: number) => void;
+  onStudy: (cards: any[]) => void;
 };
 
-const Actions: React.FC<ActionsProps> = ({ selectedDeck, currentCards, onDelete }) => {
+const Actions: React.FC<ActionsProps> = ({ selectedDeck, onStudy, onDelete }) => {
   const [showMoreActions, setShowMoreActions] = useState(false);
   const navigate = useNavigate();
 
@@ -26,8 +26,8 @@ const Actions: React.FC<ActionsProps> = ({ selectedDeck, currentCards, onDelete 
   };
 
   const handleStudy = () => {
-    if (currentCards && currentCards.length > 0) {
-      navigate('/learn', { state: { cards: currentCards } });
+    if (selectedDeck && selectedDeck?.flashcards?.length > 0) {
+      navigate('/learn', { state: { cards: selectedDeck.flashcards } });
     } else {
       alert('Please add flashcards to the deck before studying!');
     }
@@ -48,10 +48,11 @@ const Actions: React.FC<ActionsProps> = ({ selectedDeck, currentCards, onDelete 
     }
   };
 
+
   const handleExportDeck = () => {
-    if (selectedDeck) {
-      exportCollection(selectedDeck.id);
-    }
+    console.log('Export Deck clicked');
+    exportCollection(selectedDeck.id);
+
   };
 
   return (
