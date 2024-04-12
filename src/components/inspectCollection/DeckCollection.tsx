@@ -3,6 +3,7 @@ import DeckSelector from './DeckSelector';
 import CardThumbnailContainer from './CardThumbnailContainer';
 import Actions from './Actions';
 import { useNavigate } from 'react-router-dom';
+import Footer from '../Skeleton/components/Footer';
 
 type DeckType = {
   id: number;
@@ -20,6 +21,7 @@ type DeckCollectionProps = {
 const DeckCollection: React.FC<DeckCollectionProps> = ({ uid, changeDeck }) => {
   const [decks, setDecks] = useState<DeckType[]>([]);
   const [selectedDeck, setSelectedDeck] = useState<DeckType | null>(null);
+  const [refreshDecks, setRefreshDecks] = useState<boolean>(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -35,28 +37,32 @@ const DeckCollection: React.FC<DeckCollectionProps> = ({ uid, changeDeck }) => {
     };
 
     fetchDecks();
-  }, [uid]);
+  }, [uid, refreshDecks]);
 
   const handleDeckSelect = (deck: DeckType) => {
     setSelectedDeck(deck);
     changeDeck(deck);
   };
 
+  const handleDeleteDeckUpdate = (deletedDeckId) => {
+    const updatedDecks = decks.filter(deck => deck.id !== deletedDeckId);
+    setDecks(updatedDecks);
+    setSelectedDeck(null);
+  };
+
   return (
+    <>
     <div>
-      <DeckSelector decks={decks} onDeckSelect={handleDeckSelect} />
-      {selectedDeck && (
+       <DeckSelector decks={decks} onDeckSelect={handleDeckSelect} uid={uid} setRefreshDecks={setRefreshDecks} refreshDecks={refreshDecks}/>
+      {selectedDeck ? (
         <>
-          <Actions selectedDeck={selectedDeck} />
-          <CardThumbnailContainer
-            collection_id={selectedDeck ? selectedDeck.id : 0}
-            onEdit={() => {}}
-            onDelete={() => {}}
-            onArchiveToggle={() => {}}
-          />
+          <Actions selectedDeck={selectedDeck} onDelete={handleDeleteDeckUpdate} />
+          <CardThumbnailContainer collection_id={selectedDeck ? selectedDeck.id : 0} />
         </>
-      )}
+      ) : <p>Please select a deck.</p>}
     </div>
+     <Footer/>
+     </>
   );
 };
 

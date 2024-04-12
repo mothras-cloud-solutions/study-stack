@@ -76,6 +76,7 @@ body {
   /* font-weight: bold; */
   transition: all 0.5s;
 }
+.nopt {padding-top:0 !important }
 
 .navbar {
   transition: all 0.5s;
@@ -178,9 +179,22 @@ body {
 }
 
 .flip-notice {
-  display: inline;
-  margin-left: 1em;
-  margin-right: 4em;
+  position: absolute;
+  right: 19px;
+  top: 53px;
 }
+.transparent-bg{
+  background: transparent !important;
+}
+/* .pagination-list {
+  display:none;
+} */
+.definition-study {
+  word-break: break-all;
+  overflow-wrap: break-word;
+}
+.pagination{width:100%}
+
+.index-count{float:right}
 
 /* End of make the thing not do the thing (for the study deck) */

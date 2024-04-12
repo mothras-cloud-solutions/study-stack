@@ -11,8 +11,8 @@ const Home: React.FC<HomeProps> = ({ onLoginLinkClick }) => {
     <div className="box">
     </div> */}
       <div className="hero-body" style={{ zIndex: 10 }}>
-        <p className="title">Enhance Your Study Sessions.<br></br>Master Test Day with Confidence.</p>
-        <p className="subtitle">Elevate Your Learning Experience.<br></br>Transform Your Flashcards into Dynamic Practice Tests.</p>
+        <p className="title">Welcome to StudyStack</p>
+        <p className="subtitle">Create, Edit, and Learn with Flashcards!</p>
         <button type="submit" className={`button is-link is-medium is-outlined`} onClick={onLoginLinkClick}><span>Get started</span><span className="icon is-medium"><i className="fas fa-arrow-right"></i></span></button>
       </div>
     </section>
@@ -20,3 +20,4 @@ const Home: React.FC<HomeProps> = ({ onLoginLinkClick }) => {
 };
 
 export default Home;
+
