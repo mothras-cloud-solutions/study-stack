@@ -70,4 +70,3 @@ const Actions: React.FC<ActionsProps> = ({ selectedDeck, onStudy, onDelete }) =>
 };
 
 export default Actions;
-
