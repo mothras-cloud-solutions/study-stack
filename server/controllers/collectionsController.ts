@@ -56,10 +56,16 @@ export const getCollectionByUserId = async (req: Request, res: Response) => {
 
 export const createCollection = async (req: Request, res: Response) => {
     const { title, description, subjects, user_id } = req.body;
+    let created_from_id: number | null;
+    if (req.body.created_from_id) {
+      created_from_id = req.body.created_from_id;
+    } else {
+      created_from_id = null;
+    }
     try {
         const result = await pool.query(
-            'INSERT INTO collections (title, description, subjects, user_id) VALUES ($1, $2, $3, $4) RETURNING *',
-            [title, description, subjects, user_id]
+            'INSERT INTO collections (title, description, subjects, user_id, created_from_id) VALUES ($1, $2, $3, $4, $5) RETURNING *',
+            [title, description, subjects, user_id, created_from_id]
         );
         res.status(201).json(result.rows[0]);
     } catch (err) {
@@ -90,6 +96,8 @@ export const updateCollection = async (req: Request, res: Response) => {
 export const deleteCollection = async (req: Request, res: Response) => {
     const { id } = req.params;
     try {
+        await pool.query('DELETE FROM canvases WHERE flashcards_id IN (SELECT id FROM flashcards WHERE collection_id = $1)', [id]);
+        await pool.query('DELETE FROM flashcards WHERE collection_id = $1', [id]);
         const result = await pool.query('DELETE FROM collections WHERE id = $1 RETURNING *', [id]);
         if (result.rows.length > 0) {
             res.json({ message: 'Collection deleted successfully' });

@@ -4,6 +4,7 @@ import { useSearchParams } from 'react-router-dom';
 import DeckForm from './DeckForm';
 import CardForm from './CardForm';
 import DeckCards from './DeckCardCollection';
+import Footer from './Footer';
 
 interface CreateEditDeckProps {
   uid: string;
@@ -51,7 +52,7 @@ const CreateEditDeck: React.FC<CreateEditDeckProps> = ({ uid }) => {
       setIsLoading(true);
       setError('');
 
-      if (deckId) {
+      if (deckId && !isEditing) {
         try {
           const deckResponse = await axios.get(`/api/collections/${deckId}`);
           const { title, subjects } = deckResponse.data;
@@ -71,7 +72,7 @@ const CreateEditDeck: React.FC<CreateEditDeckProps> = ({ uid }) => {
     };
 
     fetchDeckData();
-  }, [deckId]);
+  }, [deckId, isEditing]);
 
   const handleCardEdit = (card: Card) => {
     setEditingCard(card);
@@ -226,6 +227,7 @@ const CreateEditDeck: React.FC<CreateEditDeckProps> = ({ uid }) => {
           )}
         </>
       )}
+      <Footer/>
     </div>
   );
 };

@@ -1,6 +1,6 @@
 // NavBar.tsx
 import React, { Fragment, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
 import Signout from '../../SignOut/SignOut';
 
 interface User {
@@ -59,7 +59,7 @@ const NavBarLogOut: React.FC<NavBarProps> = () => {
                 <>
                   <a className="navbar-item" >
                     <Link to="/collections">
-                      Collections
+                      Decks
                     </Link>
                   </a>
                   {/* {function () {
@@ -75,7 +75,7 @@ const NavBarLogOut: React.FC<NavBarProps> = () => {
                   }} */}
                   <a className="navbar-item" href="#">
                     <Link to="/create">
-                      Create
+                      Create Deck
                     </Link>
                   </a>
                   <Signout />
@@ -91,6 +91,7 @@ const NavBarLogOut: React.FC<NavBarProps> = () => {
           </div>
         </nav>
       </div>
+      <Outlet/>
     </Fragment>
 
   );

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { signInWithEmail, signInWithGoogle } from '../../../firebase/firebase.ts';
 import { useNavigate } from 'react-router-dom';
+import Footer from '../Skeleton/components/Footer.tsx';
 
 function Login() {
   const [uid, setUid] = useState('');
@@ -33,7 +34,7 @@ function Login() {
   const handleCancel = () => {
     setEmail('');
     setPassword('');
-    navigate('/home');
+    navigate('/');
   };
 
   return (
@@ -79,6 +80,7 @@ function Login() {
           <button className="logcancel button is-link" type="button" onClick={handleCancel}>Cancel</button>
         </div>
       </div>
+      <Footer/>
     </div >
   );
 }
