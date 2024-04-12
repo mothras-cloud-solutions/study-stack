@@ -23,7 +23,7 @@ const NavBarLogIn: React.FC<NavBarProps> = () => {
 
   return (
     <Fragment>
-   <div className="box is-radiusless transparent-bg py-1">
+   <div className="box nopt is-radiusless transparent-bg py-1">
       <nav className="navbar transparent-bg is-fixed-top" role="navigation" aria-label="main navigation">
         <div className="container">
           <div className="navbar-brand">
@@ -52,8 +52,9 @@ const NavBarLogIn: React.FC<NavBarProps> = () => {
                   </Link>
                 </a>
                 <a className="navbar-item">
-                  <span className="navbar-item-separator"></span>
-                </a> */}
+
+                  <span className="navbar-item-separator is-hidden-mobile"></span>
+                </a>
 
                 {/* {user ? ( */}
                 {/* // If user is signed in, show additional links */}

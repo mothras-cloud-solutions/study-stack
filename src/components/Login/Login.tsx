@@ -80,7 +80,6 @@ function Login() {
           <button className="logcancel button is-link" type="button" onClick={handleCancel}>Cancel</button>
         </div>
       </div>
-      <Footer/>
     </div >
   );
 }

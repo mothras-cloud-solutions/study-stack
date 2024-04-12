@@ -75,13 +75,11 @@ function App() {
                 <>
                   <NavBarLogOut path="/home" />
                   <Overview />
-                  <Footer />
                 </>
               ) : (
                 <Fragment>
                   <NavBarLogIn currentCards={currentCards} />
                   <HomePage />
-                  <Footer />
                 </Fragment>
               )}
             />
@@ -98,6 +96,7 @@ function App() {
           </Routes>
         </div>
       </section>
+      <Footer />
     </Fragment>
   )
 }

@@ -227,7 +227,6 @@ const CreateEditDeck: React.FC<CreateEditDeckProps> = ({ uid }) => {
           )}
         </>
       )}
-      <Footer/>
     </div>
   );
 };

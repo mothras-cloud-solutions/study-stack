@@ -24,8 +24,8 @@ const CardThumbnail: React.FC<CardThumbnailProps> = ({
     <div className="column is-one-third">
       <div className="card">
         <div className="card-content">
-          <div className="content">
-            <p><strong>Prompt:</strong> {flashcard.term}</p>
+        <div className="content short-description">
+                  <p className="chunckle-clamp"><strong>Prompt:</strong> {flashcard.term}</p>
             <p><strong>Response:</strong>  <span dangerouslySetInnerHTML={{ __html: flashcard.definition }} /></p>
           </div>
         </div>

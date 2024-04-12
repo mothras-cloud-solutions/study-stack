@@ -60,7 +60,6 @@ function shuffleTheDeck() {
       return <Card card={studyDeck[index]} setIndex={setIndex} index={index} length={length}
         studyDeck={studyDeck} setStudyDeck={setStudyDeck} shuffleTheDeck={shuffleTheDeck} />
     }
-    <Footer/>
   }()}
   </div>
 }

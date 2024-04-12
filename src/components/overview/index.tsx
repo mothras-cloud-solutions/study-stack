@@ -55,7 +55,6 @@ function Overview() {
           </div>
         </section>
       </div>
-      <Footer />
     </Fragment>
   );
 }

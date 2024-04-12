@@ -18,8 +18,8 @@
 .action-button:focus {
   outline: 2px solid transparent;
   outline-offset: 2px;
-  ring-width: 2px;
-  ring-color: #cbd5e1;
+  /* ring-width: 2px; */
+  /* ring-color: #cbd5e1; */
 }
 
 .additional-actions {
