@@ -9,10 +9,11 @@ type ActionsProps = {
     id: number;
     flashcards: any[];
   } | null;
-  onStudy: (cards: any[]) => void;
+  currentCards: any[];
+  onDelete: (id: number) => void;
 };
 
-const Actions: React.FC<ActionsProps> = ({ selectedDeck, onStudy, onDelete }) => {
+const Actions: React.FC<ActionsProps> = ({ selectedDeck, currentCards, onDelete }) => {
   const [showMoreActions, setShowMoreActions] = useState(false);
   const navigate = useNavigate();
 
@@ -25,8 +26,8 @@ const Actions: React.FC<ActionsProps> = ({ selectedDeck, onStudy, onDelete }) =>
   };
 
   const handleStudy = () => {
-    if (selectedDeck && selectedDeck.flashcards.length > 0) {
-      navigate('/learn', { state: { cards: selectedDeck.flashcards } });
+    if (currentCards && currentCards.length > 0) {
+      navigate('/learn', { state: { cards: currentCards } });
     } else {
       alert('Please add flashcards to the deck before studying!');
     }
@@ -47,11 +48,10 @@ const Actions: React.FC<ActionsProps> = ({ selectedDeck, onStudy, onDelete }) =>
     }
   };
 
-
   const handleExportDeck = () => {
-    console.log('Export Deck clicked');
-    exportCollection(selectedDeck.id);
-
+    if (selectedDeck) {
+      exportCollection(selectedDeck.id);
+    }
   };
 
   return (
