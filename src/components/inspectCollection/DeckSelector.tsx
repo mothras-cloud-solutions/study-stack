@@ -13,6 +13,11 @@ type DeckSelectorProps = {
 
 const DeckSelector: React.FC<DeckSelectorProps> = ({ decks, onDeckSelect }) => {
   console.log('Rendering DeckSelector, decks:', decks);
+
+  const handleImportDeck = () => {
+    console.log('Import Deck clicked');
+  };
+
   return (
     <div className="w-full mb-4">
       <label htmlFor="collection-select" className="block text-lg font-medium text-gray-700 mb-2">
@@ -38,6 +43,7 @@ const DeckSelector: React.FC<DeckSelectorProps> = ({ decks, onDeckSelect }) => {
           </option>
         ))}
       </select>
+      <button onClick={handleImportDeck} className="action-button">Import Deck</button>
     </div>
   );
 };
