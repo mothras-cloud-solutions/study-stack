@@ -143,8 +143,12 @@ const CardForm: React.FC<CardFormProps> = ({
             });
 
         const updatedCard = editingCard ? response.data : response.data.flashcard;
-        updatedCard.canvas_front = '';
-        updatedCard.canvas_back = '';
+        if (typeof updatedCard.canvas_front !== 'string') {
+          updatedCard.canvas_front = '';
+        }
+        if (typeof updatedCard.canvas_back !== 'string') {
+          updatedCard.canvas_back = '';
+        }
         console.log('Card saved successfully:', updatedCard);
         setTerm('');
         setDefinition('');
