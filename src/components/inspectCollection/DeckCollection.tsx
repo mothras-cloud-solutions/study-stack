@@ -47,13 +47,13 @@ const DeckCollection: React.FC<DeckCollectionProps> = ({ uid, changeDeck }) => {
       <DeckSelector decks={decks} onDeckSelect={handleDeckSelect} />
       {selectedDeck && (
         <>
+          <Actions selectedDeck={selectedDeck} />
           <CardThumbnailContainer
             collection_id={selectedDeck ? selectedDeck.id : 0}
             onEdit={() => {}}
             onDelete={() => {}}
             onArchiveToggle={() => {}}
           />
-          <Actions selectedDeck={selectedDeck} />
         </>
       )}
     </div>
