@@ -51,7 +51,7 @@ const StudyCanvas: React.FC<Props> = ({ front, back, flipped, index }) => {
       setShapes({"rectangles":[],"circles":[],"lines":[],"texts":[],"number":0})
     }
     if (!flipped && front.length > 0) {
-      setShapes(JSON.parse(back));
+      setShapes(JSON.parse(front));
     } else if (!flipped && front.length < 5) {
       setShapes({"rectangles":[],"circles":[],"lines":[],"texts":[],"number":0});
     }
