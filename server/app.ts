@@ -16,6 +16,10 @@ app.use('/api/collections', collectionsRoutes);
 app.use('/api/flashcards', flashcardsRoutes);
 app.use('/api/canvases', canvasesRoutes);
 
+app.get('*', function(_req, res){
+  res.redirect('/');
+});
+
 const port: number = Number(process.env.PORT) || 3000;
 const host: string = process.env.HOST || 'localhost'
 
