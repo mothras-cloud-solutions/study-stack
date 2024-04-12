@@ -25,7 +25,7 @@ const CreateSearch = () => {
               <span className="icon is-large">
                 <i className="fas fa-search fa-3x"></i> {/* Font Awesome icon for searching decks */}
               </span>
-              <p className="title is-4">Search Decks</p>
+              <p className="title is-4">See all your decks</p>
               <p className="subtitle is-6">Find existing decks</p>
               <p className="content">Search for decks created by other users.</p>
             </div>

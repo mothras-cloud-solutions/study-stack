@@ -261,7 +261,7 @@ const CardEditor: React.FC<Props> = ({ card, closeEditor }) => {
   return (
     <div className="box">
       <h2 className="title is-2">Edit Card</h2>
-      <nav className="level">
+      <nav className="level buttons">
         <div className="level-left">
           <div className="tags are-large">
             {/* You can change, edit, add, and delete this buttons/tags based on the view */}
@@ -293,8 +293,7 @@ const CardEditor: React.FC<Props> = ({ card, closeEditor }) => {
               {/* <p>This is the front side of the card.</p> */}
             </div>
             <div className="flip-card-back">
-              {isFlipped && <h3 className="title is-3">{definition}</h3>}
-              <p>{definition}</p>
+              {isFlipped && <span className="definition-study" dangerouslySetInnerHTML={{ __html: definition }} />}
             </div>
           </div>
         </div>

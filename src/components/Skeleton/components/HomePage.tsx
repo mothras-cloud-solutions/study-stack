@@ -34,3 +34,4 @@ const Home: React.FC<HomeProps> = ({ onLoginLinkClick }) => {
 };
 
 export default Home;
+

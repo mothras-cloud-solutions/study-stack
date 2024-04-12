@@ -1,243 +1,172 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-
+import Pagination from '../Skeleton/components/Pagination';
 import StudyCanvas from '../cardEditor/StudyCanvas';
-// const Card: React.FC<{term: string,
-//   definition: string,
-//  keywords:string,
-// confidenceLevel: number}>
-export default function Card({ card, setIndex, index, length, studyDeck, setStudyDeck, shuffleTheDeck }) {
+import { onAuthStateChange } from '../../../firebase/firebase';
+import { User } from 'firebase/auth';
 
+interface CardProps {
+  card: {
+    term: string;
+    definition: string;
+    starred: number;
+    id: number;
+    deck_title: string;
+    canvas_back: string;
+    canvas_front: string;
+  };
+  setIndex: React.Dispatch<React.SetStateAction<number>>;
+  index: number;
+  length: number;
+  studyDeck: any[];
+  setStudyDeck: React.Dispatch<React.SetStateAction<any[]>>;
+  shuffleTheDeck: () => void;
+}
+
+const Card: React.FC<CardProps> = ({
+  card,
+  setIndex,
+  index,
+  length,
+  studyDeck,
+  setStudyDeck,
+  shuffleTheDeck,
+}) => {
   const navigate = useNavigate();
-
+  const [user, setUser] = useState<User | null>(null);
   const { term, definition, starred, id, deck_title, canvas_back, canvas_front } = card;
-
-  // temp state, with the endpoint I'll just hit the backend
-  // const [starryNight, setStarryNight] = useState(starred);
-
-  // current position counter
-  const currPosition = index + 1
-
-
+  const currPosition = index + 1;
   const [isFlipped, setIsFlipped] = useState(false);
 
-  // Function to flip the card on click
+  useEffect(() => {
+    const unsubscribe = onAuthStateChange((u) => {
+      setUser(u);
+    });
+
+    return () => {
+      unsubscribe();
+    }
+  }, []);
+
   const flipCard = () => {
     setIsFlipped(!isFlipped);
   };
 
-  // Build confidence increasing functionality later
-
-  //figure out how to add fontawesome icon - talk to Raul
-
-  // routes needed - update starred
-  // later - update confidence
-
-
-  // routes below
-  // PUT /api/flashcards/:id/confidenceLevel
-  // PUT /api/flashcards/:id/starred
-
-
-  function handleClick(e) {
-    e.preventDefault();
-    const buttonClicked = e.target.innerText
-
-    if (buttonClicked === "Skip Back") {
-      const newIndex = index - 1;
-      if (newIndex < 0) {
-        console.log("That's far enough")
-      } else {
-        setIsFlipped(false);
-        setIndex(newIndex)
-      }
-    } else if (buttonClicked === "Skip Forward") {
-      let newIndex = index + 1;
-      if (newIndex < length) {
-        setIsFlipped(false);
-        setIndex(newIndex);
-      } else {
-        console.log("No more cards")
-      }
-    } else if (buttonClicked === "Study again") {
-      // add a property to this card object ("StudyAgain : true")
-      // then change its position in the array to the length to put it at the end of the arr
-      // then delete its current index from the array
-      // Never mind - they want to instead persist a star or something. Will comment this out for now
-
-      // studyDeck[index].studyAgain = true;
-      // studyDeck[length] = studyDeck[index];
-      // let newDeck = studyDeck.toSpliced(index, 1)
-      // setStudyDeck(newDeck);
-
-
-      // insert axios call once we get the route
-      // only toggle it if the star is 0 (what if they got it wrong twice?)
-      if (starred === 0) {
-        axios.put(`/api/flashcards/${id}/starred`).then(() => {
-          console.log('starred should be changed to 1')
-          studyDeck[index].starred = 1;
-        })
-      }
-      const newIndex = index + 1;
-      if (newIndex < length) {
-        setIsFlipped(false);
-        setIndex(newIndex);
-      } else {
-        // implement "Done" functionality here once route is ready
-        console.log("No more cards")
-      }
-
-
-    } else if (buttonClicked === "Got it!") {
-      // increment confidence in the backend route,
-      // for now just skip to the next cardrrrrr
-      // should we only move to the next card when they click next?
-      // then got it can just update the confidence instead
-      if (starred === 1) {
-        axios.put(`/api/flashcards/${id}/starred`).then(() => {
-          console.log('starred should be changed back to 0')
-          studyDeck[index].starred = 0;
-        })
-      }
-      const newIndex = index + 1;
-      if (newIndex < length) {
-        setIsFlipped(false);
-        setIndex(newIndex)
-      } else {
-        console.log("No more cards")
-      }
-    } else if (buttonClicked === "Done") {
-      console.log("Here's where I'll route to another page")
-      // needs another page to go to with the react router etc.
-      setIndex(0); // for now
-      navigate('/collections')
-    } else if (buttonClicked === "Shuffle") {
-      shuffleTheDeck();
-      setIsFlipped(false);
-    }
-    return
-  }
-
-  // add conditional that reads the starred value and displays something in the return statement.
-  // make "Study again" send the directions to the DB to update the field to have 1 and go to the next card.
-  // add a conditional inside "got it" that not only updates the confidence in the backend, but checks to see
-  // "If" the current card has starred set to 1. If so and they click "got it" then send the route to the backend
-  // to turn starred to 0
-
-  // {Deck Title goes here}
-
-  const style = {
-    zIndex: 50,
-    position: 'absolute',
-    width: '100%',
-    height: '100%',
+  const handlePageClick = (pageIndex: number) => {
+    setIndex(pageIndex);
+    setIsFlipped(false);
   };
 
- return <div className='box'>
-  <h2 className="title is-2">{deck_title}</h2>
-  {/* {function(){
-    if (studyDeck[index].studyAgain) {
-      return <>Studying Again</>
+  const handlePrevClick = () => {
+    let newIndex = index - 1;
+    if (newIndex >= 0) {
+      setIsFlipped(false);
+      setIndex(newIndex);
+    } else {
+      console.log("That's far enough");
     }
-  }()} */}
-  <span className='flip-notice'>Click a card to flip it</span>
-  <span className='index-count'>Card {currPosition}/{length}</span>
-   {function(){
+  };
+
+  const handleNextClick = () => {
+    let newIndex = index + 1;
+    if (studyDeck && studyDeck.length > 0 && newIndex < studyDeck.length) {
+      setIsFlipped(false);
+      setIndex(newIndex);
+    } else {
+      console.log("No more cards or the deck is empty");
+    }
+  };
+
+  const handleStudyAgainClick = () => {
+    if (starred === 0) {
+      axios.put(`/api/flashcards/${id}/starred`).then(() => {
+        console.log('starred should be changed to 1');
+      });
+    }
+    handleNextClick();
+  };
+
+  const handleGotItClick = () => {
     if (starred === 1) {
-      return <span className='starr-prompt'>This question was challenging for you, try to get it this time!</span>
+      axios.put(`/api/flashcards/${id}/starred`).then(() => {
+        console.log('starred should be changed back to 0');
+      });
     }
-  }()}
- <nav className="nav">
-   <div className='left'>
-       </div>
-   <div className="right">
-     <div className="tags are-large">
-     </div>
-   </div>
- </nav>
-<div className="flip-container" onClick={flipCard}>
-  <div className='flip-card' id="studyCanvas" style={style}>
-    <StudyCanvas front={canvas_front} back={canvas_back} index={index} flipped={isFlipped}/>
-  </div>
-     <div className={`flip-card${isFlipped ? ' is-flipped' : ''}`}>
-       <div className="flip-card-inner">
-         <div className="flip-card-front">
-          {function(){
-            if (!isFlipped) {
-              return <h3 className="title is-3">{term}</h3>
-            }
-          }()}
-         </div>
-         <div className="flip-card-back">
-           <p>{definition}</p>
-         </div>
-       </div>
-     </div>
-   </div>
-   <div className='buttons'>
-      {function(){
-        if (index === 0){
-          return <button>Beginning</button>
-        } else {
-          return <button name="skip-back" type="button" onClick={handleClick}>Skip Back</button>
-        }
-      }()}
-      {function () {
-        if (index === length - 1) {
-          return <button>End of deck</button>
-        } else {
-          return <button name="skip-forward" type="button" onClick={handleClick}>Skip Forward</button>
-        }
-      }()}
-      <button name="study-again" type="button" onClick={handleClick}>Study again</button>
-      <button name="got-it" type="button" onClick={handleClick}>Got it!</button>
-      <button name="done" type="button" onClick={handleClick}>Done</button>
-      <button name="shuffle" type="button" onClick={handleClick}>Shuffle</button>
+    handleNextClick();
+  };
+
+  const handleDoneClick = () => {
+    setIndex(0);
+    navigate('/collections');
+  };
+
+  const handleShuffleClick = () => {
+    shuffleTheDeck();
+    setIsFlipped(false);
+  };
+console.log(user)
+  return (
+    <div className='box'>
+      <h2 className="title is-2">{deck_title}</h2>
+      <span className='flip-notice tag is-link is-light is-outlined is-small'>Click on a card to flip it</span>
+      <span className='tag index-count is-light'>Card {currPosition}/{length}</span>
+      {starred === 1 && (
+        <span className='starr-prompt'>This question was challenging for you, try to get it this time!</span>
+      )}
+      <nav className="nav">
+        <div className='left'></div>
+        <div className="right">
+          <div className="tags are-large"></div>
+        </div>
+      </nav>
+      <div className="flip-container" onClick={flipCard}>
+        <div className='flip-card' id="studyCanvas" style={{ zIndex: 50, position: 'absolute', width: '100%', height: '100%' }}>
+          <StudyCanvas front={canvas_front} back={canvas_back} index={index} flipped={isFlipped} />
+        </div>
+        <div className={`flip-card${isFlipped ? ' is-flipped' : ''}`}>
+          <div className="flip-card-inner">
+            <div className="flip-card-front">
+              {!isFlipped && <h3 className="title is-3">{term}</h3>}
+            </div>
+            <div className="flip-card-back">
+              <span className="definition-study" dangerouslySetInnerHTML={{ __html: definition }} />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className='buttons'>
+        <Pagination
+          onPrevClick={handlePrevClick}
+          onNextClick={handleNextClick}
+          onPageClick={handlePageClick}
+          onStudyAgainClick={handleStudyAgainClick}
+          onGotItClick={handleGotItClick}
+          onDoneClick={handleDoneClick}
+          onShuffleClick={handleShuffleClick}
+          index={index}
+          length={length}
+        />
+      </div>
+      {user && (
+        <div className="card">
+          <div className="card-content">
+            <div className="media">
+              <div className="media-left">
+                <figure className="image is-64x64">
+                  <img className="is-rounded" src={`https://randomuser.me/api/portraits/men/1.jpg`} alt="User Picture" />
+                </figure>
+              </div>
+              <div className="media-content">
+                <p className="title is-4">Craig Castelaz</p>
+                <p className="subtitle is-6">Date Created: April, 12, 2024</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
-  </div>
-}
+  );
+};
 
-
-//   return (
-//     <div className="box">
-//       <h2 className="title is-2">Deck Title</h2>
-//       <nav className="level">
-//         <div className="level-left">
-//           <div className="tags are-large">
-//             {/* You can change this buttons/tags based on the view */}
-//             <span className="tag has-text-light">Flashcards</span>
-//             <span className="tag has-text-light">Learn</span>
-//             <span className="tag has-text-light">Test</span>
-//             <span className="tag has-text-light">Shuffle</span>
-//           </div>
-//         </div>
-//         <div className="level-right">
-//           <div className="tags are-large">
-//             <span className="tag has-text-light">Edit</span>
-//             <span className="tag has-text-light">Settings</span>
-//           </div>
-//         </div>
-//       </nav>
-//       <div className="flip-container" onClick={flipCard}>
-//         <div className={`flip-card${isFlipped ? ' is-flipped' : ''}`}>
-//           <div className="flip-card-inner">
-//             <div className="flip-card-front">
-//               <h3 className="title is-3">Front Side</h3>
-//               <p>This is the front side of the card.</p>
-//             </div>
-//             <div className="flip-card-back">
-//               <h3 className="title is-3">Back Side</h3>
-//               <p>This is the back side of the card.</p>
-//             </div>
-//           </div>
-//         </div>
-//       </div>
-//       {/* Pagination component for card depending on the view */}
-//       <Pagination />
-//     </div>
-//   );
-// };
-
-// export default Flashcard;
+export default Card;

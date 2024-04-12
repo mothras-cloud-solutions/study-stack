@@ -7,7 +7,7 @@ const Footer: React.FC = () => {
         <p>
           <strong>Study Stack</strong> &copy; 2024. All rights reserved.
         </p>
-        {/* <div className="social-icons">
+        <div className="social-icons">
           <a href="#" className="icon">
             <i className="fab fa-facebook"></i>
           </a>
@@ -17,7 +17,7 @@ const Footer: React.FC = () => {
           <a href="#" className="icon">
             <i className="fab fa-instagram"></i>
           </a>
-        </div> */}
+        </div>
       </div>
     </footer>
   );

@@ -1,3 +1,6 @@
+
+
+
 import React, { useState, useEffect } from 'react';
 import DeckSelector from './DeckSelector';
 import CardThumbnailContainer from './CardThumbnailContainer';
@@ -51,6 +54,7 @@ const DeckCollection: React.FC<DeckCollectionProps> = ({ uid, changeDeck }) => {
   };
 
   return (
+    <>
     <div>
        <DeckSelector decks={decks} onDeckSelect={handleDeckSelect} uid={uid} setRefreshDecks={setRefreshDecks} refreshDecks={refreshDecks}/>
       {selectedDeck ? (
@@ -62,6 +66,7 @@ const DeckCollection: React.FC<DeckCollectionProps> = ({ uid, changeDeck }) => {
       <Footer/>
 
     </div>
+     </>
   );
 };
 
