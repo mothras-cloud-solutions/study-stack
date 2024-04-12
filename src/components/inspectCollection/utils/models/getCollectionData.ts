@@ -3,7 +3,7 @@ import axios from 'axios';
 // Update canvas back for flashcard
 export const getCollectionMeta = async (collection_id: number) => {
   try {
-    const response = await axios.put(`/api/collections/${collection_id}`);
+    const response = await axios.get(`/api/collections/${collection_id}`);
     return response.data;
   } catch (error) {
     console.error('getCollectionMeta error: ', error);
@@ -13,7 +13,7 @@ export const getCollectionMeta = async (collection_id: number) => {
 
 export const getCollectionFlashcards = async (collection_id: number) => {
   try {
-    const response = await axios.put(`/api/flashcards/collection_id/${collection_id}`);
+    const response = await axios.get(`/api/flashcards/collection_id/${collection_id}`);
     return response.data;
   } catch (error) {
     console.error('getCollectionFlashcards error: ', error);

@@ -1,26 +1,30 @@
 
 
-type CanvasType = {
-  id: number;
-  canvas: string;
-};
-
 type FlashcardType = {
   id: number;
   term: string;
   definition: string;
   confidenceLevel: number;
   keywords: string;
-  collectionId: number;
-  isArchived?: boolean;
-  canvas: CanvasType;
+  collection_id: number;
+  archived: number;
+  starred: number;
+  created_at: string;
+  edited_at: string;
+  canvas_front: string;
+  canvas_back: string;
+  deck_title: string;
 };
 
 type CollectionType = {
-  collectionId: number;
+  id: number;
   title: string;
   description: string;
-  subjects: string[];
+  subjects: string;
+  created_at: string;
+  edited_at: string;
+  user_id: string;
+  created_from_id: number;
   flashcards: FlashcardType[];
 };
 

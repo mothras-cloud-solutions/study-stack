@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './Actions.css';
 import { useNavigate } from 'react-router-dom';
+import { exportCollection } from './utils/exportFile.ts';
 
 type ActionsProps = {
   selectedDeck: {
@@ -38,6 +39,7 @@ const Actions: React.FC<ActionsProps> = ({ selectedDeck, onStudy }) => {
 
   const handleExportDeck = () => {
     console.log('Export Deck clicked');
+    exportCollection(selectedDeck.id);
   };
 
   return (
