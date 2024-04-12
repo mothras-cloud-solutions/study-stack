@@ -19,7 +19,7 @@ const Actions: React.FC<ActionsProps> = ({ selectedDeck, onStudy }) => {
   };
 
   const handleStudy = () => {
-    if (selectedDeck && selectedDeck.flashcards) {
+    if (selectedDeck) {
       navigate('/learn', { state: { cards: selectedDeck.flashcards } });
     }
   };

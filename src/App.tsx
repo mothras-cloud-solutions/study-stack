@@ -1,6 +1,7 @@
 import React, { useEffect, useState, Fragment } from 'react';
 import Register from './components/Register/Register.tsx';
 import Login from './components/Login/Login.tsx';
+import axios from 'axios';
 // import SignOut from './components/SignOut/SignOut.tsx';
 import { onAuthStateChange } from '../firebase/firebase.ts';
 import { User } from 'firebase/auth';
@@ -16,11 +17,13 @@ import NavBarLogOut from './components/overview/components/NavBarLogOut';
 import { Routes, Route } from 'react-router-dom';
 import Overview from './components/overview/index';
 import StudyCards from './components/learnCollection/StudyCards';
+import { response } from 'express';
 
 function App() {
   const [user, setUser] = useState<User | null>(null);
   const [uid, setUid] = useState<string | null>(null);
-  const [currentDeck, setCurrentDeck] = useState<Array | null>(null);
+  const [currentDeck, setCurrentDeck] = useState<Object | null>(null);
+  const [currentCards, setCurrentCards] = useState<Array | null>(null);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChange((u) => {
@@ -31,6 +34,18 @@ function App() {
       unsubscribe();
     }
   }, []);
+
+  useEffect(() => {
+    if (currentDeck !== null) {
+      axios.get(`/api/flashcards/collection_id/${currentDeck.id}`)
+        .then((response) => {
+          setCurrentCards(response.data);
+        })
+        .catch((error) => {
+          console.error('Error fetching flashcards:', error);
+        });
+    }
+  }, [currentDeck]);
 
   useEffect(() => {
     if (user) {
@@ -70,7 +85,7 @@ useEffect(() => {
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/home" element={<Overview />} />
-        <Route path="/learn" element={<StudyCards prop={currentDeck}/>} />
+        <Route path="/learn" element={<StudyCards prop={currentCards}/>} />
         <Route path="/create" element={<CreateDeck uid={uid} />} />
         <Route path="/collections" element={<DeckCollection uid={uid} changeDeck={changeDeck} />} />
       </Routes>
