@@ -25,10 +25,8 @@ const Actions: React.FC<ActionsProps> = ({ selectedDeck, onStudy, onDelete }) =>
   };
 
   const handleStudy = () => {
-    if (selectedDeck && selectedDeck?.flashcards?.length > 0) {
+    if (selectedDeck) {
       navigate('/learn', { state: { cards: selectedDeck.flashcards } });
-    } else {
-      alert('Please add flashcards to the deck before studying!');
     }
   };
 

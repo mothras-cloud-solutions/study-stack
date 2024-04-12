@@ -181,10 +181,12 @@ body {
 .flip-notice {
   position: absolute;
   right: 19px;
-  top: 53px;
+  top: 82px;
 }
 .transparent-bg{
+
   background: transparent !important;
+  background:rgb(255,255,255, 0.6) !important;
 }
 /* .pagination-list {
   display:none;
