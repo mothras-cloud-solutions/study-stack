@@ -1,4 +1,3 @@
-
 import React from 'react';
 
 import { importFile } from './utils/importFile.ts';

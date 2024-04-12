@@ -1,0 +1,36 @@
+.container-overview {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  height: 90%;
+}
+
+.hero {
+  /* background-image: url("https://flippity.net/images/Flashcard-BG-Side1.gif"); */
+  background-color:transparent;
+  /* background-size: cover;
+  background-position: center; */
+}
+
+.buttons {
+  margin-top: 20px;
+}
+
+.clickable {
+  display: block;
+  text-decoration: none;
+  padding: 20px;
+  border-radius: 8px;
+  background-color: transparent;
+}
+
+.clickable:hover {
+  /* background-color: #f0f0f0; */
+}
+
+.homeBg{
+  background-image: url("https://flippity.net/images/Flashcard-BG-Side1.gif");
+  background-size: cover;
+  background-position: center;
+  margin: 10px;
+}

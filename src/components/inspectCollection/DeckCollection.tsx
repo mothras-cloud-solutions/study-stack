@@ -3,6 +3,7 @@ import DeckSelector from './DeckSelector';
 import CardThumbnailContainer from './CardThumbnailContainer';
 import Actions from './Actions';
 import { useNavigate } from 'react-router-dom';
+import Footer from '../Skeleton/components/Footer';
 
 type DeckType = {
   id: number;
@@ -57,7 +58,7 @@ const DeckCollection: React.FC<DeckCollectionProps> = ({ uid, changeDeck }) => {
           <Actions selectedDeck={selectedDeck} onDelete={handleDeleteDeckUpdate} />
           <CardThumbnailContainer collection_id={selectedDeck ? selectedDeck.id : 0} />
         </>
-      ) : <p></p>}
+      ) : <p>Please select a deck.</p>}
     </div>
   );
 };

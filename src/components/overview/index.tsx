@@ -1,23 +1,60 @@
 import React, { Fragment } from 'react';
-import { Links } from 'react-router-dom';
-import DeckCollection from '../Skeleton/components/DeckCollection';
-import Search from './components/Search';
+// import { Links } from 'react-router-dom';
 import Footer from './components/Footer';
-
+import './styles/styles.css'
+import { useNavigate, NavLink } from 'react-router-dom';
 
 function Overview() {
-  const decksData = [
-    { id: 1, title: 'Deck 1', description: 'Description for Deck 1', cardCount: 12 },
-    { id: 2, title: 'Deck 2', description: 'Description for Deck 2', cardCount: 10 },
-    { id: 3, title: 'Deck 3', description: 'Description for Deck 3', cardCount: 2 },
-    { id: 4, title: 'Deck 4', description: 'Description for Deck 4', cardCount: 20 }
-  ];
+  const navigate = useNavigate();
+
+  const handleHomeCollections = async () => {
+    try {
+      navigate('/collections');
+    } catch (error) {
+      console.error('Collections button error:', error.message);
+    }
+  };
+  const handleHomeCreate = async () => {
+    try {
+      navigate('/create');
+    } catch (error) {
+      console.error('Create button error:', error.message);
+    }
+  };
   return (
     <Fragment>
-      {/* <h1>Overview</h1> */}
-      {/* <Search items={}/> */}
-      <DeckCollection decks={decksData}/>
-      {/* <Search/> */}
+      <div className="container">
+        <section className="hero is-fullheight">
+          <div className="hero-body">
+            <div className="container has-text-centered">
+              <h1 className="title is-size-1">Welcome to StudyStack</h1>
+              <h2 className="subtitle is-size-4">
+                Create, Edit, and Learn with Flashcards!
+              </h2>
+              <div className="columns is-centered is-vcentered">
+                <div className="column is-half homeBg">
+                  <NavLink to="/create" className="box clickable">
+                    <h3 className="title is-size-3">Create Your First Deck</h3>
+                    <p>Create your own flashcards quickly and easily.</p>
+                  </NavLink>
+                </div>
+                {/* <div className="column is-one-third homeBg">
+                  <a href="#" className="box clickable">
+                    <h3 className="title is-size-3">Edit</h3>
+                    <p>Edit your existing flashcards with ease.</p>
+                  </a>
+                </div> */}
+                <div className="column is-half homeBg">
+                  <NavLink to="/collections" className="box clickable">
+                    <h3 className="title is-size-3">See all your Decks</h3>
+                    <p>Organize and format your flashcards here.</p>
+                  </NavLink>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
       <Footer />
     </Fragment>
   );

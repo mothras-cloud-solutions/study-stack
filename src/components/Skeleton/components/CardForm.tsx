@@ -143,6 +143,12 @@ const CardForm: React.FC<CardFormProps> = ({
             });
 
         const updatedCard = editingCard ? response.data : response.data.flashcard;
+        if (typeof updatedCard.canvas_front !== 'string') {
+          updatedCard.canvas_front = '';
+        }
+        if (typeof updatedCard.canvas_back !== 'string') {
+          updatedCard.canvas_back = '';
+        }
         console.log('Card saved successfully:', updatedCard);
         setTerm('');
         setDefinition('');
@@ -166,6 +172,7 @@ const CardForm: React.FC<CardFormProps> = ({
   const handleCancelOrEdit = () => {
     setError('');
     setSuccess('');
+    setShowAdvanced(false);
     setEditingCard(null);
     setTerm('');
     setDefinition('');

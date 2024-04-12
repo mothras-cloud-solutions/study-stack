@@ -58,7 +58,7 @@ const Actions: React.FC<ActionsProps> = ({ selectedDeck, onStudy, onDelete }) =>
     <div className="action-container space-y-2">
       <button onClick={handleEdit} className="action-button">Edit</button>
       <button onClick={handleStudy} className="action-button">Study</button>
-      <button onClick={() => setShowMoreActions(!showMoreActions)} className="action-button">...</button>
+      <button onClick={() => setShowMoreActions(!showMoreActions)} className="action-button">More options...</button>
       {showMoreActions && (
         <div className={`additional-actions ${showMoreActions ? 'show' : ''}`}>
           <button onClick={handleDeleteDeck} className="action-button">Delete Deck</button>
