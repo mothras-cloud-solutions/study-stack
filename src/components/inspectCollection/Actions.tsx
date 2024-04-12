@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './Actions.css';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 type ActionsProps = {
   selectedDeck: {
@@ -25,7 +26,18 @@ const Actions: React.FC<ActionsProps> = ({ selectedDeck, onStudy }) => {
   };
 
   const handleDeleteDeck = () => {
-    console.log('Delete Deck clicked');
+    if (selectedDeck && window.confirm('Are you sure you want to delete the currently selected deck?')) {
+      axios.delete(`/api/collections/${selectedDeck.id}`)
+        .then(response => {
+          alert(response.data.message);
+          // refresh
+          navigate('/collections');
+        })
+        .catch(error => {
+          console.error('Error deleting deck:', error);
+          alert('Failed to delete the deck.');
+        });
+    }
   };
 
   const handleImportDeck = () => {
