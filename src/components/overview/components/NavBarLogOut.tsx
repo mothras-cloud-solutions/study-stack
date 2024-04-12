@@ -1,6 +1,6 @@
 // NavBar.tsx
 import React, { Fragment, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
 import Signout from '../../SignOut/SignOut';
 
 interface User {
@@ -91,6 +91,7 @@ const NavBarLogOut: React.FC<NavBarProps> = () => {
           </div>
         </nav>
       </div>
+      <Outlet/>
     </Fragment>
 
   );

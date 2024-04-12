@@ -10,7 +10,7 @@ function SignOut() {
     try {
       await signOut();
       console.log('User signed out successfully');
-      navigate('/home');
+      navigate('/');
     } catch (error) {
       console.error('Sign out error:', error.message);
     }
