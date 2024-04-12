@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useSearchParams } from 'react-router-dom';
 import DeckForm from './DeckForm';
 import CardForm from './CardForm';
 import DeckCards from './DeckCardCollection';
 
 interface CreateEditDeckProps {
   uid: string;
-  deckId?: string;
 }
 
 interface Card {
@@ -17,7 +17,9 @@ interface Card {
   archived: boolean;
 }
 
-const CreateEditDeck: React.FC<CreateEditDeckProps> = ({ uid, deckId: initialDeckId }) => {
+const CreateEditDeck: React.FC<CreateEditDeckProps> = ({ uid }) => {
+  const [searchParams] = useSearchParams();
+  const [deckId, setDeckId] = useState<string | undefined>(searchParams.get('deckId'));
   const [deckName, setDeckName] = useState('');
   const [subjects, setSubjects] = useState('');
   const [titleError, setTitleError] = useState('');
@@ -29,7 +31,6 @@ const CreateEditDeck: React.FC<CreateEditDeckProps> = ({ uid, deckId: initialDec
   const [isEditing, setIsEditing] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
-  const [deckId, setDeckId] = useState<string | undefined>(initialDeckId);
 
   useEffect(() => {
     let timer: ReturnType<typeof setTimeout> | null = null;

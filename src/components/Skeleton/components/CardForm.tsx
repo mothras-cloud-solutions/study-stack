@@ -224,7 +224,6 @@ const CardForm: React.FC<CardFormProps> = ({
           </button>
         </div>
         <div className="control">
-        <CardEditor card={editingCard}/>
           {/* Button to render to Wyatt's editor or redirect to it */}
           {function(){
             if (Object.keys(editingCard).length > 0){
