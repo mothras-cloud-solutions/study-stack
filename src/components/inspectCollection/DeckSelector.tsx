@@ -1,6 +1,8 @@
 
 import React from 'react';
 
+import { importFile } from './utils/importFile.ts';
+
 type CollectionType = {
   id: number;
   title: string;
@@ -9,10 +11,19 @@ type CollectionType = {
 type DeckSelectorProps = {
   decks: CollectionType[];
   onDeckSelect: (collection: CollectionType) => void;
+  uid: string | null;
+  setRefreshDecks: (refresh: boolean) => void;
+  refreshDecks: boolean;
 };
 
-const DeckSelector: React.FC<DeckSelectorProps> = ({ decks, onDeckSelect }) => {
-  console.log('Rendering DeckSelector, decks:', decks);
+const DeckSelector: React.FC<DeckSelectorProps> = ({ decks, onDeckSelect, uid, setRefreshDecks, refreshDecks }) => {
+  // console.log('Rendering DeckSelector, decks:', decks);
+
+  const handleImportDeck = async () => {
+    // console.log('Import Deck clicked');
+    importFile(uid, setRefreshDecks, refreshDecks);
+  };
+
   return (
     <div className="w-full mb-4">
       <label htmlFor="collection-select" className="block text-lg font-medium text-gray-700 mb-2">
@@ -38,6 +49,7 @@ const DeckSelector: React.FC<DeckSelectorProps> = ({ decks, onDeckSelect }) => {
           </option>
         ))}
       </select>
+      <button onClick={handleImportDeck} className="action-button">Import Deck</button>
     </div>
   );
 };
