@@ -74,7 +74,10 @@ export const createFlashcard = async (req: Request, res: Response) => {
             'INSERT INTO canvases (archived, canvas_front, canvas_back, flashcards_id) VALUES ($1, $2, $3, $4) RETURNING *',
             [archived, canvas_front, canvas_back, flashcards_id]
         );
-        res.status(201).json({ flashcard: result.rows[0], canvas: result2.rows[0] });
+        const combinedResult = result.rows[0];
+        combinedResult.canvas_front = result2.rows[0].canvas_front;
+        combinedResult.canvas_back = result2.rows[0].canvas_back;
+        res.status(201).json(combinedResult);
     } catch (err) {
         console.error('Error creating flashcard:', err);
         res.status(500).json({ error: 'Internal server error' });
