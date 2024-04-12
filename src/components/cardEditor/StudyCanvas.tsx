@@ -44,6 +44,7 @@ const StudyCanvas: React.FC<Props> = ({ front, back, flipped, index }) => {
   }, [parentDimensions]);
 
   useEffect(() => {
+    console.log(front, 'front', back, 'back');
     if (flipped && back.length > 1) {
       setShapes(JSON.parse(back))
     } else if (flipped && back.length < 5) {
