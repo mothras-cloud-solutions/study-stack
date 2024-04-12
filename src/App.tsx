@@ -88,7 +88,8 @@ function App() {
               <Route path="home" element={<Overview />} />
               <Route path="learn" element={<StudyCards prop={currentCards} />} />
               <Route path="create" element={<CreateDeck uid={uid} />} />
-              <Route path="collections" element={<DeckCollection uid={uid} changeDeck={changeDeck} />} />
+              <Route path="collections" element={<DeckCollection currentCards={currentCards} changeDeck={changeDeck} uid={uid} />} />
+
             </Route>
             <Route path="/register" element={<Register />} />
             <Route path="/login" element={<Login />} />
