@@ -36,7 +36,6 @@ export default function StudyCards (prop: collection) {
 function shuffleTheDeck() {
   let shuffleDeck = studyDeck.slice();
       shuffleDeck = shuffle(shuffleDeck);
-      console.log(shuffleDeck, " this is shuffledeck")
       setStudyDeck(shuffleDeck);
       setIndex(0);
 }
