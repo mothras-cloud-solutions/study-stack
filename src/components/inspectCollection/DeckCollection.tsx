@@ -42,7 +42,7 @@ const DeckCollection: React.FC<DeckCollectionProps> = ({ uid, currentCards, chan
   }, [uid, refreshDecks]);
 
   useEffect(() => {
-    if (currentCards.length > 0 && selectedDeck) {
+    if (selectedDeck && currentCards && currentCards.length > 0) {
       const updatedDeck = { ...selectedDeck, flashcards: currentCards };
       setSelectedDeck(updatedDeck);
       changeDeck(updatedDeck);
@@ -50,8 +50,9 @@ const DeckCollection: React.FC<DeckCollectionProps> = ({ uid, currentCards, chan
   }, [currentCards, selectedDeck, changeDeck, uid]);
 
   const handleDeckSelect = (deck: DeckType) => {
-    setSelectedDeck(deck);
-    changeDeck(deck);
+    const deckWithCards = decks.find(d => d.id === deck.id) || deck;
+    setSelectedDeck(deckWithCards);
+    changeDeck(deckWithCards);
   };
 
   const handleDeleteDeckUpdate = (deletedDeckId: number) => {
@@ -63,14 +64,14 @@ const DeckCollection: React.FC<DeckCollectionProps> = ({ uid, currentCards, chan
   return (
     <>
     <div>
-      <DeckSelector decks={decks} onDeckSelect={handleDeckSelect} uid={uid} setRefreshDecks={setRefreshDecks} refreshDecks={refreshDecks}/>
+      <DeckSelector decks={decks} onDeckSelect={handleDeckSelect} uid={uid} setRefreshDecks={setRefreshDecks} refreshDecks={refreshDecks} />
       {selectedDeck ? (
         <>
           <Actions selectedDeck={selectedDeck} currentCards={currentCards} onDelete={handleDeleteDeckUpdate} />
           <CardThumbnailContainer collection_id={selectedDeck.id} />
         </>
       ) : <p>Please select a deck.</p>}
-      <Footer/>
+      <Footer />
     </div>
      </>
   );
