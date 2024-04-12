@@ -15,7 +15,11 @@ const Actions: React.FC<ActionsProps> = ({ selectedDeck, onStudy }) => {
   const navigate = useNavigate();
 
   const handleEdit = () => {
-    navigate('/create');
+    if (selectedDeck) {
+      navigate(`/create?deckId=${selectedDeck.id}`);
+    } else {
+      navigate('/create');
+    }
   };
 
   const handleStudy = () => {

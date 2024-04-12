@@ -82,6 +82,7 @@ useEffect(() => {
     <section className="section">
     <div className="container">
       <Routes>
+        <Route path="/" element={<HomePage />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
         <Route path="/home" element={<Overview />} />

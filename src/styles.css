@@ -20,10 +20,42 @@ body {
   background-position: center;
 }
 
-/* .transparent-bg {
 
-} */
+/* For browsers that support -webkit-line-clamp */
+@supports (-webkit-line-clamp: 3) {
+  .short-description {
+    max-width: 300px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    word-break: break-all;
+    overflow-wrap: break-word;
+  }
+}
 
+/* Fallback for browsers that do not support -webkit-line-clamp */
+@supports not (-webkit-line-clamp: 3) {
+  .short-description {
+    max-height: 3 * 1.2em;
+    line-height: 1.2em;
+    overflow: hidden;
+  }
+}
+
+.card-form-container {
+  overflow: hidden;
+  transition: height 0.3s ease-in-out;
+}
+
+.card-form {
+  transition: opacity 0.3s ease-in-out;
+}
+
+.card-form-hidden {
+  opacity: 0;
+  height: 0;
+}
 
 .navbar-item-separator {
   display: inline-block;
@@ -47,12 +79,19 @@ body {
 
 .navbar {
   transition: all 0.5s;
-  /* background-color: rgba(255, 255, 255, 0.95); */
-  /* box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px; */
+  background-color: rgba(255, 255, 255, 0.95);
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px;
 }
 
 .fullPageCenteredComponent{
   height: calc(100vh - 230px);
+}
+
+.chunckle-clamp {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 250px;
 }
 /* CSS To make the card flip */
 .flip-container {
