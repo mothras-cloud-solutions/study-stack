@@ -66,32 +66,37 @@ function App() {
 
   return (
     <Fragment>
-      <Routes>
-        <Route
-          path="/"
-          element={user ? (
-            <>
-              <NavBarLogOut path="/home" />
-              <Overview />
-              <Footer />
-            </>
-          ) : (
-            <Fragment>
-              <NavBarLogIn currentCards={currentCards} />
-              <HomePage />
-              <Footer />
-            </Fragment>
-          )}
-        />
-        <Route path='/' element={user ? <NavBarLogOut /> : <NavBarLogIn currentCards={currentCards} />}>
-          <Route path="home" element={<Overview />} />
-          <Route path="learn" element={<StudyCards prop={currentCards} />} />
-          <Route path="create" element={<CreateDeck uid={uid} />} />
-          <Route path="collections" element={<DeckCollection uid={uid} changeDeck={changeDeck} />} />
-        </Route>
-        <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
-      </Routes>
+      <section className="section">
+        <div className="container">
+          <Routes>
+            <Route
+              path="/"
+              element={user ? (
+                <>
+                  <NavBarLogOut path="/home" />
+                  <Overview />
+                  <Footer />
+                </>
+              ) : (
+                <Fragment>
+                  <NavBarLogIn currentCards={currentCards} />
+                  <HomePage />
+                  <Footer />
+                </Fragment>
+              )}
+            />
+
+            <Route path='/' element={user ? <NavBarLogOut /> : <NavBarLogIn currentCards={currentCards} />}>
+              <Route path="home" element={<Overview />} />
+              <Route path="learn" element={<StudyCards prop={currentCards} />} />
+              <Route path="create" element={<CreateDeck uid={uid} />} />
+              <Route path="collections" element={<DeckCollection uid={uid} changeDeck={changeDeck} />} />
+            </Route>
+            <Route path="/register" element={<Register />} />
+            <Route path="/login" element={<Login />} />
+          </Routes>
+        </div>
+      </section>
     </Fragment>
   )
 }
