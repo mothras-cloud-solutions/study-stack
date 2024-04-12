@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import './Actions.css';
 import { useNavigate } from 'react-router-dom';
-import { exportCollection } from './utils/exportFile.ts';
 import axios from 'axios';
 
 type ActionsProps = {
@@ -9,10 +8,10 @@ type ActionsProps = {
     id: number;
     flashcards: any[];
   } | null;
-  onStudy: (cards: any[]) => void;
+  onDelete: (id: number) => void;
 };
 
-const Actions: React.FC<ActionsProps> = ({ selectedDeck, onStudy }) => {
+const Actions: React.FC<ActionsProps> = ({ selectedDeck, onDelete }) => {
   const [showMoreActions, setShowMoreActions] = useState(false);
   const navigate = useNavigate();
 
@@ -45,15 +44,6 @@ const Actions: React.FC<ActionsProps> = ({ selectedDeck, onStudy }) => {
     }
   };
 
-  // const handleImportDeck = () => {
-  //   console.log('Import Deck clicked');
-  // };
-
-  const handleExportDeck = () => {
-    console.log('Export Deck clicked');
-    exportCollection(selectedDeck.id);
-  };
-
   return (
     <div className="action-container space-y-2">
       <button onClick={handleEdit} className="action-button">Edit</button>
@@ -62,8 +52,6 @@ const Actions: React.FC<ActionsProps> = ({ selectedDeck, onStudy }) => {
       {showMoreActions && (
         <div className={`additional-actions ${showMoreActions ? 'show' : ''}`}>
           <button onClick={handleDeleteDeck} className="action-button">Delete Deck</button>
-          {/* <button onClick={handleImportDeck} className="action-button">Import Deck</button> */}
-          <button onClick={handleExportDeck} className="action-button">Export Deck</button>
         </div>
       )}
     </div>
