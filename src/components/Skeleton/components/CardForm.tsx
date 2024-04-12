@@ -8,6 +8,7 @@ interface CardFormProps {
   setEditingCard: React.Dispatch<React.SetStateAction<Card | null>>;
   handleNewCardSave: (newCard: Card) => void;
   handleCardUpdate: (updatedCard: Card) => void;
+  isCreateMode: boolean; // Add isCreateMode prop
 }
 
 interface Card {
@@ -16,6 +17,8 @@ interface Card {
   definition: string;
   keywords: string;
   archived: boolean;
+  confidenceLevel: number;
+  collection_id: number;
 }
 
 const CardForm: React.FC<CardFormProps> = ({
@@ -24,6 +27,7 @@ const CardForm: React.FC<CardFormProps> = ({
   setEditingCard,
   handleNewCardSave,
   handleCardUpdate,
+  isCreateMode, // Destructure isCreateMode prop
 }) => {
   const [term, setTerm] = useState('');
   const [definition, setDefinition] = useState('');
@@ -110,42 +114,44 @@ const CardForm: React.FC<CardFormProps> = ({
     setError('');
     setSuccess('');
 
-    try {
-      const response = editingCard
-        ? await axios.put(`/api/flashcards/${editingCard.id}`, {
-            term,
-            definition,
-            keywords,
-          })
-        : await axios.post('/api/flashcards/', {
-            term,
-            definition,
-            confidenceLevel: 0,
-            keywords,
-            archived: 0,
-            starred: 0,
-            collection_id: deckId,
-          });
-      const updatedCard = response.data;
-      console.log('Card saved successfully:', updatedCard);
-      setTerm('');
-      setDefinition('');
-      setKeywords('');
-      setEditingCard(null);
-      quillRef.current?.setText(''); // Clear the text editor
-      setSuccess(editingCard ? 'Card updated successfully!' : 'Card saved successfully!');
-      if (editingCard) {
-        handleCardUpdate(updatedCard);
-      } else {
-        handleNewCardSave(updatedCard);
+      try {
+        const response = editingCard
+          ? await axios.put(`/api/flashcards/${editingCard.id}`, {
+              term,
+              definition,
+              keywords,
+              collection_id: editingCard.collection_id,
+            })
+          : await axios.post('/api/flashcards/', {
+              term,
+              definition,
+              confidenceLevel: 0,
+              keywords,
+              archived: 0,
+              starred: 0,
+              collection_id: deckId,
+            });
+
+        const updatedCard = editingCard ? response.data : response.data.flashcard;
+        console.log('Card saved successfully:', updatedCard);
+        setTerm('');
+        setDefinition('');
+        setKeywords('');
+        setEditingCard(null);
+        quillRef.current?.setText(''); // Clear the text editor
+        setSuccess(editingCard ? 'Card updated successfully!' : 'Card saved successfully!');
+        if (editingCard) {
+          handleCardUpdate(updatedCard);
+        } else {
+          handleNewCardSave(updatedCard);
+        }
+      } catch (error) {
+        console.error('Error saving card:', error);
+        setError('Error saving card. Please try again.');
+      } finally {
+        setSaving(false);
       }
-    } catch (error) {
-      console.error('Error saving card:', error);
-      setError('Error saving card. Please try again.');
-    } finally {
-      setSaving(false);
-    }
-  };
+    };
 
   const handleCancelOrEdit = () => {
     setError('');
@@ -158,7 +164,7 @@ const CardForm: React.FC<CardFormProps> = ({
   };
 
   return (
-    <div className="box">
+    <div className={`box card-form ${isCreateMode ? 'card-form-hidden' : ''}`}>
       <h3 className="title is-4">{editingCard ? 'Edit Card' : 'Add New Card'}</h3>
       <div className="field">
         <label className="label">Prompt</label>

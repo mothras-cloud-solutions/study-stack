@@ -51,8 +51,8 @@ const DeckCards: React.FC<DeckCardsProps> = ({ cards, handleCardEdit, handleCard
           <div className="column is-one-third" key={card.id}>
             <div className="card">
               <div className="card-content">
-                <div className="content">
-                  <p><strong>Prompt:</strong> {card.term}</p>
+                <div className="content short-description">
+                  <p className="chunckle-clamp"><strong>Prompt:</strong> {card.term}</p>
                   {/* <p><strong>Definition:</strong> {card.definition}</p> */}
                   <span dangerouslySetInnerHTML={{ __html: card.definition }} />
                 </div>

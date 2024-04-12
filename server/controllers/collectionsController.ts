@@ -55,11 +55,11 @@ export const getCollectionByUserId = async (req: Request, res: Response) => {
 };
 
 export const createCollection = async (req: Request, res: Response) => {
-    const { title, description, subjects, uid } = req.body;
+    const { title, subjects, user_id } = req.body;
     try {
         const result = await pool.query(
-            'INSERT INTO collections (title, description, subjects, uid) VALUES ($1, $2, $3, $4) RETURNING *',
-            [title, description, subjects, uid]
+            'INSERT INTO collections (title, subjects, user_id) VALUES ($1, $2, $3) RETURNING *',
+            [title,  subjects, user_id]
         );
         res.status(201).json(result.rows[0]);
     } catch (err) {
@@ -70,11 +70,11 @@ export const createCollection = async (req: Request, res: Response) => {
 
 export const updateCollection = async (req: Request, res: Response) => {
     const { id } = req.params;
-    const { title, description, subjects, user_id } = req.body;
+    const { title, subjects, user_id } = req.body;
     try {
         const result = await pool.query(
-            'UPDATE collections SET title = $1, description = $2, subjects = $3, user_id = $4 WHERE id = $5 RETURNING *',
-            [title, description, subjects, user_id, id]
+            'UPDATE collections SET title = $1, subjects = $2, user_id = $3 WHERE id = $4 RETURNING *',
+            [title, subjects, user_id, id]
         );
         if (result.rows.length > 0) {
             res.json(result.rows[0]);
