@@ -44,6 +44,13 @@ function Register() {
     navigate('/');
   };
 
+  const handleToLogin = () => {
+    setEmail('');
+    setPassword('');
+    setConfirmPassword('');
+    navigate('/login');
+  };
+
   return (
     <div className="columns is-centered is-vcentered fullPageCenteredComponent">
       <div className="column is-two-fifths">
@@ -110,6 +117,11 @@ function Register() {
               <div className="control">
                 <button type="button" className="button is-link is-light is-fullwidth" onClick={handleCancel}>
                   Cancel
+                </button>
+              </div>
+              <div className="control">
+                <button type="button" className="button is-success is-light is-fullwidth loginInstead" onClick={handleToLogin}>
+                  Login Instead
                 </button>
               </div>
             </div>
