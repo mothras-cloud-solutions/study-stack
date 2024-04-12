@@ -172,6 +172,7 @@ const CardForm: React.FC<CardFormProps> = ({
     setKeywords('');
     quillRef.current?.setText(''); // Clear the text editor
   };
+  console.log(editingCard, 'editingCard');
 
   return (
     <div className={`box card-form ${isCreateMode ? 'card-form-hidden' : ''}`}>
@@ -225,16 +226,9 @@ const CardForm: React.FC<CardFormProps> = ({
         </div>
         <div className="control">
           {/* Button to render to Wyatt's editor or redirect to it */}
-          {function(){
-            if (Object.keys(editingCard).length > 0){
-              return <button className="button is-light" onClick={changeAdvancedState}>Advanced Edit Mode</button>
-            }
-          }}
-          {function(){
-            if (showAdvanced) {
-              return <CardEditor card={editingCard}/>
-            }
-          }}
+          {editingCard !== null && <button className="button is-light" onClick={changeAdvancedState}>Advanced Edit Mode</button>}
+          {showAdvanced && <CardEditor card={editingCard}/>}
+
         </div>
       </div>
     </div>
