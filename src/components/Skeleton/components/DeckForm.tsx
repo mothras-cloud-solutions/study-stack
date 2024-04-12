@@ -13,6 +13,7 @@ interface DeckFormProps {
   handleCancel: () => void;
   savedSuccessfully: boolean;
   saving: boolean;
+  isEditing: boolean;
 }
 
 const DeckForm: React.FC<DeckFormProps> = ({
@@ -28,6 +29,8 @@ const DeckForm: React.FC<DeckFormProps> = ({
   handleCancel,
   savedSuccessfully,
   saving,
+  isEditing,
+  setDeckId // Added setDeckId as a prop
 }) => {
   const [titleTyping, setTitleTyping] = useState(false);
   const [subjectsTyping, setSubjectsTyping] = useState(false);
@@ -49,9 +52,9 @@ const DeckForm: React.FC<DeckFormProps> = ({
 
   useEffect(() => {
     if (savedSuccessfully) {
-      setSuccessMessage('Deck saved successfully!');
+      setSuccessMessage(isEditing ? 'Deck saved successfully!' : 'Deck saved successfully!');
     }
-  }, [savedSuccessfully]);
+  }, [savedSuccessfully, isEditing]);
 
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTitleTyping(true);
@@ -68,12 +71,13 @@ const DeckForm: React.FC<DeckFormProps> = ({
   const handleSubmit = async () => {
     setTitleTyping(false);
     setSubjectsTyping(false);
-    await handleSave();
+    const response = await handleSave();
+    if (!isEditing) {
+      setDeckId(response.data.id); // Set the deckId with the new deck ID
+    }
   };
-
   return (
     <div className="box">
-      <h3 className="title is-4">Create New Deck</h3>
       <div className="field">
         <label className="label">Deck Name</label>
         <div className="control">
@@ -84,9 +88,7 @@ const DeckForm: React.FC<DeckFormProps> = ({
             onChange={handleTitleChange}
           />
         </div>
-        {titleError && !titleTyping && (
-          <p className="help is-danger">{titleError}</p>
-        )}
+
       </div>
       <div className="field">
         <label className="label">Keywords</label>
@@ -98,11 +100,9 @@ const DeckForm: React.FC<DeckFormProps> = ({
             onChange={handleSubjectsChange}
           />
         </div>
-        {subjectsError && !subjectsTyping && (
-          <p className="help is-danger">{subjectsError}</p>
-        )}
+
       </div>
-      {successMessage && <p className="help is-success">{successMessage}</p>}
+
       <div className="field is-grouped">
         <div className="control">
           <button
@@ -110,13 +110,22 @@ const DeckForm: React.FC<DeckFormProps> = ({
             onClick={handleSubmit}
             disabled={saving}
           >
-            Save Deck
+            {isEditing ? 'Update Deck' : 'Create Deck'}
           </button>
         </div>
         <div className="control">
           <button className="button is-link is-light" onClick={handleCancel}>
             Cancel
           </button>
+        </div>
+        <div className="control">
+        {titleError && !titleTyping && (
+          <span className="tag  is-light is-danger">{titleError}</span>
+        )}
+        {subjectsError && !subjectsTyping && (
+          <span className="tag  is-light is-danger">{subjectsError}</span>
+        )}
+        {successMessage && <span className="tag is-success  is-light">{successMessage}</span>}
         </div>
       </div>
     </div>
