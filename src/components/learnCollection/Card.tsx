@@ -45,7 +45,7 @@ export default function Card({ card, setIndex, index, length, studyDeck, setStud
     const buttonClicked = e.target.innerText
 
     if (buttonClicked === "Skip Back") {
-      let newIndex = index - 1;
+      const newIndex = index - 1;
       if (newIndex < 0) {
         console.log("That's far enough")
       } else {
@@ -77,6 +77,7 @@ export default function Card({ card, setIndex, index, length, studyDeck, setStud
       if (starred === 0) {
         axios.put(`/api/flashcards/${id}/starred`).then(() => {
           console.log('starred should be changed to 1')
+          studyDeck[index].starred = 1;
         })
       }
       const newIndex = index + 1;
@@ -97,6 +98,7 @@ export default function Card({ card, setIndex, index, length, studyDeck, setStud
       if (starred === 1) {
         axios.put(`/api/flashcards/${id}/starred`).then(() => {
           console.log('starred should be changed back to 0')
+          studyDeck[index].starred = 0;
         })
       }
       const newIndex = index + 1;

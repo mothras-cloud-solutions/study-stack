@@ -52,7 +52,7 @@ const CreateEditDeck: React.FC<CreateEditDeckProps> = ({ uid }) => {
       setIsLoading(true);
       setError('');
 
-      if (deckId) {
+      if (deckId && !isEditing) {
         try {
           const deckResponse = await axios.get(`/api/collections/${deckId}`);
           const { title, subjects } = deckResponse.data;
@@ -72,7 +72,7 @@ const CreateEditDeck: React.FC<CreateEditDeckProps> = ({ uid }) => {
     };
 
     fetchDeckData();
-  }, [deckId]);
+  }, [deckId, isEditing]);
 
   const handleCardEdit = (card: Card) => {
     setEditingCard(card);

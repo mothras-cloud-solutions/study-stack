@@ -59,7 +59,7 @@ const NavBarLogOut: React.FC<NavBarProps> = () => {
                 <>
                   <a className="navbar-item" >
                     <Link to="/collections">
-                      Collections
+                      Decks
                     </Link>
                   </a>
                   {/* {function () {
@@ -75,7 +75,7 @@ const NavBarLogOut: React.FC<NavBarProps> = () => {
                   }} */}
                   <a className="navbar-item" href="#">
                     <Link to="/create">
-                      Create
+                      Create Deck
                     </Link>
                   </a>
                   <Signout />

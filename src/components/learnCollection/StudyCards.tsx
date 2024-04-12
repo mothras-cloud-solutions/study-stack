@@ -34,13 +34,12 @@ export default function StudyCards(prop: collection) {
     return arr;
   }
 
-  function shuffleTheDeck() {
-    let shuffleDeck = studyDeck.slice();
-    shuffleDeck = shuffle(shuffleDeck);
-    console.log(shuffleDeck, " this is shuffledeck")
-    setStudyDeck(shuffleDeck);
-    setIndex(0);
-  }
+function shuffleTheDeck() {
+  let shuffleDeck = studyDeck.slice();
+      shuffleDeck = shuffle(shuffleDeck);
+      setStudyDeck(shuffleDeck);
+      setIndex(0);
+}
 
 
   // make a state that equals [0]

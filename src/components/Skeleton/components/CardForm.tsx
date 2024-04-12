@@ -143,6 +143,8 @@ const CardForm: React.FC<CardFormProps> = ({
             });
 
         const updatedCard = editingCard ? response.data : response.data.flashcard;
+        updatedCard.canvas_front = '';
+        updatedCard.canvas_back = '';
         console.log('Card saved successfully:', updatedCard);
         setTerm('');
         setDefinition('');
@@ -225,18 +227,10 @@ const CardForm: React.FC<CardFormProps> = ({
         </div>
         <div className="control">
           {/* Button to render to Wyatt's editor or redirect to it */}
-          {function(){
-            if (Object.keys(editingCard).length > 0){
-              return <button className="button is-light" onClick={changeAdvancedState}>Advanced Edit Mode</button>
-            }
-          }}
-          {function(){
-            if (showAdvanced) {
-              return <CardEditor card={editingCard}/>
-            }
-          }}
+          {editingCard && <button className="button is-light" onClick={changeAdvancedState}>Advanced Edit Mode</button>}
         </div>
       </div>
+      {showAdvanced && <CardEditor card={editingCard} closeEditor={changeAdvancedState}/>}
     </div>
   );
 };

@@ -2,37 +2,41 @@ import { getCollectionMeta, getCollectionFlashcards } from './models/getCollecti
 
 // Note types will need to be updated to match the actual types used in the final version of the full collection data passed in
 
-type CanvasType = {
-  id: number;
-  canvas: string;
-};
-
 type FlashcardType = {
   id: number;
   term: string;
   definition: string;
   confidenceLevel: number;
   keywords: string;
-  collectionId: number;
-  isArchived?: boolean;
-  canvas: CanvasType;
+  collection_id: number;
+  archived: number;
+  starred: number;
+  created_at: string;
+  edited_at: string;
+  canvas_front: string;
+  canvas_back: string;
+  deck_title: string;
 };
 
 type CollectionType = {
-  collectionId: number;
+  id: number;
   title: string;
   description: string;
-  subjects: string[];
+  subjects: string;
+  created_at: string;
+  edited_at: string;
+  user_id: string;
+  created_from_id: number;
   flashcards: FlashcardType[];
 };
 
   // This function will export the collection data to a JSON file
-export const exportCollection = (collectionId: number) => {
+export const exportCollection = async (collectionId: number) => {
   const collectionMeta: CollectionType = await getCollectionMeta(collectionId);
   const flashcards: FlashcardType[] = await getCollectionFlashcards(collectionId);
   collectionMeta.flashcards = flashcards;
   // Create a JSON string of the collection data
-  const collectionData: string = JSON.stringify(collection);
+  const collectionData: string = JSON.stringify(collectionMeta);
 
   // Create a Blob object from the JSON string
   const blob: Blob = new Blob([collectionData], { type: 'application/json' });
@@ -40,12 +44,12 @@ export const exportCollection = (collectionId: number) => {
   // Create a URL for the Blob object
   const url: string = URL.createObjectURL(blob);
 
-  const title: string = collection.title.replace(/\s/g, '_');
+  const title: string = collectionMeta.title.replace(/\s/g, '_');
 
   // Create a link element to trigger the download
   const link: HTMLAnchorElement = document.createElement('a');
   link.href = url;
-  link.download = `${collection.title}.json`;
+  link.download = `${title}.json`;
 
   // Append the link element to the document body and trigger the download
   document.body.appendChild(link);
