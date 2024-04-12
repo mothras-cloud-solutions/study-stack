@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { createUser } from '../../../firebase/firebase.ts';
 import { useNavigate } from 'react-router-dom';
+import Footer from '../Skeleton/components/Footer.tsx';
 
 function Register() {
   const [email, setEmail] = useState('');
@@ -115,6 +116,7 @@ function Register() {
           </form>
         </div>
       </div>
+      <Footer/>
     </div>
   );
 }

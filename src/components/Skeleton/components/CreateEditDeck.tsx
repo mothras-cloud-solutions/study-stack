@@ -4,6 +4,7 @@ import { useSearchParams } from 'react-router-dom';
 import DeckForm from './DeckForm';
 import CardForm from './CardForm';
 import DeckCards from './DeckCardCollection';
+import Footer from './Footer';
 
 interface CreateEditDeckProps {
   uid: string;
@@ -226,6 +227,7 @@ const CreateEditDeck: React.FC<CreateEditDeckProps> = ({ uid }) => {
           )}
         </>
       )}
+      <Footer/>
     </div>
   );
 };
