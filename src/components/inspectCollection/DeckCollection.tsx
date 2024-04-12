@@ -59,7 +59,6 @@ const DeckCollection: React.FC<DeckCollectionProps> = ({ uid, changeDeck }) => {
           <CardThumbnailContainer collection_id={selectedDeck ? selectedDeck.id : 0} />
         </>
       ) : <p>Please select a deck.</p>}
-      <Footer/>
     </div>
   );
 };
