@@ -1,6 +1,8 @@
 
 import React from 'react';
 
+import { importFile } from './utils/importFile.ts';
+
 type CollectionType = {
   id: number;
   title: string;
@@ -9,13 +11,17 @@ type CollectionType = {
 type DeckSelectorProps = {
   decks: CollectionType[];
   onDeckSelect: (collection: CollectionType) => void;
+  uid: string | null;
+  setRefreshDecks: (refresh: boolean) => void;
+  refreshDecks: boolean;
 };
 
-const DeckSelector: React.FC<DeckSelectorProps> = ({ decks, onDeckSelect }) => {
-  console.log('Rendering DeckSelector, decks:', decks);
+const DeckSelector: React.FC<DeckSelectorProps> = ({ decks, onDeckSelect, uid, setRefreshDecks, refreshDecks }) => {
+  // console.log('Rendering DeckSelector, decks:', decks);
 
-  const handleImportDeck = () => {
-    console.log('Import Deck clicked');
+  const handleImportDeck = async () => {
+    // console.log('Import Deck clicked');
+    importFile(uid, setRefreshDecks, refreshDecks);
   };
 
   return (
