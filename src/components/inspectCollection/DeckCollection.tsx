@@ -45,9 +45,8 @@ const DeckCollection: React.FC<DeckCollectionProps> = ({ uid, currentCards, chan
     if (selectedDeck && currentCards && currentCards.length > 0) {
       const updatedDeck = { ...selectedDeck, flashcards: currentCards };
       setSelectedDeck(updatedDeck);
-      changeDeck(updatedDeck);
     }
-  }, [currentCards, selectedDeck, changeDeck, uid]);
+  }, [currentCards, selectedDeck, uid]);
 
   const handleDeckSelect = (deck: DeckType) => {
     const deckWithCards = decks.find(d => d.id === deck.id) || deck;
