@@ -59,7 +59,6 @@ const CardForm: React.FC<CardFormProps> = ({
       quillRef.current.setContents(delta);
       setTerm(editingCard.term);
       setKeywords(editingCard.keywords);
-      console.log(editingCard, 'editingCard');
     }
   }, [editingCard]);
 
@@ -228,8 +227,8 @@ const CardForm: React.FC<CardFormProps> = ({
           {/* Button to render to Wyatt's editor or redirect to it */}
           {editingCard && <button className="button is-light" onClick={changeAdvancedState}>Advanced Edit Mode</button>}
         </div>
-        {showAdvanced && <CardEditor card={editingCard}/>}
       </div>
+      {showAdvanced && <CardEditor card={editingCard} closeEditor={changeAdvancedState}/>}
     </div>
   );
 };

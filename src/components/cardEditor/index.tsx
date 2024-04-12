@@ -18,10 +18,11 @@ interface card {
 };
 
 interface Props {
-  card: card
+  card: card;
+  closeEditor: () => void;
 }
 
-const CardEditor: React.FC<Props> = ({ card }) => {
+const CardEditor: React.FC<Props> = ({ card, closeEditor }) => {
   const [isFlipped, setIsFlipped] = useState(false);
   const [selectId, selectElement] = useState('');
   const [rectangles, setRectangles] = useState([]);
@@ -95,6 +96,7 @@ const CardEditor: React.FC<Props> = ({ card }) => {
       .then(() => {
         card.canvas_back = backString;
         card.canvas_front = frontString;
+        closeEditor();
       })
       .catch((err) => {
         console.log(err);
@@ -273,7 +275,7 @@ const CardEditor: React.FC<Props> = ({ card }) => {
         </div>
         <div className="level-right">
           <div className="tags are-large">
-            <span className="tag" onClick={onSave}>Save</span>
+            <span className="tag is-primary" onClick={onSave}>Save Advanced Edit</span>
             <span className="tag" onClick={resetCanvas}>Reset</span>
             <span className="tag" onClick={onDelete}>Delete</span>
             <span className="tag" onClick={flipCard}>Flip Card</span>
