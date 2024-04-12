@@ -39,11 +39,15 @@ function App() {
     <Fragment>
       {user ? (
         <>
-          <NavBarLogOut />
+          <NavBarLogOut path="/home" />
+          <div>Logout</div>
+          <Overview />
         </>
       ) : (
         <Fragment>
-          <NavBarLogIn />
+          <NavBarLogIn path="/" />
+          <div>Login</div>
+          <Overview />
         </Fragment>
       )}
       <Routes>

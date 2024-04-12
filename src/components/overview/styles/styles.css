@@ -1,0 +1,22 @@
+/* styles.css */
+body,
+html {
+  height: 100%;
+}
+
+.container-overview {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.hero {
+  background-image: url("https://t4.ftcdn.net/jpg/05/34/87/15/360_F_534871551_MOmx3mu3oP1TkmUW8ZDffLpHrv86LLrE.jpg");
+  background-size: cover;
+  background-position: center center;
+}
+
+.buttons {
+  margin-top: 20px;
+}

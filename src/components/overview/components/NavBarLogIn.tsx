@@ -37,7 +37,7 @@ const NavBarLogIn: React.FC<NavBarProps> = () => {
                 aria-expanded="false"
                 onClick={toggleMenu}
               >
-                <span aria-hidden="false"></span>
+                <span aria-hidden="true"></span>
                 <span aria-hidden="true"></span>
                 <span aria-hidden="true"></span>
               </a>
