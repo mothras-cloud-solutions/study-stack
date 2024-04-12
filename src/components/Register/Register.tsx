@@ -41,7 +41,7 @@ function Register() {
     setEmail('');
     setPassword('');
     setConfirmPassword('');
-    navigate('/home');
+    navigate('/');
   };
 
   return (
