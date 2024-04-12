@@ -3,6 +3,7 @@ import DeckSelector from './DeckSelector';
 import CardThumbnailContainer from './CardThumbnailContainer';
 import Actions from './Actions';
 import { useNavigate } from 'react-router-dom';
+import Footer from '../Skeleton/components/Footer';
 
 type DeckType = {
   id: number;
@@ -56,6 +57,7 @@ const DeckCollection: React.FC<DeckCollectionProps> = ({ uid, changeDeck }) => {
           />
         </>
       )}
+      <Footer/>
     </div>
   );
 };
