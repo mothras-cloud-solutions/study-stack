@@ -56,9 +56,9 @@ function App() {
     }
   }, [user]);
 
-useEffect(() => {
-  console.log("uid, ", uid)
-},[uid])
+  useEffect(() => {
+    console.log("uid, ", uid)
+  }, [uid])
 
   function changeDeck(deck: Array) {
     setCurrentDeck(deck);
@@ -66,32 +66,32 @@ useEffect(() => {
 
   return (
     <Fragment>
-      {user ? (
-        <>
-          {/* <CreateDeck uid={uid} /> */}
-        {/* <SignOut /> */}
-        {/* <DeckCollection uid={uid} /> */}
-        {/* <StudyPageTest /> */}
-          <NavBarLogOut />
-        </>
-      ) : (
-        <Fragment>
-          <NavBarLogIn currentCards={currentCards}/>
-        </Fragment>
-      )}
-    <section className="section">
-    <div className="container">
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        <Route
+          path="/"
+          element={user ? (
+            <>
+              <NavBarLogOut path="/home" />
+              <Overview />
+              <Footer />
+            </>
+          ) : (
+            <Fragment>
+              <NavBarLogIn currentCards={currentCards} />
+              <HomePage />
+              <Footer />
+            </Fragment>
+          )}
+        />
+        <Route path='/' element={user ? <NavBarLogOut /> : <NavBarLogIn currentCards={currentCards} />}>
+          <Route path="home" element={<Overview />} />
+          <Route path="learn" element={<StudyCards prop={currentCards} />} />
+          <Route path="create" element={<CreateDeck uid={uid} />} />
+          <Route path="collections" element={<DeckCollection uid={uid} changeDeck={changeDeck} />} />
+        </Route>
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/home" element={<Overview />} />
-        <Route path="/learn" element={<StudyCards prop={currentCards}/>} />
-        <Route path="/create" element={<CreateDeck uid={uid} />} />
-        <Route path="/collections" element={<DeckCollection uid={uid} changeDeck={changeDeck} />} />
       </Routes>
-      </div>
-      </section>
     </Fragment>
   )
 }
