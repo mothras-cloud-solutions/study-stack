@@ -3,24 +3,24 @@ import Quill from 'quill';
 import axios from 'axios';
 import CardEditor from '../../cardEditor/index.tsx';
 
+
 interface CardFormProps {
   deckId?: string;
   editingCard: Card | null;
   setEditingCard: React.Dispatch<React.SetStateAction<Card | null>>;
   handleNewCardSave: (newCard: Card) => void;
   handleCardUpdate: (updatedCard: Card) => void;
+  isCreateMode: boolean; // Add isCreateMode prop
 }
 
 interface Card {
   id: number;
-  deck_title: string;
   term: string;
   definition: string;
-  confidenceLevel: number;
   keywords: string;
-  collectionid: number;
-  archived: number;
-  starred: number;
+  archived: boolean;
+  confidenceLevel: number;
+  collection_id: number;
   canvas_front: string;
   canvas_back: string;
 }
@@ -31,6 +31,7 @@ const CardForm: React.FC<CardFormProps> = ({
   setEditingCard,
   handleNewCardSave,
   handleCardUpdate,
+  isCreateMode, // Destructure isCreateMode prop
 }) => {
   const [term, setTerm] = useState('');
   const [definition, setDefinition] = useState('');
@@ -40,7 +41,7 @@ const CardForm: React.FC<CardFormProps> = ({
   const [saving, setSaving] = useState(false);
   const editorRef = useRef<HTMLDivElement>(null);
   const quillRef = useRef<Quill | null>(null);
-  //Show advanced editor when true
+// Wyatt Advance Editor
   const [showAdvanced, setShowAdvanced] = useState(false);
 
   useEffect(() => {
@@ -58,6 +59,7 @@ const CardForm: React.FC<CardFormProps> = ({
       quillRef.current.setContents(delta);
       setTerm(editingCard.term);
       setKeywords(editingCard.keywords);
+      console.log(editingCard, 'editingCard');
     }
   }, [editingCard]);
 
@@ -89,10 +91,6 @@ const CardForm: React.FC<CardFormProps> = ({
     };
   }, [success]);
 
-  const changeAdvancedState = () => {
-    setShowAdvanced(!showAdvanced);
-  };
-
   const handleTermChange = (e: ChangeEvent<HTMLInputElement>) => {
     setTerm(e.target.value);
     setError('');
@@ -101,6 +99,10 @@ const CardForm: React.FC<CardFormProps> = ({
   const handleKeywordChange = (e: ChangeEvent<HTMLInputElement>) => {
     setKeywords(e.target.value);
     setError('');
+  };
+
+    const changeAdvancedState = () => {
+    setShowAdvanced(!showAdvanced);
   };
 
   const handleSaveCard = async () => {
@@ -123,42 +125,44 @@ const CardForm: React.FC<CardFormProps> = ({
     setError('');
     setSuccess('');
 
-    try {
-      const response = editingCard
-        ? await axios.put(`/api/flashcards/${editingCard.id}`, {
-            term,
-            definition,
-            keywords,
-          })
-        : await axios.post('/api/flashcards/', {
-            term,
-            definition,
-            confidenceLevel: 0,
-            keywords,
-            archived: 0,
-            starred: 0,
-            collection_id: deckId,
-          });
-      const updatedCard = response.data;
-      console.log('Card saved successfully:', updatedCard);
-      setTerm('');
-      setDefinition('');
-      setKeywords('');
-      setEditingCard(null);
-      quillRef.current?.setText(''); // Clear the text editor
-      setSuccess(editingCard ? 'Card updated successfully!' : 'Card saved successfully!');
-      if (editingCard) {
-        handleCardUpdate(updatedCard);
-      } else {
-        handleNewCardSave(updatedCard);
+      try {
+        const response = editingCard
+          ? await axios.put(`/api/flashcards/${editingCard.id}`, {
+              term,
+              definition,
+              keywords,
+              collection_id: editingCard.collection_id,
+            })
+          : await axios.post('/api/flashcards/', {
+              term,
+              definition,
+              confidenceLevel: 0,
+              keywords,
+              archived: 0,
+              starred: 0,
+              collection_id: deckId,
+            });
+
+        const updatedCard = editingCard ? response.data : response.data.flashcard;
+        console.log('Card saved successfully:', updatedCard);
+        setTerm('');
+        setDefinition('');
+        setKeywords('');
+        setEditingCard(null);
+        quillRef.current?.setText(''); // Clear the text editor
+        setSuccess(editingCard ? 'Card updated successfully!' : 'Card saved successfully!');
+        if (editingCard) {
+          handleCardUpdate(updatedCard);
+        } else {
+          handleNewCardSave(updatedCard);
+        }
+      } catch (error) {
+        console.error('Error saving card:', error);
+        setError('Error saving card. Please try again.');
+      } finally {
+        setSaving(false);
       }
-    } catch (error) {
-      console.error('Error saving card:', error);
-      setError('Error saving card. Please try again.');
-    } finally {
-      setSaving(false);
-    }
-  };
+    };
 
   const handleCancelOrEdit = () => {
     setError('');
@@ -171,7 +175,7 @@ const CardForm: React.FC<CardFormProps> = ({
   };
 
   return (
-    <div className="box">
+    <div className={`box card-form ${isCreateMode ? 'card-form-hidden' : ''}`}>
       <h3 className="title is-4">{editingCard ? 'Edit Card' : 'Add New Card'}</h3>
       <div className="field">
         <label className="label">Prompt</label>
@@ -222,20 +226,21 @@ const CardForm: React.FC<CardFormProps> = ({
         </div>
         <div className="control">
           {/* Button to render to Wyatt's editor or redirect to it */}
-          {function(){
-            if (Object.keys(editingCard).length > 0){
-              return <button className="button is-light" onClick={changeAdvancedState}>Advanced Edit Mode</button>
-            }
-          }}
-          {function(){
-            if (showAdvanced) {
-              return <CardEditor card={editingCard}/>
-            }
-          }}
+          {editingCard && <button className="button is-light" onClick={changeAdvancedState}>Advanced Edit Mode</button>}
         </div>
+        {showAdvanced && <CardEditor card={editingCard}/>}
       </div>
     </div>
   );
 };
 
 export default CardForm;
+
+
+
+
+
+
+
+
+

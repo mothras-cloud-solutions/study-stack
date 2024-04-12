@@ -20,8 +20,6 @@ type DeckCollectionProps = {
 const DeckCollection: React.FC<DeckCollectionProps> = ({ uid, changeDeck }) => {
   const [decks, setDecks] = useState<DeckType[]>([]);
   const [selectedDeck, setSelectedDeck] = useState<DeckType | null>(null);
-
-
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -49,13 +47,13 @@ const DeckCollection: React.FC<DeckCollectionProps> = ({ uid, changeDeck }) => {
       <DeckSelector decks={decks} onDeckSelect={handleDeckSelect} />
       {selectedDeck && (
         <>
+          <Actions selectedDeck={selectedDeck} />
           <CardThumbnailContainer
             collection_id={selectedDeck ? selectedDeck.id : 0}
             onEdit={() => {}}
             onDelete={() => {}}
             onArchiveToggle={() => {}}
           />
-          <Actions selectedDeck={selectedDeck} />
         </>
       )}
     </div>

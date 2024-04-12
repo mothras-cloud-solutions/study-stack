@@ -30,6 +30,7 @@ const DeckForm: React.FC<DeckFormProps> = ({
   savedSuccessfully,
   saving,
   isEditing,
+  setDeckId // Added setDeckId as a prop
 }) => {
   const [titleTyping, setTitleTyping] = useState(false);
   const [subjectsTyping, setSubjectsTyping] = useState(false);
@@ -51,7 +52,7 @@ const DeckForm: React.FC<DeckFormProps> = ({
 
   useEffect(() => {
     if (savedSuccessfully) {
-      setSuccessMessage(isEditing ? 'Deck updated successfully!' : 'Deck saved successfully!');
+      setSuccessMessage(isEditing ? 'Deck saved successfully!' : 'Deck saved successfully!');
     }
   }, [savedSuccessfully, isEditing]);
 
@@ -70,9 +71,11 @@ const DeckForm: React.FC<DeckFormProps> = ({
   const handleSubmit = async () => {
     setTitleTyping(false);
     setSubjectsTyping(false);
-    await handleSave();
+    const response = await handleSave();
+    if (!isEditing) {
+      setDeckId(response.data.id); // Set the deckId with the new deck ID
+    }
   };
-
   return (
     <div className="box">
       <div className="field">
@@ -107,7 +110,7 @@ const DeckForm: React.FC<DeckFormProps> = ({
             onClick={handleSubmit}
             disabled={saving}
           >
-            {isEditing ? 'Update Deck' : 'Save Deck'}
+            {isEditing ? 'Update Deck' : 'Create Deck'}
           </button>
         </div>
         <div className="control">

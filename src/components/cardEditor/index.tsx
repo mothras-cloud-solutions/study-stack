@@ -89,8 +89,8 @@ const CardEditor: React.FC<Props> = ({ card }) => {
       canvas_back: backString
     };
     Promise.all([
-      axios.put(`/api/flashcards/${id}/canvasFront`, frontCanvas),
-      axios.put(`/api/flashcards/${id}/canvasBack`, backCanvas)
+      axios.put(`/api/canvases/${id}/canvasFront`, frontCanvas),
+      axios.put(`/api/canvases/${id}/canvasBack`, backCanvas)
     ])
       .then(() => {
         card.canvas_back = backString;
