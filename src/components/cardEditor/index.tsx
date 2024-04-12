@@ -49,7 +49,7 @@ const CardEditor: React.FC<Props> = ({ card, closeEditor }) => {
     if (canvas_back.length > 0) {
       setBack(JSON.parse(canvas_back));
     }
-  }, []);
+  }, [card]);
 
   // Function to flip the card on click
   const flipCard = () => {
