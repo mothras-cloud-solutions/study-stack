@@ -10,6 +10,7 @@ interface User {
 
 interface NavBarProps {
   user: User | null;
+  currentCards: Array | null;
 }
 
 const NavBarLogOut: React.FC<NavBarProps> = () => {
@@ -61,11 +62,17 @@ const NavBarLogOut: React.FC<NavBarProps> = () => {
                       Collections
                     </Link>
                   </a>
-                  <a className="navbar-item" href="#">
-                    <Link to="/learn">
-                      Study
-                    </Link>
-                  </a>
+                  {function () {
+                    if (currentCards.length > 0) {
+                      return (
+                        <a className="navbar-item" href="#">
+                          <Link to="/learn">
+                            Study
+                          </Link>
+                        </a>
+                      );
+                    };
+                  }}
                   <a className="navbar-item" href="#">
                     <Link to="/create">
                       Create

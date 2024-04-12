@@ -76,7 +76,7 @@ useEffect(() => {
         </>
       ) : (
         <Fragment>
-          <NavBarLogIn />
+          <NavBarLogIn currentCards={currentCards}/>
         </Fragment>
       )}
     <section className="section">
