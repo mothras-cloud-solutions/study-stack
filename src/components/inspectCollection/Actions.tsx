@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './Actions.css';
 import { useNavigate } from 'react-router-dom';
-import { exportCollection } from './utils/exportFile';
+import { exportCollection } from './utils/exportFile.ts';
 import axios from 'axios';
 
 type ActionsProps = {
