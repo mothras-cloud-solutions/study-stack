@@ -168,6 +168,7 @@ const CardForm: React.FC<CardFormProps> = ({
   const handleCancelOrEdit = () => {
     setError('');
     setSuccess('');
+    setShowAdvanced(false);
     setEditingCard(null);
     setTerm('');
     setDefinition('');
