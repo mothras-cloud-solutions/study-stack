@@ -289,15 +289,11 @@ const CardEditor: React.FC<Props> = ({ card, closeEditor }) => {
         <div className={`flip-card${isFlipped ? ' is-flipped' : ''}`}>
           <div className="flip-card-inner">
             <div className="flip-card-front">
-              {function(){
-                if (!isFlipped) {
-                  return <h3 className="title is-3">{term}</h3>
-                }
-              }}
+              {!isFlipped && <h3 className="title is-3">{term}</h3>}
               {/* <p>This is the front side of the card.</p> */}
             </div>
             <div className="flip-card-back">
-              {/* <h3 className="title is-3">Back Side</h3> */}
+              {isFlipped && <h3 className="title is-3">{definition}</h3>}
               <p>{definition}</p>
             </div>
           </div>
