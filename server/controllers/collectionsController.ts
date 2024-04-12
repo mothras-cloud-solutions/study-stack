@@ -55,11 +55,11 @@ export const getCollectionByUserId = async (req: Request, res: Response) => {
 };
 
 export const createCollection = async (req: Request, res: Response) => {
-    const { title, description, subjects, uid } = req.body;
+    const { title, description, subjects, user_id } = req.body;
     try {
         const result = await pool.query(
-            'INSERT INTO collections (title, description, subjects, uid) VALUES ($1, $2, $3, $4) RETURNING *',
-            [title, description, subjects, uid]
+            'INSERT INTO collections (title, description, subjects, user_id) VALUES ($1, $2, $3, $4) RETURNING *',
+            [title, description, subjects, user_id]
         );
         res.status(201).json(result.rows[0]);
     } catch (err) {

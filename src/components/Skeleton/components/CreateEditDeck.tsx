@@ -17,7 +17,7 @@ interface Card {
   archived: boolean;
 }
 
-const CreateEditDeck: React.FC<CreateEditDeckProps> = ({ uid, deckId }) => {
+const CreateEditDeck: React.FC<CreateEditDeckProps> = ({ uid, deckId: initialDeckId }) => {
   const [deckName, setDeckName] = useState('');
   const [subjects, setSubjects] = useState('');
   const [titleError, setTitleError] = useState('');
@@ -26,9 +26,10 @@ const CreateEditDeck: React.FC<CreateEditDeckProps> = ({ uid, deckId }) => {
   const [saving, setSaving] = useState(false);
   const [cards, setCards] = useState<Card[]>([]);
   const [editingCard, setEditingCard] = useState<Card | null>(null);
-  const [isEditing, setIsEditing] = useState(true);
+  const [isEditing, setIsEditing] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
+  const [deckId, setDeckId] = useState<string | undefined>(initialDeckId);
 
   useEffect(() => {
     let timer: ReturnType<typeof setTimeout> | null = null;
@@ -57,7 +58,7 @@ const CreateEditDeck: React.FC<CreateEditDeckProps> = ({ uid, deckId }) => {
           setSubjects(subjects);
           setIsEditing(true);
           const cardsResponse = await axios.get(`api/flashcards/collection_id/${deckId}`);
-          console.log('cardsResponse: ', cardsResponse);
+          console.log('cardsResponse: ', cardsResponse.data);
           setCards(cardsResponse.data);
         } catch (error) {
           console.error('Error fetching deck data:', error);
@@ -87,8 +88,9 @@ const CreateEditDeck: React.FC<CreateEditDeckProps> = ({ uid, deckId }) => {
 
   const handleCardArchive = async (cardId: number) => {
     try {
-      await axios.put(`/api/flashcards/${cardId}`, { archived: true });
-      setCards(cards.map(card => (card.id === cardId ? { ...card, archived: true } : card)));
+      const response = await axios.put(`/api/flashcards/${cardId}/archived`);
+      const { newArchivedStatus } = response.data;
+      setCards(cards.map(card => (card.id === cardId ? { ...card, archived: newArchivedStatus === 1 } : card)));
     } catch (error) {
       console.error('Error archiving card:', error);
       setError('An error occurred while archiving the card. Please try again.');
@@ -97,8 +99,9 @@ const CreateEditDeck: React.FC<CreateEditDeckProps> = ({ uid, deckId }) => {
 
   const handleCardUnarchive = async (cardId: number) => {
     try {
-      await axios.put(`/api/flashcards/${cardId}`, { archived: false });
-      setCards(cards.map(card => (card.id === cardId ? { ...card, archived: false } : card)));
+      const response = await axios.put(`/api/flashcards/${cardId}/archived`);
+      const { newArchivedStatus } = response.data;
+      setCards(cards.map(card => (card.id === cardId ? { ...card, archived: newArchivedStatus === 1 } : card)));
     } catch (error) {
       console.error('Error unarchiving card:', error);
       setError('An error occurred while unarchiving the card. Please try again.');
@@ -127,17 +130,24 @@ const CreateEditDeck: React.FC<CreateEditDeckProps> = ({ uid, deckId }) => {
     }
 
     try {
-      const response = isEditing
-        ? await axios.put(`/api/collections/3`, {
-            title: deckName,
-            subjects,
-            uid,
-          })
-        : await axios.post('/api/collections', {
-            title: deckName,
-            subjects,
-            uid,
-          });
+      let response;
+      if (isEditing) {
+        // Update an existing deck
+        response = await axios.put(`/api/collections/${deckId}`, {
+          title: deckName,
+          subjects: subjects,
+          user_id: uid,
+        });
+      } else {
+        // Create a new deck
+        response = await axios.post('/api/collections/', {
+          title: deckName,
+          subjects: subjects,
+          user_id: uid,
+        });
+        setDeckId(response.data.id); // Set the deckId with the new deck ID
+      }
+
       console.log('Collection saved:', response.data);
       setSavedSuccessfully(true);
       if (!isEditing) {
@@ -178,27 +188,32 @@ const CreateEditDeck: React.FC<CreateEditDeckProps> = ({ uid, deckId }) => {
         </div>
       ) : (
         <>
-          <DeckForm
-            deckName={deckName}
-            subjects={subjects}
-            setDeckName={setDeckName}
-            setSubjects={setSubjects}
-            titleError={titleError}
-            subjectsError={subjectsError}
-            setTitleError={setTitleError}
-            setSubjectsError={setSubjectsError}
-            handleSave={handleSaveDeck}
-            handleCancel={handleCancel}
-            savedSuccessfully={savedSuccessfully}
-            saving={saving}
-          />
+<DeckForm
+  deckName={deckName}
+  subjects={subjects}
+  setDeckName={setDeckName}
+  setSubjects={setSubjects}
+  titleError={titleError}
+  subjectsError={subjectsError}
+  setTitleError={setTitleError}
+  setSubjectsError={setSubjectsError}
+  handleSave={handleSaveDeck}
+  handleCancel={handleCancel}
+  savedSuccessfully={savedSuccessfully}
+  saving={saving}
+  isEditing={isEditing}
+  setDeckId={setDeckId} // Pass setDeckId as a prop
+/>
+<div className="card-form-container">
           <CardForm
             deckId={deckId}
             editingCard={editingCard}
             setEditingCard={setEditingCard}
             handleNewCardSave={handleNewCardSave}
             handleCardUpdate={handleCardUpdate}
+            isCreateMode={!isEditing} // Pass isCreateMode prop
           />
+          </div>
           {deckId && (
             <DeckCards
               cards={cards}
