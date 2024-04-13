@@ -121,7 +121,7 @@ function Register() {
               </div>
               <div className="control">
                 <button type="button" className="button is-success is-light is-fullwidth loginInstead" onClick={handleToLogin}>
-                  Login Instead
+                  Already have an account?
                 </button>
               </div>
             </div>
