@@ -93,9 +93,19 @@ export const updateFlashcard = async (req: Request, res: Response) => {
             'UPDATE flashcards SET term = $1, definition = $2, keywords = $3, edited_at = CURRENT_TIMESTAMP WHERE id = $4 RETURNING *',
             [term, definition, keywords, id]
         );
-
+        const result2 = await pool.query(
+            `SELECT c.canvas_front, c.canvas_back, col.title as deck_title
+            FROM flashcards f
+            LEFT JOIN canvases c ON f.id = c.flashcards_id
+            LEFT JOIN collections col ON f.collection_id = col.id
+            WHERE f.id = $1`,
+            [id]
+        );
         if (result.rows.length > 0) {
-            res.status(200).json(result.rows[0]);
+            const combinedResult = result.rows[0];
+            combinedResult.canvas_front = result2.rows[0].canvas_front;
+            combinedResult.canvas_back = result2.rows[0].canvas_back;
+            res.status(201).json(combinedResult);
         } else {
             res.status(404).json({ error: 'Flashcard not found' });
         }
