@@ -145,9 +145,7 @@ const CardForm: React.FC<CardFormProps> = ({
           starred: 0,
           collection_id: deckId,
         });
-      console.log('Response: ', response.data);
       const updatedCard = response.data;
-      console.log(updatedCard);
       if (typeof updatedCard.canvas_front !== 'string') {
         updatedCard.canvas_front = '';
       }
