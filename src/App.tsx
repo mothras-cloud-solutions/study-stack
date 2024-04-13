@@ -50,6 +50,7 @@ function App() {
   useEffect(() => {
     if (user) {
       const uid = user.uid;
+      console.log(user);
       setUid(uid);
     } else {
       setUid(null);
