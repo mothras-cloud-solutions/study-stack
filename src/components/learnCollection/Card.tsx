@@ -135,7 +135,7 @@ const Card: React.FC<CardProps> = ({
           index={index}
           length={length}
         />
-        {user !== null ? <img src={user.photoUrl} alt="user profile photo" /> : null
+        {user !== null  && user.photoUrl !== null ? <img src={user.photoUrl} alt="user profile photo" /> : null
 }
       </div>
     </div>
