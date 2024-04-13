@@ -86,7 +86,7 @@ function App() {
 
             <Route path='/' element={user ? <NavBarLogOut /> : <NavBarLogIn currentCards={currentCards} />}>
               <Route path="home" element={<Overview />} />
-              <Route path="learn" element={<StudyCards prop={currentCards} />} />
+              <Route path="learn" element={<StudyCards prop={currentCards} user={user} />} />
               <Route path="create" element={<CreateDeck uid={uid} />} />
               <Route path="collections" element={<DeckCollection uid={uid} changeDeck={changeDeck} />} />
             </Route>

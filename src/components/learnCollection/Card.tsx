@@ -31,6 +31,7 @@ const Card: React.FC<CardProps> = ({
   studyDeck,
   setStudyDeck,
   shuffleTheDeck,
+  user
 }) => {
   const navigate = useNavigate();
   const { term, definition, starred, id, deck_title, canvas_back, canvas_front } = card;
@@ -134,6 +135,8 @@ const Card: React.FC<CardProps> = ({
           index={index}
           length={length}
         />
+        {user !== null ? <img src={user.photoUrl} alt="user profile photo" /> : null
+}
       </div>
     </div>
   );
