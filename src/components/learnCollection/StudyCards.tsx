@@ -15,7 +15,7 @@ import Footer from '../Skeleton/components/Footer.tsx';
 
 
 
-export default function StudyCards(prop: collection) {
+export default function StudyCards(prop: collection, user: string | null) {
 
   const [index, setIndex] = useState(0);
 
@@ -58,7 +58,7 @@ function shuffleTheDeck() {
   return <div> {function () {
     if (studyDeck) {
       return <Card card={studyDeck[index]} setIndex={setIndex} index={index} length={length}
-        studyDeck={studyDeck} setStudyDeck={setStudyDeck} shuffleTheDeck={shuffleTheDeck} />
+        studyDeck={studyDeck} setStudyDeck={setStudyDeck} shuffleTheDeck={shuffleTheDeck} user={user} />
     }
   }()}
   </div>
