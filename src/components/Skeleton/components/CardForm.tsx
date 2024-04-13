@@ -145,8 +145,7 @@ const CardForm: React.FC<CardFormProps> = ({
           starred: 0,
           collection_id: deckId,
         });
-
-      const updatedCard = editingCard ? response.data : response.data.flashcard;
+      const updatedCard = response.data;
       if (typeof updatedCard.canvas_front !== 'string') {
         updatedCard.canvas_front = '';
       }
