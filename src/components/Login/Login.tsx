@@ -76,8 +76,8 @@ function Login() {
             </div>
             <button type="submit" className="button is-link" disabled={!(email && password)}> Submit </button>
           </form>
-          <button className="google button is-link" onClick={handleLoginWithGoogle}>Login with Google</button>
-          <button className="logcancel button is-link" type="button" onClick={handleCancel}>Cancel</button>
+          <button className="google button is-success" onClick={handleLoginWithGoogle}>Login with Google</button>
+          <button className="logcancel button is-link is-light" type="button" onClick={handleCancel}>Cancel</button>
         </div>
       </div>
     </div >
