@@ -21,7 +21,7 @@ interface CardProps {
   length: number;
   studyDeck: any[];
   setStudyDeck: React.Dispatch<React.SetStateAction<any[]>>;
-  shuffleTheDeck: () => void,
+  shuffleTheDeck: () => void;
 }
 
 const Card: React.FC<CardProps> = ({
