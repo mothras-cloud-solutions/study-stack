@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Card from './Card.tsx';
 import { collection } from './Interfaces.tsx';
 import Footer from '../Skeleton/components/Footer.tsx';
+import { User } from 'firebase/auth';
 
 // hba.conf need to change it to promisify
 
@@ -15,8 +16,7 @@ import Footer from '../Skeleton/components/Footer.tsx';
 
 
 
-export default function StudyCards(prop: collection, user: string | null) {
-
+export default function StudyCards(prop: collection) {
   const [index, setIndex] = useState(0);
 
   const currDeck = prop.prop.filter((card) => {
@@ -58,7 +58,7 @@ function shuffleTheDeck() {
   return <div> {function () {
     if (studyDeck) {
       return <Card card={studyDeck[index]} setIndex={setIndex} index={index} length={length}
-        studyDeck={studyDeck} setStudyDeck={setStudyDeck} shuffleTheDeck={shuffleTheDeck} user={user} />
+        studyDeck={studyDeck} setStudyDeck={setStudyDeck} shuffleTheDeck={shuffleTheDeck} />
     }
   }()}
   </div>

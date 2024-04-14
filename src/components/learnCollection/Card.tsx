@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import Pagination from '../Skeleton/components/Pagination';
 import StudyCanvas from '../cardEditor/StudyCanvas';
 import { onAuthStateChange } from '../../../firebase/firebase';
+import { User } from 'firebase/auth';
 
 interface CardProps {
   card: {
@@ -20,7 +21,7 @@ interface CardProps {
   length: number;
   studyDeck: any[];
   setStudyDeck: React.Dispatch<React.SetStateAction<any[]>>;
-  shuffleTheDeck: () => void;
+  shuffleTheDeck: () => void,
 }
 
 const Card: React.FC<CardProps> = ({
@@ -31,7 +32,6 @@ const Card: React.FC<CardProps> = ({
   studyDeck,
   setStudyDeck,
   shuffleTheDeck,
-  user
 }) => {
   const navigate = useNavigate();
   const { term, definition, starred, id, deck_title, canvas_back, canvas_front } = card;
@@ -135,8 +135,6 @@ const Card: React.FC<CardProps> = ({
           index={index}
           length={length}
         />
-        {user !== null  && user.photoURL !== null ? <img src={user.photoURL} alt="user profile photo" /> : null
-}
       </div>
     </div>
   );
